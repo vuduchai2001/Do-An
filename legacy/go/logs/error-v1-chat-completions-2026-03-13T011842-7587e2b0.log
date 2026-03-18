@@ -1,0 +1,34 @@
+=== REQUEST INFO ===
+Version: v6.8.51
+URL: /v1/chat/completions
+Method: POST
+Timestamp: 2026-03-13T01:18:42.785075279+08:00
+
+=== HEADERS ===
+Authorization: Bearer sk-2...MO55
+User-Agent: PostmanRuntime/7.51.1
+Connection: keep-alive
+Content-Type: application/json
+Accept: */*
+Postman-Token: 2297...61b2
+Accept-Encoding: gzip, deflate, br
+Content-Length: 49
+
+=== REQUEST BODY ===
+{
+    "model": "gpt-4o",
+    "messages": "hu"
+  }
+
+=== API RESPONSE ===
+Timestamp: 2026-03-13T01:18:42.785232836+08:00
+{"error":{"message":"unknown provider for model gpt-4o","type":"server_error","code":"internal_server_error"}}
+
+=== RESPONSE ===
+Status: 502
+Access-Control-Allow-Origin: *
+Access-Control-Allow-Methods: GET, POST, PUT, PATCH, DELETE, OPTIONS
+Access-Control-Allow-Headers: *
+Content-Type: application/json
+
+{"error":{"message":"unknown provider for model gpt-4o","type":"server_error","code":"internal_server_error"}}

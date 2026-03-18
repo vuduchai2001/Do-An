@@ -1,0 +1,69 @@
+# Binaries
+cli-proxy-api
+cliproxy
+*.exe
+
+# Root configuration
+.env
+.mcp.json
+
+# Legacy Go workspace runtime data
+go/config.yaml
+go/bin/*
+go/logs/*
+go/conv/*
+go/temp/*
+go/refs/*
+go/tmp/*
+
+# Legacy Go storage backends
+go/pgstore/*
+go/gitstore/*
+go/objectstore/*
+
+# Legacy Go static assets
+go/static/*
+
+# Legacy Go authentication data
+go/auths/*
+!go/auths/.gitkeep
+
+# Legacy Go documentation metadata
+go/docs/*
+AGENTS.md
+CLAUDE.md
+GEMINI.md
+
+# Node.js workspace
+nodejs/node_modules/*
+nodejs/dist/*
+nodejs/.turbo/*
+nodejs/.next/*
+nodejs/.env
+
+# Tooling metadata
+.vscode/*
+.codex/*
+.claude/*
+.gemini/*
+.serena/*
+.agent/*
+.agents/*
+.agents/*
+.opencode/*
+.idea/*
+.bmad/*
+_bmad/*
+_bmad-output/*
+.mcp/cache/
+
+# macOS
+.DS_Store
+._*
+*.bak
+
+apps/**/dist
+apps/**/node_modules
+node_modules
+.env
+apps/**/.env
