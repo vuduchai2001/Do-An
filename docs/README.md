@@ -6,7 +6,8 @@ Thư mục này chứa blueprint kiến trúc, migration plan, và implementatio
 
 - `architecture-overview.md` — kiến trúc đích, ranh giới runtime, và các nguyên tắc thiết kế
 - `module-plan.md` — kế hoạch theo từng module, dependency, và thứ tự triển khai
-- `src-structure.md` — giải thích chi tiết các file, folder, và module hiện có trong `src/`
+- `project-structure.md` — giải thích cấu trúc project hiện tại, các vùng active, và cách đọc monorepo
+- `coding-style.md` — quy ước coding style, import, naming, typing, và cách theo local conventions
 - `monorepo-with-frontend.md` — đề xuất tổ chức lại monorepo nếu thêm frontend web UI
 - `sprint-plan.md` — kế hoạch triển khai theo từng sprint từ MVP đến giai đoạn hardening
 - `parity-strategy.md` — cách đối chiếu hành vi với `../legacy/go`

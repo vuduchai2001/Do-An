@@ -30,7 +30,6 @@ go/auths/*
 
 # Legacy Go documentation metadata
 go/docs/*
-AGENTS.md
 CLAUDE.md
 GEMINI.md
 

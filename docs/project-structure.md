@@ -1,10 +1,97 @@
-# Giải thích cấu trúc `src/`
+# Giải thích cấu trúc project
 
-Tài liệu này giải thích các file, thư mục, và module hiện có trong `apps/backend/src` sau Sprint 0. Mục tiêu là giúp người mới vào dự án đọc được cây source nhanh và hiểu phần nào đang là nền tảng, phần nào mới chỉ là placeholder chuẩn bị cho các sprint sau.
+Tài liệu này giải thích cấu trúc hiện tại của toàn bộ monorepo, với trọng tâm là các vùng code đang active. Mục tiêu là giúp người mới vào dự án nhìn được bức tranh tổng thể trước, sau đó đi sâu vào các thư mục quan trọng nhất như `apps/backend/src`, `apps/web/src`, và `packages/*`.
 
 ---
 
 ## Tổng quan
+
+Hiện tại project được tổ chức theo dạng monorepo như sau:
+
+```txt
+/
+  apps/
+    backend/
+    web/
+  packages/
+    api-contract/
+    shared/
+    tsconfig/
+  docs/
+  legacy/
+  package.json
+  pnpm-workspace.yaml
+  turbo.json
+```
+
+Ý tưởng chung là:
+
+- `apps/backend/` là backend chính của hệ thống mới
+- `apps/web/` là frontend web UI mới
+- `packages/*` là lớp dùng chung cho contracts, shared types, và config nền
+- `docs/` là nơi đặt các tài liệu kiến trúc, kế hoạch module, và giải thích cấu trúc
+- `legacy/go/` là chuẩn tham chiếu hành vi trong giai đoạn migration
+- `legacy/web-reference/` là web UI cũ để tham chiếu flow, page structure, và feature ideas
+
+---
+
+## Thư mục root
+
+### `package.json`
+
+Đây là nơi đặt các script orchestration của monorepo, ví dụ:
+
+- `pnpm dev`
+- `pnpm build`
+- `pnpm typecheck`
+- `pnpm dev:backend`
+- `pnpm dev:web`
+
+Các script này không chứa business logic, mà dùng để điều phối các workspace con.
+
+### `pnpm-workspace.yaml`
+
+Định nghĩa workspace package đang active:
+
+- `apps/*`
+- `packages/*`
+
+Điều này có nghĩa là `legacy/web-reference` không phải package active của workspace chính.
+
+### `turbo.json`
+
+Chứa cấu hình pipeline cho Turborepo. Đây là lớp điều phối build/typecheck/dev giữa các package.
+
+---
+
+## Thư mục `apps/`
+
+### Vai trò
+
+Đây là nơi chứa các ứng dụng chạy thật của monorepo.
+
+### Cấu trúc hiện tại
+
+```txt
+apps/
+  backend/
+  web/
+```
+
+### `apps/backend/`
+
+Đây là backend Node.js/TypeScript chính. Đây cũng là vùng code trưởng thành và mang tính domain-driven rõ hơn frontend hiện tại.
+
+#### Cấu trúc chính
+
+```txt
+apps/backend/
+  src/
+  package.json
+  tsconfig.json
+```
+
+#### `apps/backend/src`
 
 Hiện tại `apps/backend/src` được chia thành 5 phần chính:
 
@@ -27,7 +114,7 @@ src/
 
 ---
 
-## File `src/index.ts`
+## File `apps/backend/src/index.ts`
 
 ### Vai trò
 
@@ -45,7 +132,7 @@ src/
 
 ---
 
-## Thư mục `src/app/`
+## Thư mục `apps/backend/src/app/`
 
 ### Vai trò
 
@@ -106,7 +193,7 @@ Thư mục này hiện mới là placeholder. Về sau nên dùng cho các plugi
 
 ---
 
-## Thư mục `src/core/`
+## Thư mục `apps/backend/src/core/`
 
 ### Vai trò
 
@@ -185,7 +272,7 @@ Nơi để các tiện ích chung, nhưng cần kiểm soát chặt để không
 
 ---
 
-## Thư mục `src/modules/`
+## Thư mục `apps/backend/src/modules/`
 
 ### Vai trò
 
@@ -285,7 +372,7 @@ Public export file cho toàn bộ `modules/`. Có thể dùng để gom các pub
 
 ---
 
-## Thư mục `src/jobs/`
+## Thư mục `apps/backend/src/jobs/`
 
 ### Vai trò
 
@@ -302,22 +389,125 @@ Lưu ý: business rules vẫn nên nằm trong module domain tương ứng; `job
 
 ---
 
-## Cách đọc `src/` hiện tại cho đúng
+## `apps/web/`
 
-Nếu bạn mới tham gia codebase, nên đọc theo thứ tự này:
+### Vai trò
 
-1. `src/index.ts`
-2. `src/app/server.ts`
-3. `src/core/config/*`
-4. `src/core/domain/*`
-5. `src/modules/*/types.ts`
-6. quay lại `docs/module-plan.md` để hiểu module nào sẽ được implement trước
+Đây là frontend React + Vite active của monorepo.
+
+### Đặc điểm hiện tại
+
+- đang còn gần baseline scaffold của Vite
+- có TypeScript strict và ESLint riêng
+- là nơi phù hợp để tiếp tục phát triển web UI mới
+- không nên mặc định lấy convention từ `legacy/web-reference` để áp vào đây
+
+### Cấu trúc cơ bản
+
+```txt
+apps/web/
+  src/
+  package.json
+  tsconfig.json
+  tsconfig.app.json
+  tsconfig.node.json
+  eslint.config.js
+  vite.config.ts
+```
+
+### `apps/web/src/`
+
+Đây là nơi đặt code frontend chính. Hiện tại phần này còn khá gọn và dễ đọc. Nếu cần hiểu nhanh web app, nên bắt đầu từ:
+
+1. `apps/web/src/main.tsx`
+2. `apps/web/src/App.tsx`
+3. `apps/web/eslint.config.js`
+4. `apps/web/tsconfig.app.json`
 
 ---
 
-## Những gì còn thiếu ở `src/` hiện tại
+## Thư mục `packages/`
 
-Sau Sprint 0, cấu trúc đã đúng hướng nhưng vẫn còn thiếu các phần sau:
+### Vai trò
+
+Đây là lớp dùng chung giữa backend và web.
+
+### Cấu trúc hiện tại
+
+```txt
+packages/
+  api-contract/
+  shared/
+  tsconfig/
+```
+
+### `packages/api-contract/`
+
+Chứa các contract và shape API dùng chung, ví dụ response health check hay summary objects cho admin.
+
+### `packages/shared/`
+
+Chứa các shared types đơn giản. Hiện tại phần này còn khá mỏng và lỏng hơn backend domain.
+
+### `packages/tsconfig/`
+
+Chứa shared tsconfig base để các package khác kế thừa hoặc tham chiếu.
+
+---
+
+## Thư mục `docs/`
+
+### Vai trò
+
+Nơi đặt tài liệu cho monorepo. Đây là vùng quan trọng để hiểu định hướng kỹ thuật và kế hoạch phát triển, không chỉ là phần tham khảo tùy chọn.
+
+### Các tài liệu chính
+
+- `architecture-overview.md` — kiến trúc đích và nguyên tắc thiết kế
+- `module-plan.md` — thứ tự triển khai và dependency giữa các module
+- `project-structure.md` — giải thích cấu trúc project hiện tại
+- `coding-style.md` — quy ước coding style và cách theo local conventions
+- `sprint-plan.md` — kế hoạch theo từng sprint
+- `parity-strategy.md` — chiến lược đối chiếu hành vi với code Go cũ
+
+---
+
+## Thư mục `legacy/`
+
+### Vai trò
+
+Đây là vùng tham chiếu, không phải vùng code active mặc định.
+
+### `legacy/go/`
+
+Dùng để đối chiếu parity hành vi khi backend TypeScript chưa rõ logic hoặc cần bám sát sản phẩm cũ.
+
+### `legacy/web-reference/`
+
+Dùng để tham khảo flow UI, page structure, và feature ideas từ web UI cũ. Không nên mặc định copy style formatting hay tooling từ đây sang `apps/web`.
+
+---
+
+## Cách đọc project hiện tại cho đúng
+
+Nếu bạn mới tham gia codebase, nên đọc theo thứ tự này:
+
+1. `README.md`
+2. `docs/architecture-overview.md`
+3. `docs/project-structure.md`
+4. `apps/backend/src/index.ts`
+5. `apps/backend/src/app/server.ts`
+6. `apps/backend/src/core/config/*`
+7. `apps/backend/src/core/domain/*`
+8. `apps/backend/src/modules/*/types.ts`
+9. `apps/web/src/main.tsx`
+10. quay lại `docs/module-plan.md` để hiểu module nào nên được implement trước
+
+---
+
+## Những gì còn thiếu ở project hiện tại
+
+Sau Sprint 0, cấu trúc đã đi đúng hướng nhưng vẫn còn thiếu hoặc còn mỏng ở các phần sau:
 
 - implementation thật của persistence
 - domain entities chi tiết hơn
@@ -326,5 +516,7 @@ Sau Sprint 0, cấu trúc đã đúng hướng nhưng vẫn còn thiếu các ph
 - routing engine implementation
 - translator implementation đầu tiên
 - error model và logging abstractions hoàn chỉnh
+- web UI business features ngoài scaffold hiện tại
+- test runner và test files cho workspace active
 
 Điều này là bình thường. Mục tiêu của Sprint 0 là dựng khung đúng, không phải giải quyết hết nghiệp vụ.

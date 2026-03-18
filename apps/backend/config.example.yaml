@@ -1,0 +1,13 @@
+server:
+  port: 3000
+  host: 0.0.0.0
+
+logging:
+  level: info
+  pretty: false
+
+postgres:
+  url: postgresql://cliproxy:cliproxy@localhost:5432/cliproxy
+
+redis:
+  url: redis://localhost:6379
