@@ -18,17 +18,17 @@ export interface WebSocketMessage {
 export interface WsRelayService {
   connect(accountId: AccountId, providerId: ProviderId): Promise<WebSocketSession>;
   disconnect(sessionId: string): Promise<void>;
-  
+
   send(sessionId: string, message: WebSocketMessage): Promise<void>;
   subscribe(sessionId: string, handler: (message: WebSocketMessage) => void): () => void;
-  
+
   getActiveSessions(): WebSocketSession[];
   getSession(sessionId: string): WebSocketSession | undefined;
 }
 
 export interface WsRelayAdapter {
   readonly providerId: ProviderId;
-  
+
   connect(credentials: unknown): Promise<void>;
   disconnect(): Promise<void>;
   send(message: WebSocketMessage): Promise<void>;

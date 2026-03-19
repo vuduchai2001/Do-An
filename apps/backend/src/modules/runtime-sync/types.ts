@@ -9,11 +9,11 @@ export interface RuntimeState {
 export interface RuntimeSyncService {
   getState(): RuntimeState;
   refresh(): Promise<void>;
-  
+
   onAccountAdded(accountId: AccountId, providerId: ProviderId): Promise<void>;
   onAccountRemoved(accountId: AccountId): Promise<void>;
   onAccountStatusChanged(accountId: AccountId, healthy: boolean): Promise<void>;
-  
+
   onRoutingRuleChanged(): Promise<void>;
 }
 

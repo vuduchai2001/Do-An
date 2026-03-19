@@ -5,14 +5,14 @@ export interface UsageEvent {
   accountId: AccountId;
   providerId: ProviderId;
   modelId: ModelId;
-  
+
   promptTokens: number;
   completionTokens: number;
-  
+
   status: 'success' | 'error';
   errorCode?: string;
   errorMessage?: string;
-  
+
   durationMs: number;
   timestamp: Date;
 }
@@ -21,19 +21,22 @@ export interface UsageSummary {
   accountId: AccountId;
   periodStart: Date;
   periodEnd: Date;
-  
+
   totalRequests: number;
   successCount: number;
   errorCount: number;
-  
+
   totalPromptTokens: number;
   totalCompletionTokens: number;
-  
-  byModel: Map<ModelId, {
-    requests: number;
-    promptTokens: number;
-    completionTokens: number;
-  }>;
+
+  byModel: Map<
+    ModelId,
+    {
+      requests: number;
+      promptTokens: number;
+      completionTokens: number;
+    }
+  >;
 }
 
 export interface UsageService {
@@ -44,10 +47,13 @@ export interface UsageService {
 
 export interface UsageRepository {
   save(event: UsageEvent): Promise<void>;
-  findByAccount(accountId: AccountId, options?: {
-    since?: Date;
-    until?: Date;
-    limit?: number;
-  }): Promise<UsageEvent[]>;
+  findByAccount(
+    accountId: AccountId,
+    options?: {
+      since?: Date;
+      until?: Date;
+      limit?: number;
+    },
+  ): Promise<UsageEvent[]>;
   aggregate(accountId: AccountId, periodStart: Date, periodEnd: Date): Promise<UsageSummary>;
 }

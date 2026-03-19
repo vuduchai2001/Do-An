@@ -16,21 +16,21 @@ export interface ProviderModel {
 export interface ProviderAdapter {
   readonly providerId: ProviderId;
   readonly name: string;
-  
+
   getModels(): ProviderModel[];
   supportsModel(modelId: ModelId): boolean;
-  
+
   execute(
     accountId: AccountId,
     modelId: ModelId,
-    request: ProviderRequest
+    request: ProviderRequest,
   ): Promise<ProviderResponse>;
-  
+
   executeStream?(
     accountId: AccountId,
     modelId: ModelId,
     request: ProviderRequest,
-    onChunk: (chunk: string) => void
+    onChunk: (chunk: string) => void,
   ): Promise<void>;
 }
 

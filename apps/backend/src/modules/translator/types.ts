@@ -12,14 +12,11 @@ export interface TranslationContext {
 export interface Translator<TGateway = GatewayRequest, TProvider = ProviderRequest> {
   readonly sourceFormat: string;
   readonly targetFormat: string;
-  
+
   translateRequest(gatewayRequest: TGateway, ctx: TranslationContext): TProvider;
   translateResponse(providerResponse: ProviderResponse, ctx: TranslationContext): GatewayResponse;
-  
-  translateStreamChunk?(
-    chunk: string,
-    ctx: TranslationContext
-  ): string | null;
+
+  translateStreamChunk?(chunk: string, ctx: TranslationContext): string | null;
 }
 
 export interface TranslatorRegistry {

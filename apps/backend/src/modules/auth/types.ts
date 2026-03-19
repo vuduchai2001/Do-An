@@ -27,7 +27,7 @@ export interface AuthRepository {
   saveSession(session: OAuthSession): Promise<void>;
   findSessionByState(state: string): Promise<OAuthSession | null>;
   deleteSession(id: string): Promise<void>;
-  
+
   saveCredentials(credentials: AuthCredentials): Promise<void>;
   findCredentials(accountId: AccountId): Promise<AuthCredentials | null>;
   deleteCredentials(accountId: AccountId): Promise<void>;

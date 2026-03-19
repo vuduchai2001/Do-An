@@ -26,10 +26,10 @@ export interface RoutingService {
   selectAccount(ctx: RoutingContext): Promise<RoutingDecision>;
   reportSuccess(accountId: AccountId, modelId: ModelId): Promise<void>;
   reportFailure(accountId: AccountId, modelId: ModelId, error: Error): Promise<void>;
-  
+
   getAccountHealth(accountId: AccountId): Promise<AccountHealth | null>;
   getHealthyAccounts(providerId: ProviderId): Promise<AccountId[]>;
-  
+
   setStrategy(strategy: RoutingStrategy): void;
   getStrategy(): RoutingStrategy;
 }

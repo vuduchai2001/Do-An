@@ -30,7 +30,7 @@ export interface GatewayService {
   handleChatCompletion(request: GatewayRequest): Promise<GatewayResponse>;
   handleStreamingChatCompletion(
     request: GatewayRequest,
-    onChunk: (chunk: string) => void
+    onChunk: (chunk: string) => void,
   ): Promise<void>;
 }
 
