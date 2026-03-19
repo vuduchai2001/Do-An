@@ -6,6 +6,9 @@ logging:
   level: info
   pretty: false
 
+persistence:
+  mode: memory
+
 postgres:
   url: postgresql://cliproxy:cliproxy@localhost:5432/cliproxy
 

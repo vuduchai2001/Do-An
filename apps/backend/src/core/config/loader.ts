@@ -7,6 +7,7 @@ import { AppConfigSchema, type AppConfig } from './schema.js';
 interface AppConfigSource {
   server?: Partial<AppConfig['server']>;
   logging?: Partial<AppConfig['logging']>;
+  persistence?: Partial<AppConfig['persistence']>;
   postgres?: Partial<AppConfig['postgres']>;
   redis?: Partial<AppConfig['redis']>;
 }
@@ -59,10 +60,21 @@ function readEnvConfig(): AppConfigSource {
     return Object.keys(logging).length > 0 ? logging : undefined;
   };
 
+  const persistenceConfig = (): Partial<AppConfig['persistence']> | undefined => {
+    const persistence: Partial<AppConfig['persistence']> = {};
+
+    if (process.env.PERSISTENCE_MODE) {
+      persistence.mode = process.env.PERSISTENCE_MODE as AppConfig['persistence']['mode'];
+    }
+
+    return Object.keys(persistence).length > 0 ? persistence : undefined;
+  };
+
   const envConfig: AppConfigSource = {};
 
   const server = serverConfig();
   const logging = loggingConfig();
+  const persistence = persistenceConfig();
 
   if (server) {
     envConfig.server = server;
@@ -70,6 +82,10 @@ function readEnvConfig(): AppConfigSource {
 
   if (logging) {
     envConfig.logging = logging;
+  }
+
+  if (persistence) {
+    envConfig.persistence = persistence;
   }
 
   if (process.env.DATABASE_URL) {
@@ -107,6 +123,11 @@ function mergeConfig(
       ...yamlConfig.logging,
       ...envConfig.logging,
       ...overrides?.logging,
+    },
+    persistence: {
+      ...yamlConfig.persistence,
+      ...envConfig.persistence,
+      ...overrides?.persistence,
     },
     postgres: {
       ...yamlConfig.postgres,

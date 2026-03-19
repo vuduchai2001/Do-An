@@ -5,7 +5,10 @@ import { afterEach, describe, expect, it, vi } from 'vitest';
 import { loadConfig } from '../../../src/core/config/loader.js';
 
 function writeTempConfig(content: string): string {
-  const filePath = join(tmpdir(), `cliproxy-config-${Date.now()}-${Math.random().toString(36).slice(2)}.yaml`);
+  const filePath = join(
+    tmpdir(),
+    `cliproxy-config-${Date.now()}-${Math.random().toString(36).slice(2)}.yaml`,
+  );
   writeFileSync(filePath, content);
   return filePath;
 }
