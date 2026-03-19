@@ -12,6 +12,68 @@ Mục tiêu là đưa backend từ **in-memory persistence** sang **PostgreSQL-b
 
 ---
 
+## Phase 1 persistence rulebook
+
+Các rule này dùng để giữ boundary của persistence sạch, giảm scope creep, và giữ đường lui rẻ nếu sau này muốn cân nhắc ORM.
+
+### 1) Chỉ repository contract được phép đi lên application layer
+
+- Service, use-case, route handler chỉ được nói chuyện với `repositories.ts`.
+- Không import `pg`, SQL helper, hoặc row types trực tiếp từ route/service layer.
+
+### 2) SQL không được rò ra ngoài persistence module
+
+- Mọi câu SQL phải nằm trong `apps/backend/src/modules/persistence/**`.
+- Không để query string rải ở `app/`, `core/`, `auth/`, `routing/`, hay module khác.
+
+### 3) Raw DB rows không được leak ra ngoài adapter
+
+- PostgreSQL rows chỉ tồn tại trong adapter layer.
+- Mọi dữ liệu đi ra ngoài persistence phải được map thành domain entities hoặc return shape đã chốt bởi repository contract.
+
+### 4) `records.ts` là shape persistence, không phải domain API
+
+- `records.ts` phục vụ lưu trữ/mapping.
+- Business logic không nên thao tác trực tiếp với persistence records trừ khi đang ở adapter layer.
+
+### 5) Domain entities không được phụ thuộc vào storage concerns
+
+- Không kéo SQL/nullability/column layout vào domain entities chỉ để “tiện map”.
+- Nếu persistence shape khác domain shape, hãy xử lý bằng mapper.
+
+### 6) Migrations phải explicit và forward-only
+
+- Không phụ thuộc vào migration magic khó audit.
+- Mọi thay đổi schema phải có file migration rõ ràng, có thể đọc được, và có thể chạy lặp lại trong môi trường local/test.
+
+### 7) Giữ implementation selection ở một chỗ
+
+- Việc chọn `memory` hay `postgres` chỉ nên diễn ra ở bootstrap của persistence.
+- Không branch theo mode ở nhiều chỗ trong application layer.
+
+### 8) Parity tests là hàng rào bắt buộc
+
+- Mỗi repository PostgreSQL mới phải được kiểm tra lại bằng contract/parity tests so với memory implementation.
+- Không cutover chỉ vì query “có vẻ đúng”.
+
+### 9) Không tối ưu hóa DB quá sớm
+
+- Tránh đưa quá nhiều SQL đặc thù/cực tối ưu vào Slice 1 nếu chưa cần.
+- Ưu tiên đúng behavior, rõ boundary, dễ verify trước; tối ưu sâu để sau.
+
+### 10) Chỉ cân nhắc ORM sau khi có pain thật
+
+- Không thêm ORM chỉ vì “sau này có thể cần”.
+- Chỉ re-evaluate khi CRUD/admin endpoints thực sự chiếm phần lớn công việc hoặc boilerplate persistence bắt đầu làm chậm delivery.
+
+### 11) ID generation phải đi qua utility dùng chung
+
+- Không tự generate ID theo kiểu `Date.now() + Math.random()` trong từng repository.
+- Mọi implementation persistence nên dùng utility chung để giữ hành vi nhất quán.
+- Với backend hiện tại, utility này đã được nâng lên UUID v7 để tối ưu hơn cho indexing và ordering ở database.
+
+---
+
 ## Mục tiêu của Slice 1
 
 - giữ nguyên repository contracts hiện có càng nhiều càng tốt
@@ -304,18 +366,26 @@ Mục tiêu là đưa backend từ **in-memory persistence** sang **PostgreSQL-b
 
 ---
 
-### 17) `apps/backend/src/modules/persistence/memory-store.ts`
+### 17) `apps/backend/src/modules/persistence/memory/`
 
 **Loại thay đổi:** update  
 **Sửa gì:**
 
-- nếu chưa có, thêm factory rõ ràng kiểu:
+- tách in-memory implementation theo strategy folder thay vì dồn toàn bộ vào một file lớn
+- giữ factory rõ ràng kiểu:
+  - `memory/bootstrap.ts`
   - `createInMemoryRepositories()`
-- không đổi business behavior
+- chia các repo thành file riêng tương ứng với postgres adapter:
+  - `provider-repository.ts`
+  - `account-repository.ts`
+  - `oauth-session-repository.ts`
+  - `routing-rule-repository.ts`
+  - `quota-state-repository.ts`
+  - `usage-event-repository.ts`
 
 **Kết quả mong đợi:**
 
-- memory và postgres có cùng bootstrap shape
+- memory và postgres có cấu trúc strategy đối xứng hơn
 
 ---
 
@@ -518,7 +588,7 @@ Mục tiêu là đưa backend từ **in-memory persistence** sang **PostgreSQL-b
 14. `apps/backend/src/modules/persistence/postgres/oauth-session-repository.ts`
 15. `apps/backend/src/modules/persistence/postgres/index.ts`
 16. `apps/backend/src/modules/persistence/bootstrap.ts`
-17. `apps/backend/src/modules/persistence/memory-store.ts`
+17. `apps/backend/src/modules/persistence/memory/`
 18. `apps/backend/src/modules/persistence/index.ts`
 
 ### Batch 3 — app wiring

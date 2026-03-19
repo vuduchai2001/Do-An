@@ -15,16 +15,28 @@ Repo này hiện được chuẩn hóa theo hướng TypeScript monorepo để p
 
 - `pnpm` để quản lý workspace
 - `Turborepo` để chạy build/typecheck/dev theo graph của monorepo
+- Root hiện có shared ESLint + Prettier config cho các workspace active
 
 ## Lệnh thường dùng
 
 - `pnpm install`
 - `pnpm build`
 - `pnpm typecheck`
+- `pnpm lint`
+- `pnpm format`
+- `pnpm format:check`
 - `pnpm dev:backend`
 - `pnpm dev:web`
 - `pnpm --filter @cliproxy/backend test`
 - `pnpm --filter @cliproxy/backend test:watch`
+- `pnpm --filter @cliproxy/backend lint`
+- `pnpm --filter @cliproxy/backend format`
+- `pnpm --filter @cliproxy/backend format:check`
+- `pnpm --filter @cliproxy/backend db:migrate`
+- `pnpm --filter @cliproxy/backend db:migrate:reset`
+- `pnpm --filter @cliproxy/web lint`
+- `pnpm --filter @cliproxy/web format`
+- `pnpm --filter @cliproxy/web format:check`
 
 ## Hạ tầng local/dev
 
@@ -60,7 +72,16 @@ docker compose down
 
 - `DATABASE_URL` — override `postgres.url` trong YAML
 - `REDIS_URL` — override `redis.url` trong YAML
+- `PERSISTENCE_MODE` — chọn `memory` hoặc `postgres`
 - `PORT` / `HOST` — override `server.port` / `server.host` trong YAML
 - `LOG_LEVEL` / `LOG_PRETTY` — override `logging.*` trong YAML
 
-Hiện tại backend mới chỉ đọc được cấu hình Postgres/Redis ở mức nền; persistence thật vẫn đang ở giai đoạn tiếp theo của kế hoạch sprint.
+### Lệnh persistence cho backend
+
+```bash
+pnpm --filter @cliproxy/backend db:migrate
+pnpm --filter @cliproxy/backend db:migrate:reset
+PERSISTENCE_MODE=postgres pnpm --filter @cliproxy/backend dev
+```
+
+Hiện tại backend đã có PostgreSQL-backed persistence cho `providers`, `accounts`, `oauthSessions`, `routingRules`, `quotaStates`, và `usageEvents`.

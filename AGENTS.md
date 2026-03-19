@@ -51,6 +51,9 @@ pnpm install
 pnpm dev
 pnpm build
 pnpm typecheck
+pnpm lint
+pnpm format
+pnpm format:check
 pnpm dev:backend
 pnpm build:backend
 pnpm typecheck:backend
@@ -65,6 +68,12 @@ pnpm typecheck:web
 pnpm --filter @cliproxy/backend dev
 pnpm --filter @cliproxy/backend build
 pnpm --filter @cliproxy/backend typecheck
+pnpm --filter @cliproxy/backend test
+pnpm --filter @cliproxy/backend lint
+pnpm --filter @cliproxy/backend format
+pnpm --filter @cliproxy/backend format:check
+pnpm --filter @cliproxy/backend db:migrate
+pnpm --filter @cliproxy/backend db:migrate:reset
 ```
 
 Ghi chú:
@@ -72,6 +81,9 @@ Ghi chú:
 - `dev` dùng `tsx watch src/index.ts`.
 - `build` dùng `tsc -p tsconfig.json`.
 - `start` chỉ tồn tại bên trong `apps/backend`: `pnpm --filter @cliproxy/backend start`.
+- Nếu cần chạy backend với persistence thật, dùng `PERSISTENCE_MODE=postgres`.
+- Backend hiện có ESLint + Prettier riêng ở cấp package; không áp formatter/linter toàn monorepo từ root.
+- Backend hiện dùng shared root ESLint + Prettier config thông qua package scripts.
 
 ### Các lệnh cho web
 
@@ -80,12 +92,16 @@ pnpm --filter @cliproxy/web dev
 pnpm --filter @cliproxy/web build
 pnpm --filter @cliproxy/web typecheck
 pnpm --filter @cliproxy/web lint
+pnpm --filter @cliproxy/web format
+pnpm --filter @cliproxy/web format:check
 pnpm --filter @cliproxy/web preview
 ```
 
 Ghi chú:
 
 - Root **không** định nghĩa script `lint` cho toàn monorepo.
+- Root hiện có shared ESLint + Prettier config, nhưng verify package-level vẫn nên chạy theo workspace bạn vừa sửa.
+- Root hiện cũng có script `lint`, `format`, `format:check` dùng chung cho monorepo active; package-level scripts vẫn là lựa chọn verify mặc định cho diff hẹp.
 - Nếu bạn thay đổi code frontend, hãy chạy trực tiếp `pnpm --filter @cliproxy/web lint`.
 
 ### Các lệnh cho legacy web reference
@@ -118,6 +134,8 @@ Nếu bạn thay đổi code backend:
 
 ```bash
 pnpm --filter @cliproxy/backend test
+pnpm --filter @cliproxy/backend lint
+pnpm --filter @cliproxy/backend format:check
 pnpm --filter @cliproxy/backend typecheck
 pnpm --filter @cliproxy/backend build
 ```
@@ -125,6 +143,7 @@ pnpm --filter @cliproxy/backend build
 Nếu bạn thay đổi code web:
 
 ```bash
+pnpm --filter @cliproxy/web format:check
 pnpm --filter @cliproxy/web typecheck
 pnpm --filter @cliproxy/web lint
 pnpm --filter @cliproxy/web build
@@ -255,7 +274,10 @@ pnpm --filter @cliproxy/backend test -- test/app/routes/health.test.ts
 Sau khi thay đổi backend:
 
 ```bash
+pnpm --filter @cliproxy/backend db:migrate
 pnpm --filter @cliproxy/backend test
+pnpm --filter @cliproxy/backend lint
+pnpm --filter @cliproxy/backend format:check
 pnpm --filter @cliproxy/backend typecheck
 pnpm --filter @cliproxy/backend build
 ```

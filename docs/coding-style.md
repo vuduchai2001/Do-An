@@ -31,8 +31,8 @@ Khi import chỉ để dùng cho type, hãy dùng `import type`.
 Ví dụ backend:
 
 ```ts
-import type { FastifyInstance } from 'fastify';
-import { loadConfig, type AppConfig } from '../core/config/index.js';
+import type { FastifyInstance } from "fastify";
+import { loadConfig, type AppConfig } from "../core/config/index.js";
 ```
 
 ### Tôn trọng quy ước import của từng package
