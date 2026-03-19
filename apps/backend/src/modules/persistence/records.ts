@@ -27,18 +27,18 @@ export interface AccountRecord {
   id: AccountId;
   providerId: ProviderId;
   status: AccountStatus;
-  
+
   accessToken: string;
   refreshToken?: string;
   tokenExpiresAt?: Date;
   tokenScopes?: string[];
-  
+
   email?: string;
   name?: string;
   organizationId?: string;
   labels?: string[];
   customAttributes?: string; // JSON string
-  
+
   createdAt: Date;
   updatedAt: Date;
   lastUsedAt?: Date;
@@ -51,9 +51,9 @@ export interface ProviderRecord {
   name: string;
   type: ProviderType;
   status: ProviderStatus;
-  
+
   models: string; // JSON string of ProviderModel[]
-  
+
   authorizationUrl?: string;
   tokenUrl?: string;
   deviceCodeUrl?: string;
@@ -61,7 +61,7 @@ export interface ProviderRecord {
   apiBaseUrl: string;
   defaultTimeoutMs: number;
   maxRetries: number;
-  
+
   createdAt: Date;
   updatedAt: Date;
 }
@@ -71,20 +71,20 @@ export interface OAuthSessionRecord {
   id: SessionId;
   providerId: ProviderId;
   status: OAuthSessionStatus;
-  
+
   state: string;
   codeVerifier?: string;
   redirectUri?: string;
-  
+
   accessToken?: string;
   refreshToken?: string;
   expiresIn?: number;
   tokenType?: string;
   tokenScopes?: string; // JSON string
-  
+
   accountId?: AccountId;
   errorMessage?: string;
-  
+
   createdAt: Date;
   expiresAt: Date;
   completedAt?: Date;
@@ -96,14 +96,14 @@ export interface RoutingRuleRecord {
   name: string;
   description?: string;
   status: RoutingRuleStatus;
-  
+
   modelPattern: string;
   providerId: ProviderId;
   priority: number;
   strategy: RoutingStrategy;
-  
+
   constraints?: string; // JSON string of RoutingRuleConstraints
-  
+
   createdAt: Date;
   updatedAt: Date;
 }
@@ -113,26 +113,26 @@ export interface QuotaStateRecord {
   id: QuotaStateId;
   accountId: AccountId;
   modelId: ModelId;
-  
+
   exhausted: boolean;
   exhaustionReason?: ExhaustionReason;
   exhaustionMessage?: string;
-  
+
   cooldownUntil?: Date;
   cooldownReason?: string;
-  
+
   limitsRequestsPerMinute?: number;
   limitsRequestsPerHour?: number;
   limitsRequestsPerDay?: number;
   limitsTokensPerMinute?: number;
   limitsTokensPerDay?: number;
-  
+
   usageRequestsInMinute: number;
   usageRequestsInHour: number;
   usageRequestsInDay: number;
   usageTokensInMinute: number;
   usageTokensInDay: number;
-  
+
   lastCheckedAt: Date;
   createdAt: Date;
   updatedAt: Date;
@@ -143,33 +143,33 @@ export interface UsageEventRecord {
   id: UsageEventId;
   accountId: AccountId;
   providerId: ProviderId;
-  
+
   status: UsageEventStatus;
-  
+
   requestModelId: ModelId;
   requestMessageCount: number;
   requestMaxTokens?: number;
   requestTemperature?: number;
   requestStreaming: boolean;
-  
+
   responseFinishReason?: string;
   responseHttpCode?: number;
   responseProviderRequestId?: string;
-  
+
   tokensPrompt?: number;
   tokensCompletion?: number;
   tokensTotal?: number;
-  
+
   timingStartedAt: Date;
   timingCompletedAt: Date;
   timingDurationMs: number;
   timingTimeToFirstTokenMs?: number;
-  
+
   errorCode?: string;
   errorMessage?: string;
-  
+
   metadata?: string; // JSON string
-  
+
   createdAt: Date;
 }
 
