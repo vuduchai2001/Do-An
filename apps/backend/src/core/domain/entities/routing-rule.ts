@@ -1,7 +1,7 @@
 /**
  * Routing Rule entity - defines how requests are routed to providers.
  */
-import type { RoutingRuleId, ProviderId, ModelId } from '../ids.js';
+import type { RoutingRuleId, ProviderId } from '../ids.js';
 import type { RoutingRuleStatus, RoutingStrategy } from '../enums.js';
 
 export interface RoutingRuleConstraints {
@@ -17,14 +17,14 @@ export interface RoutingRule {
   name: string;
   description?: string;
   status: RoutingRuleStatus;
-  
+
   modelPattern: string;
   providerId: ProviderId;
   priority: number;
   strategy: RoutingStrategy;
-  
+
   constraints?: RoutingRuleConstraints;
-  
+
   createdAt: Date;
   updatedAt: Date;
 }

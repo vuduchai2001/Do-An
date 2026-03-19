@@ -4,7 +4,13 @@
 
 // Account status values
 export type AccountStatus = 'active' | 'suspended' | 'exhausted' | 'cooldown' | 'disabled';
-export const AccountStatusValues = ['active', 'suspended', 'exhausted', 'cooldown', 'disabled'] as const;
+export const AccountStatusValues = [
+  'active',
+  'suspended',
+  'exhausted',
+  'cooldown',
+  'disabled',
+] as const;
 
 // Provider types
 export type ProviderType = 'oauth' | 'device' | 'apikey';
@@ -39,7 +45,12 @@ export const UsageEventStatusValues = ['success', 'error', 'timeout', 'rate_limi
 
 // Quota exhaustion reasons
 export type ExhaustionReason = 'rate_limit' | 'quota_exceeded' | 'provider_error' | 'manual';
-export const ExhaustionReasonValues = ['rate_limit', 'quota_exceeded', 'provider_error', 'manual'] as const;
+export const ExhaustionReasonValues = [
+  'rate_limit',
+  'quota_exceeded',
+  'provider_error',
+  'manual',
+] as const;
 
 // Health status
 export type HealthStatus = 'healthy' | 'degraded' | 'unhealthy';

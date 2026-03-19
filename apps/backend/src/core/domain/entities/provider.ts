@@ -30,10 +30,10 @@ export interface Provider {
   name: string;
   type: ProviderType;
   status: ProviderStatus;
-  
+
   models: ProviderModel[];
   config: ProviderConfig;
-  
+
   createdAt: Date;
   updatedAt: Date;
 }

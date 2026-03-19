@@ -23,10 +23,10 @@ export interface Account {
   id: AccountId;
   providerId: ProviderId;
   status: AccountStatus;
-  
+
   credentials: AccountCredentials;
   metadata: AccountMetadata;
-  
+
   createdAt: Date;
   updatedAt: Date;
   lastUsedAt?: Date;

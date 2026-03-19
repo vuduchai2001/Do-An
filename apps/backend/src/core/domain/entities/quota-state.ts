@@ -24,17 +24,17 @@ export interface QuotaState {
   id: QuotaStateId;
   accountId: AccountId;
   modelId: ModelId;
-  
+
   exhausted: boolean;
   exhaustionReason?: ExhaustionReason;
   exhaustionMessage?: string;
-  
+
   cooldownUntil?: Date;
   cooldownReason?: string;
-  
+
   limits: QuotaLimits;
   usage: QuotaUsage;
-  
+
   lastCheckedAt: Date;
   createdAt: Date;
   updatedAt: Date;

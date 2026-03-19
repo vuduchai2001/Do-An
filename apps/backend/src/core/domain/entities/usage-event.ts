@@ -35,20 +35,20 @@ export interface UsageEvent {
   id: UsageEventId;
   accountId: AccountId;
   providerId: ProviderId;
-  
+
   status: UsageEventStatus;
-  
+
   request: UsageEventRequest;
   response?: UsageEventResponse;
-  
+
   tokens?: UsageEventTokenCounts;
   timing: UsageEventTiming;
-  
+
   errorCode?: string;
   errorMessage?: string;
-  
+
   metadata?: Record<string, unknown>;
-  
+
   createdAt: Date;
 }
 

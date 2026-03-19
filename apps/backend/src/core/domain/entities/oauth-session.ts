@@ -16,15 +16,15 @@ export interface OAuthSession {
   id: SessionId;
   providerId: ProviderId;
   status: OAuthSessionStatus;
-  
+
   state: string;
   codeVerifier?: string;
   redirectUri?: string;
-  
+
   tokens?: OAuthSessionTokens;
   accountId?: AccountId;
   errorMessage?: string;
-  
+
   createdAt: Date;
   expiresAt: Date;
   completedAt?: Date;
