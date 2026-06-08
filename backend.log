@@ -1,0 +1,513 @@
+CLIProxyAPI Version: dev, Commit: none, BuiltAt: unknown
+[2026-06-02 21:44:47] [--------] [info ] [main.go:496] CLIProxyAPI Version: dev, Commit: none, BuiltAt: unknown
+[2026-06-02 21:44:47] [--------] [info ] [util.go:70] log level changed from info to debug (debug=true)
+[2026-06-02 21:44:47] [--------] [info ] [antigravity_version.go:54] periodic antigravity version refresh started (interval=3h0m0s)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+[2026-06-02 21:44:47] [--------] [debug] [reconcile.go:103] auth providers unchanged after config update
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] GET    /healthz                  --> github.com/router-for-me/CLIProxyAPI/v7/internal/api.(*Server).setupRoutes.func1 (6 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] HEAD   /healthz                  --> github.com/router-for-me/CLIProxyAPI/v7/internal/api.(*Server).setupRoutes.func1 (6 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] GET    /management.html          --> github.com/router-for-me/CLIProxyAPI/v7/internal/api.(*Server).serveManagementControlPanel-fm (6 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] GET    /v1/models                --> github.com/router-for-me/CLIProxyAPI/v7/internal/api.(*Server).setupRoutes.(*Server).unifiedModelsHandler.func9 (7 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] POST   /v1/chat/completions      --> github.com/router-for-me/CLIProxyAPI/v7/sdk/api/handlers/openai.(*OpenAIAPIHandler).ChatCompletions-fm (7 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] POST   /v1/completions           --> github.com/router-for-me/CLIProxyAPI/v7/sdk/api/handlers/openai.(*OpenAIAPIHandler).Completions-fm (7 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] POST   /v1/images/generations    --> github.com/router-for-me/CLIProxyAPI/v7/sdk/api/handlers/openai.(*OpenAIAPIHandler).ImagesGenerations-fm (7 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] POST   /v1/images/edits          --> github.com/router-for-me/CLIProxyAPI/v7/sdk/api/handlers/openai.(*OpenAIAPIHandler).ImagesEdits-fm (7 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] POST   /v1/videos                --> github.com/router-for-me/CLIProxyAPI/v7/sdk/api/handlers/openai.(*OpenAIAPIHandler).VideosCreate-fm (7 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] POST   /v1/videos/generations    --> github.com/router-for-me/CLIProxyAPI/v7/sdk/api/handlers/openai.(*OpenAIAPIHandler).XAIVideosGenerations-fm (7 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] POST   /v1/videos/edits          --> github.com/router-for-me/CLIProxyAPI/v7/sdk/api/handlers/openai.(*OpenAIAPIHandler).XAIVideosEdits-fm (7 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] POST   /v1/videos/extensions     --> github.com/router-for-me/CLIProxyAPI/v7/sdk/api/handlers/openai.(*OpenAIAPIHandler).XAIVideosExtensions-fm (7 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] GET    /v1/videos/:request_id    --> github.com/router-for-me/CLIProxyAPI/v7/sdk/api/handlers/openai.(*OpenAIAPIHandler).XAIVideosRetrieve-fm (7 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] POST   /v1/messages              --> github.com/router-for-me/CLIProxyAPI/v7/sdk/api/handlers/claude.(*ClaudeCodeAPIHandler).ClaudeMessages-fm (7 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] POST   /v1/messages/count_tokens --> github.com/router-for-me/CLIProxyAPI/v7/sdk/api/handlers/claude.(*ClaudeCodeAPIHandler).ClaudeCountTokens-fm (7 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] GET    /v1/responses             --> github.com/router-for-me/CLIProxyAPI/v7/sdk/api/handlers/openai.(*OpenAIResponsesAPIHandler).ResponsesWebsocket-fm (7 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] POST   /v1/responses             --> github.com/router-for-me/CLIProxyAPI/v7/sdk/api/handlers/openai.(*OpenAIResponsesAPIHandler).Responses-fm (7 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] POST   /v1/responses/compact     --> github.com/router-for-me/CLIProxyAPI/v7/sdk/api/handlers/openai.(*OpenAIResponsesAPIHandler).Compact-fm (7 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] GET    /backend-api/codex/responses --> github.com/router-for-me/CLIProxyAPI/v7/sdk/api/handlers/openai.(*OpenAIResponsesAPIHandler).ResponsesWebsocket-fm (7 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] POST   /backend-api/codex/responses --> github.com/router-for-me/CLIProxyAPI/v7/sdk/api/handlers/openai.(*OpenAIResponsesAPIHandler).Responses-fm (7 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] POST   /backend-api/codex/responses/compact --> github.com/router-for-me/CLIProxyAPI/v7/sdk/api/handlers/openai.(*OpenAIResponsesAPIHandler).Compact-fm (7 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] GET    /v1beta/models            --> github.com/router-for-me/CLIProxyAPI/v7/internal/api.(*Server).setupRoutes.(*Server).geminiModelsHandler.func12 (7 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] POST   /v1beta/models/*action    --> github.com/router-for-me/CLIProxyAPI/v7/sdk/api/handlers/gemini.(*GeminiAPIHandler).GeminiHandler-fm (7 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] GET    /v1beta/models/*action    --> github.com/router-for-me/CLIProxyAPI/v7/internal/api.(*Server).setupRoutes.(*Server).geminiGetHandler.func13 (7 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] GET    /                         --> github.com/router-for-me/CLIProxyAPI/v7/internal/api.(*Server).setupRoutes.func2 (6 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] POST   /v1internal:method        --> github.com/router-for-me/CLIProxyAPI/v7/sdk/api/handlers/gemini.(*GeminiCLIAPIHandler).CLIHandler-fm (6 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] GET    /anthropic/callback       --> github.com/router-for-me/CLIProxyAPI/v7/internal/api.(*Server).setupRoutes.func3 (6 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] GET    /codex/callback           --> github.com/router-for-me/CLIProxyAPI/v7/internal/api.(*Server).setupRoutes.func4 (6 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] GET    /google/callback          --> github.com/router-for-me/CLIProxyAPI/v7/internal/api.(*Server).setupRoutes.func5 (6 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] GET    /antigravity/callback     --> github.com/router-for-me/CLIProxyAPI/v7/internal/api.(*Server).setupRoutes.func6 (6 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] GET    /xai/callback             --> github.com/router-for-me/CLIProxyAPI/v7/internal/api.(*Server).setupRoutes.func7 (6 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] GET    /api/provider/:provider/models --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerProviderAliases.func2 (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] POST   /api/provider/:provider/chat/completions --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerProviderAliases.(*FallbackHandler).WrapHandler.func5 (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] POST   /api/provider/:provider/completions --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerProviderAliases.(*FallbackHandler).WrapHandler.func6 (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] POST   /api/provider/:provider/responses --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerProviderAliases.(*FallbackHandler).WrapHandler.func7 (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] GET    /api/provider/:provider/v1/models --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerProviderAliases.func2 (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] POST   /api/provider/:provider/v1/chat/completions --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerProviderAliases.(*FallbackHandler).WrapHandler.func8 (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] POST   /api/provider/:provider/v1/completions --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerProviderAliases.(*FallbackHandler).WrapHandler.func9 (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] POST   /api/provider/:provider/v1/responses --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerProviderAliases.(*FallbackHandler).WrapHandler.func10 (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] POST   /api/provider/:provider/v1/messages --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerProviderAliases.(*FallbackHandler).WrapHandler.func11 (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] POST   /api/provider/:provider/v1/messages/count_tokens --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerProviderAliases.(*FallbackHandler).WrapHandler.func12 (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] GET    /api/provider/:provider/v1beta/models --> github.com/router-for-me/CLIProxyAPI/v7/sdk/api/handlers/gemini.(*GeminiAPIHandler).GeminiModels-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] POST   /api/provider/:provider/v1beta/models/*action --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerProviderAliases.(*FallbackHandler).WrapHandler.func13 (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] GET    /api/provider/:provider/v1beta/models/*action --> github.com/router-for-me/CLIProxyAPI/v7/sdk/api/handlers/gemini.(*GeminiAPIHandler).GeminiGetHandler-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] GET    /api/internal             --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] POST   /api/internal             --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] PUT    /api/internal             --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] PATCH  /api/internal             --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] HEAD   /api/internal             --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] OPTIONS /api/internal             --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] DELETE /api/internal             --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] CONNECT /api/internal             --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] TRACE  /api/internal             --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] GET    /api/internal/*path       --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] POST   /api/internal/*path       --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] PUT    /api/internal/*path       --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] PATCH  /api/internal/*path       --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] HEAD   /api/internal/*path       --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] OPTIONS /api/internal/*path       --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] DELETE /api/internal/*path       --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] CONNECT /api/internal/*path       --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] TRACE  /api/internal/*path       --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] GET    /api/user                 --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] POST   /api/user                 --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] PUT    /api/user                 --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] PATCH  /api/user                 --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] HEAD   /api/user                 --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] OPTIONS /api/user                 --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] DELETE /api/user                 --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] CONNECT /api/user                 --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] TRACE  /api/user                 --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] GET    /api/user/*path           --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] POST   /api/user/*path           --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] PUT    /api/user/*path           --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] PATCH  /api/user/*path           --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] HEAD   /api/user/*path           --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] OPTIONS /api/user/*path           --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] DELETE /api/user/*path           --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] CONNECT /api/user/*path           --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] TRACE  /api/user/*path           --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] GET    /api/auth                 --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] POST   /api/auth                 --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] PUT    /api/auth                 --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] PATCH  /api/auth                 --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] HEAD   /api/auth                 --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] OPTIONS /api/auth                 --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] DELETE /api/auth                 --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] CONNECT /api/auth                 --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] TRACE  /api/auth                 --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] GET    /api/auth/*path           --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] POST   /api/auth/*path           --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] PUT    /api/auth/*path           --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] PATCH  /api/auth/*path           --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] HEAD   /api/auth/*path           --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] OPTIONS /api/auth/*path           --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] DELETE /api/auth/*path           --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] CONNECT /api/auth/*path           --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] TRACE  /api/auth/*path           --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] GET    /api/meta                 --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] POST   /api/meta                 --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] PUT    /api/meta                 --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] PATCH  /api/meta                 --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] HEAD   /api/meta                 --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] OPTIONS /api/meta                 --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] DELETE /api/meta                 --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] CONNECT /api/meta                 --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] TRACE  /api/meta                 --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] GET    /api/meta/*path           --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] POST   /api/meta/*path           --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] PUT    /api/meta/*path           --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] PATCH  /api/meta/*path           --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] HEAD   /api/meta/*path           --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] OPTIONS /api/meta/*path           --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] DELETE /api/meta/*path           --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] CONNECT /api/meta/*path           --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] TRACE  /api/meta/*path           --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] GET    /api/ads                  --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] POST   /api/ads                  --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] PUT    /api/ads                  --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] PATCH  /api/ads                  --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] HEAD   /api/ads                  --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] OPTIONS /api/ads                  --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] DELETE /api/ads                  --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] CONNECT /api/ads                  --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] TRACE  /api/ads                  --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] GET    /api/telemetry            --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] POST   /api/telemetry            --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] PUT    /api/telemetry            --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] PATCH  /api/telemetry            --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] HEAD   /api/telemetry            --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] OPTIONS /api/telemetry            --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] DELETE /api/telemetry            --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] CONNECT /api/telemetry            --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] TRACE  /api/telemetry            --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] GET    /api/telemetry/*path      --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] POST   /api/telemetry/*path      --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] PUT    /api/telemetry/*path      --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] PATCH  /api/telemetry/*path      --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] HEAD   /api/telemetry/*path      --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] OPTIONS /api/telemetry/*path      --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] DELETE /api/telemetry/*path      --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] CONNECT /api/telemetry/*path      --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] TRACE  /api/telemetry/*path      --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] GET    /api/threads              --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] POST   /api/threads              --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] PUT    /api/threads              --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] PATCH  /api/threads              --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] HEAD   /api/threads              --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] OPTIONS /api/threads              --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] DELETE /api/threads              --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] CONNECT /api/threads              --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] TRACE  /api/threads              --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] GET    /api/threads/*path        --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] POST   /api/threads/*path        --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] PUT    /api/threads/*path        --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] PATCH  /api/threads/*path        --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] HEAD   /api/threads/*path        --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] OPTIONS /api/threads/*path        --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] DELETE /api/threads/*path        --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] CONNECT /api/threads/*path        --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] TRACE  /api/threads/*path        --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] GET    /api/thread-actors        --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] POST   /api/thread-actors        --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] PUT    /api/thread-actors        --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] PATCH  /api/thread-actors        --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] HEAD   /api/thread-actors        --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] OPTIONS /api/thread-actors        --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] DELETE /api/thread-actors        --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] CONNECT /api/thread-actors        --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] TRACE  /api/thread-actors        --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] GET    /api/otel                 --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] POST   /api/otel                 --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] PUT    /api/otel                 --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] PATCH  /api/otel                 --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] HEAD   /api/otel                 --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] OPTIONS /api/otel                 --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] DELETE /api/otel                 --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] CONNECT /api/otel                 --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] TRACE  /api/otel                 --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] GET    /api/otel/*path           --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] POST   /api/otel/*path           --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] PUT    /api/otel/*path           --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] PATCH  /api/otel/*path           --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] HEAD   /api/otel/*path           --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] OPTIONS /api/otel/*path           --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] DELETE /api/otel/*path           --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] CONNECT /api/otel/*path           --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] TRACE  /api/otel/*path           --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] GET    /api/tab                  --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] POST   /api/tab                  --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] PUT    /api/tab                  --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] PATCH  /api/tab                  --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] HEAD   /api/tab                  --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] OPTIONS /api/tab                  --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] DELETE /api/tab                  --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] CONNECT /api/tab                  --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] TRACE  /api/tab                  --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] GET    /api/tab/*path            --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] POST   /api/tab/*path            --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] PUT    /api/tab/*path            --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] PATCH  /api/tab/*path            --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] HEAD   /api/tab/*path            --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] OPTIONS /api/tab/*path            --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] DELETE /api/tab/*path            --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] CONNECT /api/tab/*path            --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] TRACE  /api/tab/*path            --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] GET    /threads                  --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] GET    /threads/*path            --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] GET    /docs                     --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] GET    /docs/*path               --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] GET    /settings                 --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] GET    /settings/*path           --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] GET    /threads.rss              --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] GET    /news.rss                 --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] GET    /auth                     --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] POST   /auth                     --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] PUT    /auth                     --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] PATCH  /auth                     --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] HEAD   /auth                     --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] OPTIONS /auth                     --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] DELETE /auth                     --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] CONNECT /auth                     --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] TRACE  /auth                     --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] GET    /auth/*path               --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] POST   /auth/*path               --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] PUT    /auth/*path               --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] PATCH  /auth/*path               --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] HEAD   /auth/*path               --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] OPTIONS /auth/*path               --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] DELETE /auth/*path               --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] CONNECT /auth/*path               --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] TRACE  /auth/*path               --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func1 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] GET    /api/provider/google/v1beta1/*path --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func3 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] POST   /api/provider/google/v1beta1/*path --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func3 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] PUT    /api/provider/google/v1beta1/*path --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func3 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] PATCH  /api/provider/google/v1beta1/*path --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func3 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] HEAD   /api/provider/google/v1beta1/*path --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func3 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] OPTIONS /api/provider/google/v1beta1/*path --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func3 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] DELETE /api/provider/google/v1beta1/*path --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func3 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] CONNECT /api/provider/google/v1beta1/*path --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func3 (11 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] TRACE  /api/provider/google/v1beta1/*path --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func3 (11 handlers)
+[2026-06-02 21:44:47] [--------] [debug] [amp.go:144] amp upstream proxy disabled (no upstream URL configured)
+[2026-06-02 21:44:47] [--------] [debug] [amp.go:145] amp provider alias routes registered
+[2026-06-02 21:44:47] [--------] [info ] [server.go:554] management routes registered after secret key configuration
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] GET    /v0/management/config     --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).GetConfig-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] GET    /v0/management/config.yaml --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).GetConfigYAML-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] PUT    /v0/management/config.yaml --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).PutConfigYAML-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] GET    /v0/management/latest-version --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).GetLatestVersion-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] GET    /v0/management/debug      --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).GetDebug-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] PUT    /v0/management/debug      --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).PutDebug-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] PATCH  /v0/management/debug      --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).PutDebug-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] GET    /v0/management/logging-to-file --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).GetLoggingToFile-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] PUT    /v0/management/logging-to-file --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).PutLoggingToFile-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] PATCH  /v0/management/logging-to-file --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).PutLoggingToFile-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] GET    /v0/management/logs-max-total-size-mb --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).GetLogsMaxTotalSizeMB-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] PUT    /v0/management/logs-max-total-size-mb --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).PutLogsMaxTotalSizeMB-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] PATCH  /v0/management/logs-max-total-size-mb --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).PutLogsMaxTotalSizeMB-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] GET    /v0/management/error-logs-max-files --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).GetErrorLogsMaxFiles-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] PUT    /v0/management/error-logs-max-files --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).PutErrorLogsMaxFiles-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] PATCH  /v0/management/error-logs-max-files --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).PutErrorLogsMaxFiles-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] GET    /v0/management/usage-statistics-enabled --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).GetUsageStatisticsEnabled-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] PUT    /v0/management/usage-statistics-enabled --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).PutUsageStatisticsEnabled-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] PATCH  /v0/management/usage-statistics-enabled --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).PutUsageStatisticsEnabled-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] GET    /v0/management/proxy-url  --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).GetProxyURL-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] PUT    /v0/management/proxy-url  --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).PutProxyURL-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] PATCH  /v0/management/proxy-url  --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).PutProxyURL-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] DELETE /v0/management/proxy-url  --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).DeleteProxyURL-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] POST   /v0/management/api-call   --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).APICall-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] GET    /v0/management/quota-exceeded/switch-project --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).GetSwitchProject-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] PUT    /v0/management/quota-exceeded/switch-project --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).PutSwitchProject-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] PATCH  /v0/management/quota-exceeded/switch-project --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).PutSwitchProject-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] GET    /v0/management/quota-exceeded/switch-preview-model --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).GetSwitchPreviewModel-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] PUT    /v0/management/quota-exceeded/switch-preview-model --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).PutSwitchPreviewModel-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] PATCH  /v0/management/quota-exceeded/switch-preview-model --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).PutSwitchPreviewModel-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] GET    /v0/management/api-keys   --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).GetAPIKeys-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] PUT    /v0/management/api-keys   --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).PutAPIKeys-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] PATCH  /v0/management/api-keys   --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).PatchAPIKeys-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] DELETE /v0/management/api-keys   --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).DeleteAPIKeys-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] GET    /v0/management/api-key-usage --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).GetAPIKeyUsage-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] GET    /v0/management/usage-queue --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).GetUsageQueue-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] GET    /v0/management/gemini-api-key --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).GetGeminiKeys-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] PUT    /v0/management/gemini-api-key --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).PutGeminiKeys-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] PATCH  /v0/management/gemini-api-key --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).PatchGeminiKey-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] DELETE /v0/management/gemini-api-key --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).DeleteGeminiKey-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] GET    /v0/management/logs       --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).GetLogs-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] DELETE /v0/management/logs       --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).DeleteLogs-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] GET    /v0/management/request-error-logs --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).GetRequestErrorLogs-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] GET    /v0/management/request-error-logs/:name --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).DownloadRequestErrorLog-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] GET    /v0/management/request-log-by-id/:id --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).GetRequestLogByID-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] GET    /v0/management/request-log --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).GetRequestLog-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] PUT    /v0/management/request-log --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).PutRequestLog-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] PATCH  /v0/management/request-log --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).PutRequestLog-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] GET    /v0/management/ws-auth    --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).GetWebsocketAuth-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] PUT    /v0/management/ws-auth    --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).PutWebsocketAuth-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] PATCH  /v0/management/ws-auth    --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).PutWebsocketAuth-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] GET    /v0/management/ampcode    --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).GetAmpCode-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] GET    /v0/management/ampcode/upstream-url --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).GetAmpUpstreamURL-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] PUT    /v0/management/ampcode/upstream-url --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).PutAmpUpstreamURL-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] PATCH  /v0/management/ampcode/upstream-url --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).PutAmpUpstreamURL-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] DELETE /v0/management/ampcode/upstream-url --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).DeleteAmpUpstreamURL-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] GET    /v0/management/ampcode/upstream-api-key --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).GetAmpUpstreamAPIKey-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] PUT    /v0/management/ampcode/upstream-api-key --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).PutAmpUpstreamAPIKey-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] PATCH  /v0/management/ampcode/upstream-api-key --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).PutAmpUpstreamAPIKey-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] DELETE /v0/management/ampcode/upstream-api-key --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).DeleteAmpUpstreamAPIKey-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] GET    /v0/management/ampcode/restrict-management-to-localhost --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).GetAmpRestrictManagementToLocalhost-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] PUT    /v0/management/ampcode/restrict-management-to-localhost --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).PutAmpRestrictManagementToLocalhost-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] PATCH  /v0/management/ampcode/restrict-management-to-localhost --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).PutAmpRestrictManagementToLocalhost-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] GET    /v0/management/ampcode/model-mappings --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).GetAmpModelMappings-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] PUT    /v0/management/ampcode/model-mappings --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).PutAmpModelMappings-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] PATCH  /v0/management/ampcode/model-mappings --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).PatchAmpModelMappings-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] DELETE /v0/management/ampcode/model-mappings --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).DeleteAmpModelMappings-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] GET    /v0/management/ampcode/force-model-mappings --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).GetAmpForceModelMappings-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] PUT    /v0/management/ampcode/force-model-mappings --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).PutAmpForceModelMappings-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] PATCH  /v0/management/ampcode/force-model-mappings --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).PutAmpForceModelMappings-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] GET    /v0/management/ampcode/upstream-api-keys --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).GetAmpUpstreamAPIKeys-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] PUT    /v0/management/ampcode/upstream-api-keys --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).PutAmpUpstreamAPIKeys-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] PATCH  /v0/management/ampcode/upstream-api-keys --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).PatchAmpUpstreamAPIKeys-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] DELETE /v0/management/ampcode/upstream-api-keys --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).DeleteAmpUpstreamAPIKeys-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] GET    /v0/management/request-retry --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).GetRequestRetry-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] PUT    /v0/management/request-retry --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).PutRequestRetry-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] PATCH  /v0/management/request-retry --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).PutRequestRetry-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] GET    /v0/management/max-retry-interval --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).GetMaxRetryInterval-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] PUT    /v0/management/max-retry-interval --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).PutMaxRetryInterval-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] PATCH  /v0/management/max-retry-interval --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).PutMaxRetryInterval-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] GET    /v0/management/force-model-prefix --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).GetForceModelPrefix-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] PUT    /v0/management/force-model-prefix --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).PutForceModelPrefix-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] PATCH  /v0/management/force-model-prefix --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).PutForceModelPrefix-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] GET    /v0/management/routing/strategy --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).GetRoutingStrategy-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] PUT    /v0/management/routing/strategy --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).PutRoutingStrategy-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] PATCH  /v0/management/routing/strategy --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).PutRoutingStrategy-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] GET    /v0/management/claude-api-key --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).GetClaudeKeys-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] PUT    /v0/management/claude-api-key --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).PutClaudeKeys-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] PATCH  /v0/management/claude-api-key --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).PatchClaudeKey-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] DELETE /v0/management/claude-api-key --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).DeleteClaudeKey-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] GET    /v0/management/codex-api-key --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).GetCodexKeys-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] PUT    /v0/management/codex-api-key --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).PutCodexKeys-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] PATCH  /v0/management/codex-api-key --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).PatchCodexKey-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] DELETE /v0/management/codex-api-key --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).DeleteCodexKey-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] GET    /v0/management/openai-compatibility --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).GetOpenAICompat-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] PUT    /v0/management/openai-compatibility --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).PutOpenAICompat-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] PATCH  /v0/management/openai-compatibility --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).PatchOpenAICompat-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] DELETE /v0/management/openai-compatibility --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).DeleteOpenAICompat-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] GET    /v0/management/vertex-api-key --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).GetVertexCompatKeys-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] PUT    /v0/management/vertex-api-key --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).PutVertexCompatKeys-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] PATCH  /v0/management/vertex-api-key --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).PatchVertexCompatKey-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] DELETE /v0/management/vertex-api-key --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).DeleteVertexCompatKey-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] GET    /v0/management/oauth-excluded-models --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).GetOAuthExcludedModels-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] PUT    /v0/management/oauth-excluded-models --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).PutOAuthExcludedModels-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] PATCH  /v0/management/oauth-excluded-models --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).PatchOAuthExcludedModels-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] DELETE /v0/management/oauth-excluded-models --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).DeleteOAuthExcludedModels-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] GET    /v0/management/oauth-model-alias --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).GetOAuthModelAlias-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] PUT    /v0/management/oauth-model-alias --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).PutOAuthModelAlias-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] PATCH  /v0/management/oauth-model-alias --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).PatchOAuthModelAlias-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] DELETE /v0/management/oauth-model-alias --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).DeleteOAuthModelAlias-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] GET    /v0/management/auth-files --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).ListAuthFiles-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] GET    /v0/management/auth-files/models --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).GetAuthFileModels-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] GET    /v0/management/model-definitions/:channel --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).GetStaticModelDefinitions-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] GET    /v0/management/auth-files/download --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).DownloadAuthFile-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] POST   /v0/management/auth-files --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).UploadAuthFile-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] DELETE /v0/management/auth-files --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).DeleteAuthFile-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] PATCH  /v0/management/auth-files/status --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).PatchAuthFileStatus-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] PATCH  /v0/management/auth-files/fields --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).PatchAuthFileFields-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] POST   /v0/management/vertex/import --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).ImportVertexCredential-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] GET    /v0/management/anthropic-auth-url --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).RequestAnthropicToken-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] GET    /v0/management/codex-auth-url --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).RequestCodexToken-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] GET    /v0/management/gemini-cli-auth-url --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).RequestGeminiCLIToken-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] GET    /v0/management/antigravity-auth-url --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).RequestAntigravityToken-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] GET    /v0/management/kimi-auth-url --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).RequestKimiToken-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] GET    /v0/management/xai-auth-url --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).RequestXAIToken-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] POST   /v0/management/oauth-callback --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).PostOAuthCallback-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] GET    /v0/management/get-auth-status --> github.com/router-for-me/CLIProxyAPI/v7/internal/api/handlers/management.(*Handler).GetAuthStatus-fm (8 handlers)
+[2026-06-02 21:44:47] [--------] [info ] [global_logger.go:97] GET    /v1/ws                    --> github.com/router-for-me/CLIProxyAPI/v7/internal/api.(*Server).AttachWebsocketRoute.func2 (7 handlers)
+[2026-06-02 21:44:47] [--------] [debug] [server.go:1218] Starting API server on 127.0.0.1:8317
+API server started successfully on: 127.0.0.1:8317
+[2026-06-02 21:44:47] [--------] [debug] [events.go:34] watching config file: /home/ha1/workspace/CLIProxyAPI/config.yaml
+[2026-06-02 21:44:47] [--------] [debug] [events.go:40] watching auth directory: /home/ha1/.cli-proxy-api
+[2026-06-02 21:44:47] [--------] [debug] [clients.go:26] starting full client load process
+[2026-06-02 21:44:47] [--------] [debug] [clients.go:61] loaded 1 API key clients
+[2026-06-02 21:44:47] [--------] [debug] [clients.go:339] auth directory scan complete - found 0 .json files, 0 readable
+[2026-06-02 21:44:47] [--------] [debug] [clients.go:66] loaded 0 file-based clients
+[2026-06-02 21:44:47] [--------] [debug] [clients.go:133] triggering server update callback before auth refresh
+[2026-06-02 21:44:47] [--------] [debug] [reconcile.go:103] auth providers unchanged after config update
+[2026-06-02 21:44:47] [--------] [debug] [server.go:1467] triggering amp module config update
+server clients and configuration updated: 1 clients (0 auth entries + 0 Gemini API keys + 0 Claude API keys + 0 Codex keys + 0 Vertex-compat + 1 OpenAI-compat)
+[2026-06-02 21:44:47] [--------] [info ] [clients.go:140] full client load complete - 1 clients (0 auth files + 0 Gemini API keys + 0 Vertex API keys + 0 Claude API keys + 0 Codex keys + 1 OpenAI-compat)
+[2026-06-02 21:44:47] [--------] [info ] [service.go:935] file watcher started for config and auth directory changes
+[2026-06-02 21:44:47] [--------] [info ] [service.go:942] core auth auto-refresh started (interval=15m0s)
+[2026-06-02 21:44:47] [--------] [debug] [model_registry.go:488] Registered new model gpt-4o-mini from provider openrouter
+[2026-06-02 21:44:47] [--------] [debug] [model_registry.go:488] Registered new model claude from provider openrouter
+[2026-06-02 21:44:47] [--------] [debug] [model_registry.go:294] Registered client openai-compatibility:openrouter:428598d53725 from provider openrouter with 2 models
+[2026-06-02 21:44:47] [--------] [debug] [credentials.go:26] -------------------------------------------------------------------
+[2026-06-02 21:44:47] [--------] [debug] [updater.go:249] management asset is already up to date
+[2026-06-02 21:44:47] [--------] [info ] [model_updater.go:133] startup model refresh completed from https://raw.githubusercontent.com/router-for-me/models/refs/heads/main/models.json, no changes detected
+[2026-06-02 21:44:47] [--------] [info ] [model_updater.go:91] periodic model refresh started (interval=3h0m0s)
+[2026-06-02 21:44:48] [--------] [info ] [antigravity_version.go:79] fetched latest antigravity version
+[2026-06-02 21:44:49] [--------] [info ] [gin_logger.go:101] 200 |            0s |       127.0.0.1 | GET     "/v1/models"
+[2026-06-02 21:45:14] [--------] [info ] [gin_logger.go:101] 200 |          66ms |       127.0.0.1 | GET     "/v0/management/config"
+[2026-06-02 21:47:14] [--------] [info ] [gin_logger.go:101] 200 |          53ms |       127.0.0.1 | GET     "/v0/management/config"
+[2026-06-02 21:47:14] [--------] [warn ] [gin_logger.go:99] 404 |            0s |       127.0.0.1 | GET     "/v0/management/nodes"
+[2026-06-02 21:47:14] [--------] [info ] [gin_logger.go:101] 200 |          62ms |       127.0.0.1 | GET     "/v0/management/auth-files"
+[2026-06-02 21:47:14] [--------] [info ] [gin_logger.go:101] 200 |          65ms |       127.0.0.1 | GET     "/v0/management/api-keys"
+[2026-06-02 21:47:14] [--------] [info ] [gin_logger.go:101] 200 |          62ms |       127.0.0.1 | GET     "/v0/management/gemini-api-key"
+[2026-06-02 21:47:14] [--------] [info ] [gin_logger.go:101] 200 |          65ms |       127.0.0.1 | GET     "/v0/management/codex-api-key"
+[2026-06-02 21:47:14] [--------] [info ] [gin_logger.go:101] 200 |          65ms |       127.0.0.1 | GET     "/v0/management/claude-api-key"
+[2026-06-02 21:47:14] [--------] [info ] [gin_logger.go:101] 200 |          63ms |       127.0.0.1 | GET     "/v0/management/openai-compatibility"
+[2026-06-02 21:47:14] [--------] [info ] [gin_logger.go:101] 200 |          63ms |       127.0.0.1 | GET     "/v0/management/api-keys"
+[2026-06-02 21:47:14] [--------] [info ] [gin_logger.go:101] 200 |          64ms |       127.0.0.1 | GET     "/v0/management/auth-files"
+[2026-06-02 21:47:14] [--------] [info ] [gin_logger.go:101] 200 |          65ms |       127.0.0.1 | GET     "/v0/management/codex-api-key"
+[2026-06-02 21:47:14] [--------] [info ] [gin_logger.go:101] 200 |          67ms |       127.0.0.1 | GET     "/v0/management/claude-api-key"
+[2026-06-02 21:47:14] [--------] [info ] [gin_logger.go:101] 200 |          65ms |       127.0.0.1 | GET     "/v0/management/openai-compatibility"
+[2026-06-02 21:47:14] [--------] [info ] [gin_logger.go:101] 200 |          74ms |       127.0.0.1 | GET     "/v0/management/gemini-api-key"
+[2026-06-02 21:47:17] [--------] [info ] [gin_logger.go:101] 200 |          63ms |       127.0.0.1 | GET     "/v0/management/vertex-api-key"
+[2026-06-02 21:47:17] [--------] [info ] [gin_logger.go:101] 200 |          63ms |       127.0.0.1 | GET     "/v0/management/ampcode"
+[2026-06-02 21:47:17] [--------] [info ] [gin_logger.go:101] 200 |          63ms |       127.0.0.1 | GET     "/v0/management/api-key-usage"
+[2026-06-02 21:47:17] [--------] [info ] [gin_logger.go:101] 200 |          65ms |       127.0.0.1 | GET     "/v0/management/config"
+[2026-06-02 21:47:17] [--------] [info ] [gin_logger.go:101] 200 |          69ms |       127.0.0.1 | GET     "/v0/management/openai-compatibility"
+[2026-06-02 21:47:17] [--------] [info ] [gin_logger.go:101] 200 |          64ms |       127.0.0.1 | GET     "/v0/management/gemini-api-key"
+[2026-06-02 21:47:17] [--------] [info ] [gin_logger.go:101] 200 |          64ms |       127.0.0.1 | GET     "/v0/management/auth-files"
+[2026-06-02 21:47:17] [--------] [info ] [gin_logger.go:101] 200 |          66ms |       127.0.0.1 | GET     "/v0/management/openai-compatibility"
+[2026-06-02 21:47:17] [--------] [info ] [gin_logger.go:101] 200 |          66ms |       127.0.0.1 | GET     "/v0/management/codex-api-key"
+[2026-06-02 21:47:17] [--------] [info ] [gin_logger.go:101] 200 |          66ms |       127.0.0.1 | GET     "/v0/management/api-keys"
+[2026-06-02 21:47:17] [--------] [info ] [gin_logger.go:101] 200 |          69ms |       127.0.0.1 | GET     "/v0/management/claude-api-key"
+[2026-06-02 21:47:31] [--------] [info ] [gin_logger.go:101] 200 |          54ms |       127.0.0.1 | GET     "/v0/management/oauth-excluded-models"
+[2026-06-02 21:47:31] [--------] [info ] [gin_logger.go:101] 200 |          56ms |       127.0.0.1 | GET     "/v0/management/auth-files"
+[2026-06-02 21:47:31] [--------] [info ] [gin_logger.go:101] 200 |          56ms |       127.0.0.1 | GET     "/v0/management/oauth-model-alias"
+[2026-06-02 21:47:31] [--------] [info ] [gin_logger.go:101] 200 |          58ms |       127.0.0.1 | GET     "/v0/management/oauth-excluded-models"
+[2026-06-02 21:47:31] [--------] [info ] [gin_logger.go:101] 200 |          58ms |       127.0.0.1 | GET     "/v0/management/auth-files"
+[2026-06-02 21:47:31] [--------] [info ] [gin_logger.go:101] 200 |          59ms |       127.0.0.1 | GET     "/v0/management/oauth-model-alias"
+[2026-06-02 21:47:32] [--------] [info ] [gin_logger.go:101] 200 |          53ms |       127.0.0.1 | GET     "/v0/management/config.yaml"
+[2026-06-02 21:47:32] [--------] [info ] [gin_logger.go:101] 200 |          53ms |       127.0.0.1 | GET     "/v0/management/auth-files"
+[2026-06-02 21:47:32] [--------] [info ] [gin_logger.go:101] 200 |          56ms |       127.0.0.1 | GET     "/v0/management/auth-files"
+[2026-06-02 21:47:32] [--------] [info ] [gin_logger.go:101] 200 |          56ms |       127.0.0.1 | GET     "/v0/management/config.yaml"
+[2026-06-02 21:47:33] [--------] [info ] [gin_logger.go:101] 200 |          53ms |       127.0.0.1 | GET     "/v0/management/config.yaml"
+[2026-06-02 21:47:33] [--------] [info ] [gin_logger.go:101] 200 |          54ms |       127.0.0.1 | GET     "/v0/management/config.yaml"
+[2026-06-02 21:47:34] [--------] [info ] [gin_logger.go:101] 200 |          60ms |       127.0.0.1 | GET     "/v0/management/config"
+[2026-06-02 21:48:06] [--------] [info ] [gin_logger.go:101] 200 |          53ms |       127.0.0.1 | GET     "/v0/management/config.yaml"
+[2026-06-02 21:48:06] [--------] [info ] [gin_logger.go:101] 200 |          54ms |       127.0.0.1 | GET     "/v0/management/config.yaml"
+[2026-06-02 21:48:08] [--------] [info ] [gin_logger.go:101] 200 |          58ms |       127.0.0.1 | GET     "/v0/management/config"
+[2026-06-02 21:48:12] [--------] [info ] [gin_logger.go:101] 200 |          56ms |       127.0.0.1 | GET     "/v0/management/config.yaml"
+[2026-06-02 21:48:12] [--------] [info ] [gin_logger.go:101] 200 |          56ms |       127.0.0.1 | GET     "/v0/management/config.yaml"
+[2026-06-02 21:48:25] [--------] [info ] [gin_logger.go:101] 200 |          52ms |       127.0.0.1 | GET     "/v0/management/config"
+[2026-06-02 21:48:25] [--------] [warn ] [gin_logger.go:99] 404 |            0s |       127.0.0.1 | GET     "/v0/management/nodes"
+[2026-06-02 21:48:25] [--------] [info ] [gin_logger.go:101] 200 |          68ms |       127.0.0.1 | GET     "/v0/management/codex-api-key"
+[2026-06-02 21:48:25] [--------] [info ] [gin_logger.go:101] 200 |          69ms |       127.0.0.1 | GET     "/v0/management/auth-files"
+[2026-06-02 21:48:25] [--------] [info ] [gin_logger.go:101] 200 |          69ms |       127.0.0.1 | GET     "/v0/management/claude-api-key"
+[2026-06-02 21:48:25] [--------] [info ] [gin_logger.go:101] 200 |          70ms |       127.0.0.1 | GET     "/v0/management/gemini-api-key"
+[2026-06-02 21:48:25] [--------] [info ] [gin_logger.go:101] 200 |          71ms |       127.0.0.1 | GET     "/v0/management/api-keys"
+[2026-06-02 21:48:25] [--------] [info ] [gin_logger.go:101] 200 |          73ms |       127.0.0.1 | GET     "/v0/management/openai-compatibility"
+[2026-06-02 21:48:25] [--------] [info ] [gin_logger.go:101] 200 |          64ms |       127.0.0.1 | GET     "/v0/management/auth-files"
+[2026-06-02 21:48:25] [--------] [info ] [gin_logger.go:101] 200 |          67ms |       127.0.0.1 | GET     "/v0/management/claude-api-key"
+[2026-06-02 21:48:25] [--------] [info ] [gin_logger.go:101] 200 |          67ms |       127.0.0.1 | GET     "/v0/management/codex-api-key"
+[2026-06-02 21:48:25] [--------] [info ] [gin_logger.go:101] 200 |          68ms |       127.0.0.1 | GET     "/v0/management/gemini-api-key"
+[2026-06-02 21:48:25] [--------] [info ] [gin_logger.go:101] 200 |          68ms |       127.0.0.1 | GET     "/v0/management/api-keys"
+[2026-06-02 21:48:25] [--------] [info ] [gin_logger.go:101] 200 |          67ms |       127.0.0.1 | GET     "/v0/management/openai-compatibility"
+[2026-06-02 21:48:46] [--------] [info ] [gin_logger.go:101] 200 |          75ms |       127.0.0.1 | GET     "/v0/management/config.yaml"
+[2026-06-02 21:48:46] [--------] [info ] [gin_logger.go:101] 200 |          75ms |       127.0.0.1 | GET     "/v0/management/auth-files"
+[2026-06-02 21:48:46] [--------] [info ] [gin_logger.go:101] 200 |          62ms |       127.0.0.1 | GET     "/v0/management/config.yaml"
+[2026-06-02 21:48:46] [--------] [info ] [gin_logger.go:101] 200 |          62ms |       127.0.0.1 | GET     "/v0/management/auth-files"
+[2026-06-02 21:48:59] [--------] [info ] [gin_logger.go:101] 200 |          53ms |       127.0.0.1 | GET     "/v0/management/request-error-logs"
+[2026-06-02 21:49:06] [--------] [info ] [gin_logger.go:101] 200 |          59ms |       127.0.0.1 | GET     "/v0/management/config"
+[2026-06-02 21:50:05] [--------] [info ] [gin_logger.go:101] 200 |          71ms |       127.0.0.1 | GET     "/v0/management/config"
+[2026-06-02 21:50:05] [--------] [warn ] [gin_logger.go:99] 404 |            0s |       127.0.0.1 | GET     "/v0/management/nodes"
+[2026-06-02 21:50:05] [--------] [warn ] [gin_logger.go:99] 404 |            0s |       127.0.0.1 | GET     "/v0/management/nodes"
+[2026-06-02 21:50:05] [--------] [warn ] [gin_logger.go:99] 404 |            0s |       127.0.0.1 | GET     "/v0/management/nodes"
+[2026-06-02 21:50:09] [--------] [info ] [gin_logger.go:101] 200 |          75ms |       127.0.0.1 | GET     "/v0/management/auth-files"
+[2026-06-02 21:50:09] [--------] [info ] [gin_logger.go:101] 200 |          75ms |       127.0.0.1 | GET     "/v0/management/gemini-api-key"
+[2026-06-02 21:50:09] [--------] [info ] [gin_logger.go:101] 200 |          84ms |       127.0.0.1 | GET     "/v0/management/api-keys"
+[2026-06-02 21:50:09] [--------] [info ] [gin_logger.go:101] 200 |          85ms |       127.0.0.1 | GET     "/v0/management/claude-api-key"
+[2026-06-02 21:50:09] [--------] [info ] [gin_logger.go:101] 200 |          77ms |       127.0.0.1 | GET     "/v0/management/openai-compatibility"
+[2026-06-02 21:50:09] [--------] [info ] [gin_logger.go:101] 200 |          92ms |       127.0.0.1 | GET     "/v0/management/codex-api-key"
+[2026-06-02 21:50:09] [--------] [info ] [gin_logger.go:101] 200 |          76ms |       127.0.0.1 | GET     "/v0/management/auth-files"
+[2026-06-02 21:50:09] [--------] [info ] [gin_logger.go:101] 200 |          76ms |       127.0.0.1 | GET     "/v0/management/gemini-api-key"
+[2026-06-02 21:50:09] [--------] [info ] [gin_logger.go:101] 200 |          79ms |       127.0.0.1 | GET     "/v0/management/claude-api-key"
+[2026-06-02 21:50:09] [--------] [info ] [gin_logger.go:101] 200 |          80ms |       127.0.0.1 | GET     "/v0/management/api-keys"
+[2026-06-02 21:50:09] [--------] [info ] [gin_logger.go:101] 200 |          74ms |       127.0.0.1 | GET     "/v0/management/codex-api-key"
+[2026-06-02 21:50:09] [--------] [info ] [gin_logger.go:101] 200 |          87ms |       127.0.0.1 | GET     "/v0/management/openai-compatibility"
+[2026-06-02 21:55:33] [--------] [info ] [gin_logger.go:101] 200 |          76ms |       127.0.0.1 | GET     "/v0/management/config"
+[2026-06-02 21:56:22] [--------] [info ] [gin_logger.go:101] 200 |          60ms |       127.0.0.1 | GET     "/v0/management/config"
+[2026-06-02 21:56:22] [--------] [warn ] [gin_logger.go:99] 404 |            0s |       127.0.0.1 | GET     "/v0/management/nodes"
+[2026-06-02 21:56:22] [--------] [warn ] [gin_logger.go:99] 404 |            0s |       127.0.0.1 | GET     "/v0/management/nodes"
+[2026-06-02 21:56:22] [--------] [warn ] [gin_logger.go:99] 404 |            0s |       127.0.0.1 | GET     "/v0/management/nodes"
+[2026-06-02 21:56:24] [--------] [info ] [gin_logger.go:101] 200 |          60ms |       127.0.0.1 | GET     "/v0/management/api-keys"
+[2026-06-02 21:56:24] [--------] [info ] [gin_logger.go:101] 200 |          63ms |       127.0.0.1 | GET     "/v0/management/auth-files"
+[2026-06-02 21:56:24] [--------] [info ] [gin_logger.go:101] 200 |          61ms |       127.0.0.1 | GET     "/v0/management/gemini-api-key"
+[2026-06-02 21:56:24] [--------] [info ] [gin_logger.go:101] 200 |          60ms |       127.0.0.1 | GET     "/v0/management/claude-api-key"
+[2026-06-02 21:56:24] [--------] [info ] [gin_logger.go:101] 200 |          62ms |       127.0.0.1 | GET     "/v0/management/codex-api-key"
+[2026-06-02 21:56:24] [--------] [info ] [gin_logger.go:101] 200 |          63ms |       127.0.0.1 | GET     "/v0/management/openai-compatibility"
+[2026-06-02 21:56:24] [--------] [info ] [gin_logger.go:101] 200 |          74ms |       127.0.0.1 | GET     "/v0/management/api-keys"
+[2026-06-02 21:56:24] [--------] [info ] [gin_logger.go:101] 200 |          72ms |       127.0.0.1 | GET     "/v0/management/gemini-api-key"
+[2026-06-02 21:56:24] [--------] [info ] [gin_logger.go:101] 200 |          73ms |       127.0.0.1 | GET     "/v0/management/openai-compatibility"
+[2026-06-02 21:56:24] [--------] [info ] [gin_logger.go:101] 200 |          76ms |       127.0.0.1 | GET     "/v0/management/auth-files"
+[2026-06-02 21:56:24] [--------] [info ] [gin_logger.go:101] 200 |          76ms |       127.0.0.1 | GET     "/v0/management/codex-api-key"
+[2026-06-02 21:56:24] [--------] [info ] [gin_logger.go:101] 200 |          76ms |       127.0.0.1 | GET     "/v0/management/claude-api-key"
+[2026-06-02 21:56:26] [--------] [info ] [gin_logger.go:101] 200 |          57ms |       127.0.0.1 | GET     "/v0/management/config.yaml"
+[2026-06-02 21:56:26] [--------] [info ] [gin_logger.go:101] 200 |          70ms |       127.0.0.1 | GET     "/v0/management/config.yaml"
+[2026-06-02 21:56:27] [--------] [info ] [gin_logger.go:101] 200 |          60ms |       127.0.0.1 | GET     "/v0/management/config.yaml"
+[2026-06-02 21:56:27] [--------] [info ] [gin_logger.go:101] 200 |          59ms |       127.0.0.1 | GET     "/v0/management/config.yaml"
+[2026-06-02 21:58:26] [--------] [info ] [gin_logger.go:101] 304 |            0s |       127.0.0.1 | GET     "/management.html"
+[2026-06-02 21:58:27] [--------] [info ] [gin_logger.go:101] 200 |          68ms |       127.0.0.1 | GET     "/v0/management/config"
+[2026-06-02 21:58:27] [--------] [warn ] [gin_logger.go:99] 404 |            0s |       127.0.0.1 | GET     "/v0/management/nodes"
+[2026-06-02 21:58:27] [--------] [warn ] [gin_logger.go:99] 404 |            0s |       127.0.0.1 | GET     "/v0/management/nodes"
+[2026-06-02 22:08:34] [--------] [info ] [gin_logger.go:101] 304 |            0s |       127.0.0.1 | GET     "/management.html"
+[2026-06-02 22:08:34] [--------] [info ] [gin_logger.go:101] 200 |          55ms |       127.0.0.1 | GET     "/v0/management/config"
+[2026-06-02 22:08:34] [--------] [warn ] [gin_logger.go:99] 404 |            0s |       127.0.0.1 | GET     "/v0/management/nodes"
+[2026-06-02 22:08:34] [--------] [warn ] [gin_logger.go:99] 404 |            0s |       127.0.0.1 | GET     "/v0/management/nodes"
