@@ -1,31 +1,74 @@
+// ─── Hexgate Console — Placeholder / empty state ─────────
+// Compact, centered console tile. Renders inside .hg-main, so the
+// root stays transparent with no full-bleed padding.
+
 .container {
   width: 100%;
-  min-height: 400px;
+  min-height: 360px;
   display: flex;
   align-items: center;
   justify-content: center;
+  background: transparent;
 }
 
 .placeholder {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
-  padding: $spacing-2xl;
+  gap: $spacing-md;
+  max-width: 440px;
+  padding: $spacing-2xl $spacing-xl;
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-lg);
+  background:
+    var(--grad-surface),
+    var(--surface-glass);
+  box-shadow: var(--elev-1);
+  overflow: hidden;
+
+  // gold→cyan signal rail along the top edge
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--grad-border);
+    opacity: 0.8;
+    pointer-events: none;
+  }
 
   .icon {
-    font-size: 64px;
-    color: var(--text-secondary);
-    opacity: 0.5;
-    margin-bottom: $spacing-lg;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 72px;
+    height: 72px;
+    border-radius: var(--radius-lg);
+    font-size: 36px;
+    color: var(--primary-color);
+    background:
+      radial-gradient(120% 120% at 30% 0%, color-mix(in srgb, var(--primary-color) 14%, transparent), transparent 70%),
+      var(--surface-sunken);
+    border: 1px solid color-mix(in srgb, var(--primary-color) 22%, var(--hairline));
+    box-shadow: var(--glow-cyan-sm);
+    filter: drop-shadow(0 0 12px color-mix(in srgb, var(--primary-color) 24%, transparent));
   }
 
   h2 {
-    font-size: 24px;
-    font-weight: 600;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 0.01em;
     color: var(--text-primary);
-    margin: 0 0 $spacing-md 0;
+    margin: 0;
   }
 
   p {
-    font-size: 14px;
+    font-size: 13px;
+    line-height: 1.6;
     color: var(--text-secondary);
     margin: 0;
   }

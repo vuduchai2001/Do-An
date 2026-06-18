@@ -22,15 +22,25 @@
 
 .content {
   position: relative;
-  background: var(--bg-primary);
+  background: var(--surface-glass);
+  backdrop-filter: blur(18px);
   border-left: 1px solid var(--border-color);
-  box-shadow: var(--floating-shadow);
+  box-shadow: var(--elev-3);
   transform: translateX(100%);
   transition: transform 280ms cubic-bezier(0.32, 0.72, 0, 1);
   display: flex;
   flex-direction: column;
   height: 100%;
   outline: none;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 2px;
+    background: var(--grad-border);
+    pointer-events: none;
+  }
 
   &.entering {
     transform: translateX(0);
@@ -56,7 +66,7 @@
 .header {
   flex-shrink: 0;
   padding: 20px 56px 20px 24px;
-  border-bottom: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--hairline);
   display: flex;
   flex-direction: column;
   gap: 4px;
@@ -64,10 +74,10 @@
 
 .eyebrow {
   font-size: 11px;
-  font-weight: 500;
+  font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: var(--muted-foreground);
+  letter-spacing: 0.08em;
+  color: var(--accent-gold);
 }
 
 .title {
@@ -93,7 +103,7 @@
 .footer {
   flex-shrink: 0;
   padding: 16px 24px;
-  border-top: 1px solid var(--border-color);
+  border-top: 1px solid var(--hairline);
   display: flex;
   gap: 12px;
   justify-content: flex-end;
@@ -110,21 +120,27 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border: none;
+  border: 1px solid transparent;
   background: transparent;
   color: var(--text-secondary);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-sm);
   cursor: pointer;
-  transition: background-color $transition-fast, color $transition-fast;
+  transition:
+    background-color var(--transition-fast),
+    border-color var(--transition-fast),
+    color var(--transition-fast),
+    box-shadow var(--transition-fast);
 
   &:hover {
-    background: var(--bg-tertiary);
+    background: color-mix(in srgb, var(--primary-color) 12%, transparent);
+    border-color: color-mix(in srgb, var(--primary-color) 28%, transparent);
     color: var(--text-primary);
+    box-shadow: var(--glow-cyan-sm);
   }
 
   &:focus-visible {
-    outline: 2px solid var(--primary-color);
-    outline-offset: 2px;
+    outline: none;
+    box-shadow: var(--focus-ring);
   }
 }
 

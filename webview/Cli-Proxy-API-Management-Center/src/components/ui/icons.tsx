@@ -414,91 +414,93 @@ export function IconLayoutDashboard({ size = 20, ...props }: IconProps) {
   );
 }
 
+/* ===== Hexgate sidebar icon set — motif lục giác đồng bộ ===== */
+
+// Dashboard: lục giác cổng + lục giác lõi (overview)
 export function IconSidebarDashboard({ size = 20, ...props }: IconProps) {
   return (
     <svg {...sidebarSvgProps} width={size} height={size} {...props}>
-      <rect width="7" height="9" x="3" y="3" rx="1" />
-      <rect width="7" height="5" x="14" y="3" rx="1" />
-      <rect width="7" height="9" x="14" y="12" rx="1" />
-      <rect width="7" height="5" x="3" y="16" rx="1" />
+      <polygon points="21,12 16.5,19.8 7.5,19.8 3,12 7.5,4.2 16.5,4.2" />
+      <polygon points="15.6,12 13.8,15.1 10.2,15.1 8.4,12 10.2,8.9 13.8,8.9" />
     </svg>
   );
 }
 
+// Config: ốc lục giác (hex nut) + lõi tròn
 export function IconSidebarConfig({ size = 20, ...props }: IconProps) {
   return (
     <svg {...sidebarSvgProps} width={size} height={size} {...props}>
-      <line x1="21" x2="14" y1="4" y2="4" />
-      <line x1="10" x2="3" y1="4" y2="4" />
-      <line x1="21" x2="12" y1="12" y2="12" />
-      <line x1="8" x2="3" y1="12" y2="12" />
-      <line x1="21" x2="16" y1="20" y2="20" />
-      <line x1="12" x2="3" y1="20" y2="20" />
-      <line x1="14" x2="14" y1="2" y2="6" />
-      <line x1="8" x2="8" y1="10" y2="14" />
-      <line x1="16" x2="16" y1="18" y2="22" />
+      <polygon points="20,12 16,18.9 8,18.9 4,12 8,5.1 16,5.1" />
+      <circle cx="12" cy="12" r="3.1" />
     </svg>
   );
 }
 
+// Providers: nút lục giác trung tâm tỏa tới 3 node (định tuyến)
 export function IconSidebarProviders({ size = 20, ...props }: IconProps) {
   return (
     <svg {...sidebarSvgProps} width={size} height={size} {...props}>
-      <rect x="16" y="16" width="6" height="6" rx="1" />
-      <rect x="2" y="16" width="6" height="6" rx="1" />
-      <rect x="9" y="2" width="6" height="6" rx="1" />
-      <path d="M5 16v-3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3" />
-      <path d="M12 12V8" />
+      <polygon points="14.6,12 13.3,14.3 10.7,14.3 9.4,12 10.7,9.7 13.3,9.7" />
+      <path d="M12 9.6 V5.6" />
+      <path d="M10.5 13.4 L6.6 17" />
+      <path d="M13.5 13.4 L17.4 17" />
+      <circle cx="12" cy="4" r="1.7" />
+      <circle cx="5.4" cy="18.3" r="1.7" />
+      <circle cx="18.6" cy="18.3" r="1.7" />
     </svg>
   );
 }
 
+// Auth files: khiên lục giác + tick xác thực
 export function IconSidebarAuthFiles({ size = 20, ...props }: IconProps) {
   return (
     <svg {...sidebarSvgProps} width={size} height={size} {...props}>
-      <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" />
+      <path d="M12 2.5 19.5 6.5 V12 C19.5 17 16 20 12 21.5 C8 20 4.5 17 4.5 12 V6.5 Z" />
       <path d="m9 12 2 2 4-4" />
     </svg>
   );
 }
 
+// OAuth: chìa khóa (đăng nhập/ủy quyền)
 export function IconSidebarOauth({ size = 20, ...props }: IconProps) {
   return (
     <svg {...sidebarSvgProps} width={size} height={size} {...props}>
-      <path d="M2 21a8 8 0 0 1 13.292-6" />
-      <circle cx="10" cy="8" r="5" />
-      <path d="m16 19 2 2 4-4" />
+      <circle cx="8.5" cy="8.5" r="4" />
+      <path d="m11.4 11.4 8 8" />
+      <path d="m16.5 16.5 2-2" />
+      <path d="m19.4 19.4 1.6-1.6" />
     </svg>
   );
 }
 
+// Quota: đồng hồ đo + kim (giới hạn)
 export function IconSidebarQuota({ size = 20, ...props }: IconProps) {
   return (
     <svg {...sidebarSvgProps} width={size} height={size} {...props}>
-      <path d="m12 14 4-4" />
-      <path d="M3.34 19a10 10 0 1 1 17.32 0" />
+      <path d="M4 17a8 8 0 1 1 16 0" />
+      <path d="M12 17 16 11" />
+      <circle cx="12" cy="17" r="1.2" fill="currentColor" stroke="none" />
     </svg>
   );
 }
 
+// Logs: console/terminal (truy vết request)
 export function IconSidebarLogs({ size = 20, ...props }: IconProps) {
   return (
     <svg {...sidebarSvgProps} width={size} height={size} {...props}>
-      <path d="M15 12h-5" />
-      <path d="M15 8h-5" />
-      <path d="M19 17V5a2 2 0 0 0-2-2H4" />
-      <path d="M8 21h12a2 2 0 0 0 2-2v-1a1 1 0 0 0-1-1H11a1 1 0 0 0-1 1v1a2 2 0 1 1-4 0V5a2 2 0 1 0-4 0v2a1 1 0 0 0 1 1h3" />
+      <rect x="3" y="4" width="18" height="16" rx="2.5" />
+      <path d="m7 10 2.5 2L7 14" />
+      <path d="M13 14h4" />
     </svg>
   );
 }
 
+// System: chip lục giác (không dùng nhưng giữ đồng bộ)
 export function IconSidebarSystem({ size = 20, ...props }: IconProps) {
   return (
     <svg {...sidebarSvgProps} width={size} height={size} {...props}>
-      <rect width="20" height="8" x="2" y="2" rx="2" />
-      <rect width="20" height="8" x="2" y="14" rx="2" />
-      <line x1="6" x2="6.01" y1="6" y2="6" />
-      <line x1="6" x2="6.01" y1="18" y2="18" />
+      <polygon points="20,12 16,18.9 8,18.9 4,12 8,5.1 16,5.1" />
+      <rect x="9.5" y="9.5" width="5" height="5" rx="1" />
     </svg>
   );
 }

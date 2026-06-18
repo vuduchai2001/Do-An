@@ -1,45 +1,106 @@
 @use '../../styles/mixins' as *;
 
+// ─── MẪU PANEL — framed config section surface ──────────
+// Each section is a glass panel: grad-surface wash, hairline frame,
+// elev-1 base, and a cyan top edge that reveals on hover.
 .section {
+  position: relative;
   display: flex;
   flex-direction: column;
-  gap: clamp(16px, 2vw, 22px);
+  gap: clamp(18px, 2vw, 24px);
   height: clamp(520px, calc(100dvh - var(--header-height, 64px) - 250px), 780px);
   min-width: 0;
   box-sizing: border-box;
   overflow-y: auto;
   overscroll-behavior: auto;
-  padding: clamp(20px, 2.4vw, 28px);
-  border: 1px solid var(--border-color);
-  border-radius: 8px;
-  background: color-mix(in srgb, var(--bg-primary) 82%, transparent);
+  padding: clamp(22px, 2.6vw, 30px);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-lg);
+  background:
+    var(--grad-surface),
+    linear-gradient(
+      155deg,
+      var(--surface-glass),
+      color-mix(in srgb, var(--bg-secondary) 74%, transparent)
+    );
+  box-shadow: var(--elev-2);
   scroll-margin-top: 104px;
   scroll-snap-align: start;
   scroll-snap-stop: always;
   scrollbar-width: thin;
+  transition:
+    border-color var(--transition-smooth),
+    box-shadow var(--transition-smooth);
+
+  // Cyan accent line along the top edge — always faintly lit, brighter on hover
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    background: var(--grad-energy);
+    opacity: 0.55;
+    transition: opacity var(--transition-smooth);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  &:hover {
+    border-color: color-mix(in srgb, var(--primary-color) 30%, var(--border-hover));
+    box-shadow:
+      var(--elev-3),
+      var(--glow-cyan-sm);
+
+    &::before {
+      opacity: 0.95;
+    }
+  }
 
   @include mobile {
-    gap: 14px;
+    gap: 16px;
     height: clamp(420px, calc(100dvh - var(--header-height, 64px) - 260px), 680px);
-    padding: 16px;
+    padding: 18px;
     scroll-margin-top: 92px;
   }
 }
 
+// ─── Section header — gold-bar eyebrow + heading group ──
 .header {
+  position: relative;
   display: grid;
   grid-template-columns: auto minmax(0, 1fr);
-  gap: 10px;
-  align-items: start;
-  padding-bottom: 14px;
-  border-bottom: 1px solid var(--border-color);
-  background: color-mix(in srgb, var(--bg-primary) 88%, transparent);
+  gap: 14px;
+  align-items: center;
+  padding: 0 0 16px 16px;
+  border-bottom: 1px solid transparent;
+  border-image: var(--grad-border) 1;
+  background: transparent;
+
+  // MẪU TIÊU ĐỀ MỤC — leading gold bar with glow
+  &::before {
+    content: '';
+    position: absolute;
+    top: 4px;
+    left: 0;
+    width: 4px;
+    height: 30px;
+    border-radius: 2px;
+    background: var(--grad-gold);
+    box-shadow: var(--glow-gold);
+  }
 
   @include mobile {
     grid-template-columns: minmax(0, 1fr);
-    gap: 10px;
-    padding-bottom: 12px;
+    gap: 12px;
+    padding: 0 0 14px 14px;
     background: transparent;
+
+    &::before {
+      height: 24px;
+    }
   }
 }
 
@@ -50,29 +111,35 @@
   min-width: 0;
 }
 
+// Index badge — monospace step marker in a cyan-tinted tile
 .indexBadge {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 32px;
-  height: 28px;
-  padding: 0 8px;
-  border: 1px solid var(--border-color);
-  border-radius: 6px;
-  color: var(--text-secondary);
+  min-width: 34px;
+  height: 30px;
+  padding: 0 9px;
+  border: 1px solid var(--primary-30);
+  border-radius: var(--radius-sm);
+  background: var(--primary-10);
+  color: var(--primary-color);
   font-size: 11px;
-  font-weight: 750;
-  letter-spacing: 0.08em;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  font-variant-numeric: tabular-nums;
 }
 
+// Icon badge — gold mark on a sunken tile
 .iconBadge {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 28px;
-  height: 28px;
-  border-radius: 6px;
-  color: var(--text-secondary);
+  width: 30px;
+  height: 30px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--accent-gold-soft);
+  background: color-mix(in srgb, var(--accent-gold) 8%, var(--surface-sunken));
+  color: var(--accent-gold);
   flex: 0 0 auto;
 }
 
@@ -83,13 +150,15 @@
   min-width: 0;
 }
 
+// Eyebrow-style uppercase title to match section-heading rhythm,
+// but keep the prominent readable scale of a panel title.
 .title {
   margin: 0;
   color: var(--text-primary);
   font-size: clamp(18px, 1.6vw, 22px);
-  font-weight: 680;
-  line-height: 1.18;
-  letter-spacing: 0;
+  font-weight: 720;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
 }
 
 .description {
@@ -107,7 +176,7 @@
 .content {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 18px;
   width: 100%;
   min-width: 0;
 }

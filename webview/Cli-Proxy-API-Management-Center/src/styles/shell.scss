@@ -1,0 +1,590 @@
+@use './variables.scss' as *;
+
+/* =========================================================================
+   Hexgate Console shell — icon rail + top bar
+   (bộ khung mới; tách riêng để dễ revert. Tái dùng design token Hextech.)
+   ========================================================================= */
+
+.hg-shell {
+  --hg-rail-w: 74px;
+  --hg-topbar-h: 64px;
+
+  position: relative;
+  display: grid;
+  grid-template-columns: var(--hg-rail-w) 1fr;
+  grid-template-rows: var(--hg-topbar-h) 1fr;
+  height: 100vh;
+  min-height: 100vh;
+  overflow: hidden;
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  transition: grid-template-columns var(--transition-smooth);
+}
+
+/* ---------- RAIL (left, icon-only) ---------- */
+.hg-rail {
+  grid-column: 1;
+  grid-row: 1 / span 2;
+  z-index: 30;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding-bottom: 14px;
+  background: var(--surface-glass);
+  border-right: 1px solid var(--hairline);
+  --glass-blur: 18px;
+  backdrop-filter: var(--glass-backdrop-filter);
+  -webkit-backdrop-filter: var(--glass-backdrop-filter);
+}
+
+.hg-rail-brand {
+  height: var(--hg-topbar-h);
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid var(--hairline);
+  margin-bottom: 10px;
+}
+
+.hg-rail-brand-logo {
+  width: 38px;
+  height: 38px;
+  border-radius: 11px;
+  box-shadow: var(--glow-cyan-sm);
+  transition: transform var(--transition-fast);
+}
+
+.hg-rail-brand:hover .hg-rail-brand-logo {
+  transform: translateY(-1px) scale(1.05);
+}
+
+.hg-rail-nav {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+}
+
+.hg-rail-item {
+  position: relative;
+  width: 46px;
+  height: 46px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 13px;
+  color: var(--text-tertiary);
+  text-decoration: none;
+  transition:
+    color var(--transition-fast),
+    background var(--transition-fast),
+    box-shadow var(--transition-fast),
+    transform var(--transition-fast);
+
+  &:hover {
+    color: var(--primary-color);
+    background: color-mix(in srgb, var(--primary-color) 12%, transparent);
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: var(--focus-ring);
+  }
+
+  &.active {
+    color: var(--primary-color);
+    background: color-mix(in srgb, var(--primary-color) 16%, transparent);
+    box-shadow: var(--glow-cyan-sm);
+  }
+
+  /* gradient marker bám mép trái khi active */
+  &.active::before {
+    content: '';
+    position: absolute;
+    left: -1px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 3px;
+    height: 22px;
+    border-radius: 3px;
+    background: var(--grad-energy);
+    box-shadow: 0 0 8px color-mix(in srgb, var(--primary-color) 60%, transparent);
+  }
+}
+
+.hg-rail-ico {
+  display: inline-flex;
+  line-height: 0;
+}
+
+/* tooltip nổi bên phải khi hover (desktop) */
+.hg-rail-tip {
+  position: absolute;
+  left: calc(100% + 12px);
+  top: 50%;
+  transform: translateY(-50%) translateX(-4px);
+  white-space: nowrap;
+  padding: 6px 10px;
+  border-radius: 9px;
+  background: var(--surface-raised);
+  color: var(--text-primary);
+  border: 1px solid var(--hairline);
+  box-shadow: var(--elev-3);
+  font-size: 13px;
+  font-weight: 600;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition:
+    opacity var(--transition-fast),
+    transform var(--transition-fast);
+  z-index: 50;
+}
+
+.hg-rail-item:hover .hg-rail-tip {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(-50%) translateX(0);
+}
+
+/* ---------- TOP BAR ---------- */
+.hg-topbar {
+  grid-column: 2;
+  grid-row: 1;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 0 22px;
+  background: var(--surface-glass);
+  border-bottom: 1px solid var(--hairline);
+  --glass-blur: 18px;
+  backdrop-filter: var(--glass-backdrop-filter);
+  -webkit-backdrop-filter: var(--glass-backdrop-filter);
+}
+
+.hg-topbar-burger {
+  display: none;
+  width: 38px;
+  height: 38px;
+  border-radius: 11px;
+  background: transparent;
+  border: 1px solid var(--hairline);
+  color: var(--text-secondary);
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition:
+    background var(--transition-fast),
+    color var(--transition-fast);
+
+  &:hover {
+    background: color-mix(in srgb, var(--primary-color) 12%, transparent);
+    color: var(--primary-color);
+  }
+}
+
+.hg-topbar-title {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+}
+
+.hg-topbar-h {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 750;
+  letter-spacing: -0.01em;
+  line-height: 1.15;
+  color: var(--text-primary);
+}
+
+.hg-topbar-sub {
+  font-size: 12px;
+  color: var(--text-tertiary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.hg-topbar-actions {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.hg-topbar-actions .btn {
+  width: 38px;
+  height: 38px;
+  min-width: 38px;
+  padding: 0;
+  border-radius: 11px;
+  background: transparent;
+  border-color: transparent;
+  color: var(--text-secondary);
+  transition:
+    background var(--transition-fast),
+    color var(--transition-fast),
+    box-shadow var(--transition-fast);
+
+  > span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 0;
+  }
+
+  &:hover {
+    background: color-mix(in srgb, var(--primary-color) 12%, transparent);
+    color: var(--primary-color);
+    border-color: transparent;
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: var(--focus-ring);
+  }
+}
+
+/* ---------- THEME MENU (trong top bar) ---------- */
+.hg-topbar .theme-menu {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.hg-topbar .theme-menu-popover {
+  position: absolute;
+  top: calc(100% + 12px);
+  right: 0;
+  z-index: 60;
+  padding: 10px;
+  display: flex;
+  gap: 8px;
+  width: max-content;
+  max-width: calc(100vw - 16px);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-lg);
+  background: var(--surface-glass);
+  box-shadow: var(--elev-3);
+  --glass-blur: 16px;
+  backdrop-filter: var(--glass-backdrop-filter);
+  -webkit-backdrop-filter: var(--glass-backdrop-filter);
+}
+
+.hg-topbar .theme-card {
+  border: 2px solid transparent;
+  border-radius: var(--radius-md);
+  background: transparent;
+  cursor: pointer;
+  padding: 6px 6px 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  transition:
+    border-color var(--transition-fast),
+    background var(--transition-fast);
+
+  &:hover {
+    background: color-mix(in srgb, var(--primary-color) 8%, transparent);
+  }
+
+  &.active {
+    border-color: var(--primary-color);
+  }
+}
+
+.hg-topbar .theme-card-preview {
+  width: 54px;
+  height: 40px;
+  border-radius: 7px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.hg-topbar .theme-card-header {
+  height: 9px;
+}
+
+.hg-topbar .theme-card-body {
+  flex: 1;
+  display: flex;
+}
+
+.hg-topbar .theme-card-sidebar {
+  width: 12px;
+}
+
+.hg-topbar .theme-card-content {
+  flex: 1;
+  padding: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.hg-topbar .theme-card-line {
+  height: 3px;
+  border-radius: 2px;
+  width: 100%;
+
+  &.short {
+    width: 60%;
+  }
+}
+
+.hg-topbar .theme-card-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+/* ---------- CONTENT ---------- */
+.hg-content {
+  grid-column: 2;
+  grid-row: 2;
+  position: relative;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.hg-main {
+  min-height: 100%;
+  padding: 26px 26px 64px;
+}
+
+.hg-main-logs {
+  padding: 0;
+  height: 100%;
+}
+
+/* ---------- BRAND TITLE + TOGGLE (đóng/mở rail) ---------- */
+.hg-rail-brand-title {
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 0;
+  opacity: 0;
+  transition:
+    max-width var(--transition-smooth),
+    opacity var(--transition-fast);
+}
+
+.hg-rail-toggle {
+  margin-top: auto;
+  width: 46px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--hairline);
+  border-radius: 12px;
+  background: transparent;
+  color: var(--text-tertiary);
+  cursor: pointer;
+  transition:
+    background var(--transition-fast),
+    color var(--transition-fast),
+    border-color var(--transition-fast);
+
+  &:hover {
+    background: color-mix(in srgb, var(--primary-color) 12%, transparent);
+    color: var(--primary-color);
+    border-color: color-mix(in srgb, var(--primary-color) 40%, var(--hairline));
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: var(--focus-ring);
+  }
+}
+
+.hg-rail-toggle-ico {
+  display: inline-flex;
+  line-height: 0;
+}
+
+.hg-rail-toggle-label {
+  max-width: 0;
+  overflow: hidden;
+  opacity: 0;
+  white-space: nowrap;
+  font-size: 13px;
+  font-weight: 600;
+  transition:
+    max-width var(--transition-smooth),
+    opacity var(--transition-fast);
+}
+
+/* ---------- RAIL MỞ RỘNG (desktop) ---------- */
+.hg-shell.rail-expanded {
+  --hg-rail-w: 224px;
+
+  .hg-rail-nav {
+    align-items: stretch;
+  }
+
+  .hg-rail-brand {
+    justify-content: flex-start;
+    gap: 12px;
+    padding-left: 18px;
+  }
+
+  .hg-rail-brand-title {
+    max-width: 160px;
+    opacity: 1;
+  }
+
+  .hg-rail-item {
+    width: auto;
+    height: 46px;
+    justify-content: flex-start;
+    gap: 12px;
+    padding: 0 14px;
+    margin: 0 12px;
+  }
+
+  .hg-rail-tip {
+    position: static;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+    color: inherit;
+    font-size: 14px;
+  }
+
+  .hg-rail-toggle {
+    width: auto;
+    justify-content: flex-start;
+    gap: 10px;
+    padding: 0 14px;
+    margin-left: 12px;
+    margin-right: 12px;
+  }
+
+  .hg-rail-toggle-label {
+    max-width: 120px;
+    opacity: 1;
+  }
+}
+
+/* ---------- BACKDROP (mobile) ---------- */
+.hg-rail-backdrop {
+  display: none;
+}
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: $breakpoint-mobile) {
+  .hg-shell {
+    grid-template-columns: 1fr;
+    grid-template-rows: var(--hg-topbar-h) 1fr;
+  }
+
+  .hg-rail {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 252px;
+    grid-column: auto;
+    grid-row: auto;
+    align-items: stretch;
+    transform: translateX(-100%);
+    transition: transform var(--transition-smooth);
+  }
+
+  .hg-shell.rail-open .hg-rail {
+    transform: translateX(0);
+    box-shadow: var(--elev-3);
+  }
+
+  .hg-rail-brand {
+    justify-content: flex-start;
+    gap: 12px;
+    padding-left: 20px;
+  }
+
+  .hg-rail-brand-title {
+    max-width: 160px;
+    opacity: 1;
+  }
+
+  /* mobile dùng drawer — không cần nút đóng/mở rail */
+  .hg-rail-toggle {
+    display: none;
+  }
+
+  .hg-rail-nav {
+    align-items: stretch;
+  }
+
+  /* trên mobile rail mở rộng -> hiện cả nhãn */
+  .hg-rail-item {
+    width: auto;
+    height: auto;
+    justify-content: flex-start;
+    gap: 12px;
+    padding: 12px 16px;
+    margin: 0 10px;
+    border-radius: var(--radius-md);
+  }
+
+  .hg-rail-tip {
+    position: static;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+    color: inherit;
+    font-weight: 600;
+  }
+
+  .hg-topbar,
+  .hg-content {
+    grid-column: 1;
+  }
+
+  .hg-topbar-burger {
+    display: inline-flex;
+  }
+
+  .hg-main {
+    padding: 18px 16px 56px;
+  }
+
+  .hg-rail-backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 25;
+    border: 0;
+    background: rgb(2 12 20 / 0.5);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--transition-fast);
+  }
+
+  .hg-shell.rail-open .hg-rail-backdrop {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}

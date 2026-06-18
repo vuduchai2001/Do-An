@@ -5,20 +5,42 @@
   display: flex;
   flex-direction: column;
   gap: $spacing-lg;
+  width: 100%;
+  max-width: 1180px;
+  margin: 0 auto;
+  background: transparent;
   padding-bottom: calc(
     var(--auth-files-action-bar-height, 0px) + 16px + env(safe-area-inset-bottom)
   );
 }
 
+// Compact eyebrow header — the shell top bar already names the page,
+// so this stays a small section label rather than a full-bleed hero.
 .pageHeader {
   display: flex;
   flex-direction: column;
-  gap: $spacing-sm;
+  gap: 6px;
+  padding-left: 14px;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 4px;
+    bottom: 4px;
+    width: 3px;
+    border-radius: 2px;
+    background: var(--grad-gold);
+    box-shadow: var(--glow-gold);
+  }
 }
 
 .pageTitle {
-  font-size: 28px;
-  font-weight: 700;
+  font-size: 13px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
   color: var(--text-primary);
   margin: 0;
 }
@@ -26,6 +48,7 @@
 .description {
   font-size: 14px;
   color: var(--text-secondary);
+  line-height: 1.5;
   margin: 0;
 }
 
@@ -91,9 +114,10 @@
   flex-direction: column;
   gap: 10px;
   padding: 12px 14px;
-  border-radius: 10px;
-  border: 1px solid color-mix(in srgb, var(--border-color) 60%, transparent);
-  background: color-mix(in srgb, var(--bg-secondary) 60%, transparent);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--hairline);
+  background: var(--surface-glass);
+  box-shadow: var(--elev-1);
 
   @include mobile {
     padding: 10px;
@@ -141,7 +165,7 @@
   font-size: 13px;
   font-weight: 600;
   line-height: 1.2;
-  border: 1px solid color-mix(in srgb, var(--border-color) 60%, transparent);
+  border: 1px solid var(--hairline);
   background: color-mix(in srgb, var(--bg-secondary) 70%, transparent);
   color: var(--text-secondary);
   cursor: pointer;
@@ -149,12 +173,20 @@
   transition:
     border-color $transition-fast,
     background-color $transition-fast,
-    color $transition-fast;
+    color $transition-fast,
+    box-shadow $transition-fast,
+    transform $transition-fast;
 
   &:hover {
     border-color: color-mix(in srgb, var(--filter-color) 40%, var(--border-color));
     background: color-mix(in srgb, var(--bg-secondary) 90%, transparent);
     color: var(--text-primary);
+    transform: translateY(-1px);
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: var(--focus-ring);
   }
 }
 
@@ -162,6 +194,7 @@
   border-color: color-mix(in srgb, var(--filter-color) 50%, var(--border-color));
   background: color-mix(in srgb, var(--filter-surface) 22%, var(--bg-secondary));
   color: var(--text-primary);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--filter-color) 24%, transparent);
 
   .filterTagIconWrap {
     border-color: color-mix(in srgb, var(--filter-color) 40%, transparent);
@@ -233,15 +266,16 @@
   position: relative;
   overflow: hidden;
   padding: 16px;
-  border-radius: 10px;
-  border: 1px solid color-mix(in srgb, var(--border-color) 60%, transparent);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--hairline);
   background:
     linear-gradient(
       135deg,
-      color-mix(in srgb, var(--primary-color) 8%, transparent),
+      color-mix(in srgb, var(--primary-color) 9%, transparent),
       transparent 46%
     ),
-    color-mix(in srgb, var(--bg-secondary) 56%, transparent);
+    var(--surface-glass);
+  box-shadow: var(--elev-1);
 
   @include mobile {
     padding: 12px;
@@ -287,10 +321,11 @@
   min-width: 0;
 
   label {
-    font-size: 11px;
+    font-size: 10px;
     color: var(--text-tertiary);
     font-weight: 700;
-    letter-spacing: 0;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
     white-space: nowrap;
   }
 }
@@ -360,19 +395,26 @@
 .pageSizeSelect {
   width: 100%;
   padding: 8px 12px;
-  border: 1px solid color-mix(in srgb, var(--border-color) 70%, transparent);
-  border-radius: 8px;
-  background-color: var(--bg-secondary);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-sm);
+  background-color: var(--surface-glass);
   color: var(--text-primary);
   font-size: 14px;
   cursor: text;
   height: 42px;
   box-sizing: border-box;
+  transition:
+    border-color $transition-fast,
+    box-shadow $transition-fast;
+
+  &:hover {
+    border-color: var(--border-hover);
+  }
 
   &:focus {
     outline: none;
     border-color: var(--primary-color);
-    box-shadow: 0 0 0 2px color-mix(in srgb, var(--primary-color) 12%, transparent);
+    box-shadow: var(--focus-ring);
   }
 }
 
@@ -566,19 +608,23 @@
 
 .quotaBar {
   height: 8px;
-  background-color: var(--bg-tertiary);
+  background-color: var(--surface-sunken);
+  border: 1px solid var(--hairline);
   border-radius: 999px;
   overflow: hidden;
+  box-shadow: inset 0 1px 2px color-mix(in srgb, var(--bg-tertiary) 50%, transparent);
 }
 
 .quotaBarFill {
   height: 100%;
   background-color: var(--success-color, #22c55e);
-  transition: width 0.2s ease;
+  border-radius: 999px;
+  transition: width var(--transition-smooth);
 }
 
 .quotaBarFillHigh {
-  background-color: var(--success-color, #22c55e);
+  background: var(--grad-energy);
+  box-shadow: 0 0 8px color-mix(in srgb, var(--primary-color) 30%, transparent);
 }
 
 .quotaBarFillMedium {
@@ -699,34 +745,63 @@
 .fileCard {
   position: relative;
   overflow: hidden;
-  background-color: color-mix(in srgb, var(--bg-primary) 85%, transparent);
+  background:
+    var(--grad-surface),
+    color-mix(in srgb, var(--bg-primary) 85%, transparent);
   --glass-blur: 8px;
   backdrop-filter: var(--glass-backdrop-filter);
   -webkit-backdrop-filter: var(--glass-backdrop-filter);
-  border: 1px solid color-mix(in srgb, var(--border-color) 70%, transparent);
-  border-radius: 12px;
-  padding: 16px;
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-lg);
+  padding: 18px;
   display: flex;
   flex-direction: column;
   min-height: 100%;
+  box-shadow: var(--elev-1);
   transition:
-    transform $transition-fast,
-    box-shadow $transition-fast,
-    border-color $transition-fast;
+    transform var(--transition-smooth),
+    box-shadow var(--transition-smooth),
+    border-color var(--transition-smooth);
+
+  // Gold→cyan gradient hairline along the top edge — Hexgate panel motif.
+  // Hidden until hover so the resting grid stays calm.
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--grad-border);
+    opacity: 0;
+    transition: opacity var(--transition-smooth);
+    pointer-events: none;
+    z-index: 1;
+  }
 
   &:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 8px 24px -12px rgba(0, 0, 0, 0.15);
-    border-color: color-mix(in srgb, var(--primary-color) 28%, var(--border-color));
+    transform: translateY(-2px);
+    box-shadow: var(--elev-2), var(--glow-cyan-sm);
+    border-color: var(--border-hover);
+
+    &::before {
+      opacity: 0.85;
+    }
+
+    .providerAvatar {
+      border-color: color-mix(in srgb, var(--primary-color) 40%, var(--border-color));
+      box-shadow: var(--glow-cyan-sm);
+    }
   }
 }
 
 .fileCardSelected {
   border-color: color-mix(in srgb, var(--primary-color) 60%, transparent);
-  box-shadow: 0 0 0 1px color-mix(in srgb, var(--primary-color) 30%, transparent);
+  box-shadow: var(--glow-cyan);
 
   &:hover {
     border-color: color-mix(in srgb, var(--primary-color) 60%, transparent);
+    box-shadow: var(--elev-2), var(--glow-cyan);
   }
 }
 
@@ -879,14 +954,23 @@
 }
 
 .providerAvatar {
-  width: 40px;
-  height: 40px;
+  width: 42px;
+  height: 42px;
   flex: 0 0 auto;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border-radius: 10px;
+  border-radius: 11px;
   border: 1px solid color-mix(in srgb, var(--border-color) 60%, transparent);
+  background:
+    var(--grad-surface),
+    var(--surface-raised);
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, #fff 14%, transparent),
+    var(--elev-1);
+  transition:
+    border-color var(--transition-smooth),
+    box-shadow var(--transition-smooth);
 }
 
 .providerAvatarImage {
@@ -932,13 +1016,26 @@
 .stateBadge {
   display: inline-flex;
   align-items: center;
-  padding: 3px 8px;
+  gap: 5px;
+  padding: 3px 8px 3px 7px;
   border-radius: 6px;
   font-size: 10px;
   font-weight: 700;
   line-height: 1;
   white-space: nowrap;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+
+  // Status indicator dot — inherits the badge text color as a token signal.
+  &::before {
+    content: '';
+    width: 5px;
+    height: 5px;
+    border-radius: 999px;
+    background: currentColor;
+    box-shadow: 0 0 6px currentColor;
+    flex: 0 0 auto;
+  }
 }
 
 .stateBadgeActive {
@@ -957,12 +1054,22 @@
   color: var(--text-secondary);
   background: color-mix(in srgb, var(--bg-tertiary) 86%, transparent);
   border: 1px solid var(--border-color);
+
+  &::before {
+    box-shadow: none;
+    opacity: 0.7;
+  }
 }
 
 .stateBadgeVirtual {
   color: var(--text-secondary);
   background: color-mix(in srgb, var(--bg-tertiary) 82%, transparent);
   border: 1px dashed color-mix(in srgb, var(--border-primary) 90%, transparent);
+
+  &::before {
+    box-shadow: none;
+    opacity: 0.7;
+  }
 }
 
 .fileName {
@@ -1257,7 +1364,7 @@
   font-size: 11px;
   line-height: 1.5;
   white-space: nowrap;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.14);
+  box-shadow: var(--elev-2);
   z-index: $z-dropdown;
   pointer-events: none;
   color: var(--text-primary);
@@ -1340,14 +1447,16 @@
   font-weight: 700;
   white-space: nowrap;
   padding: 6px 10px;
-  border-radius: 999px;
-  background: var(--bg-tertiary);
+  border-radius: var(--radius-sm);
+  background: var(--surface-glass);
+  border: 1px solid var(--hairline);
   flex-shrink: 0;
 }
 
 .statusRateHigh {
   color: var(--success-badge-text, #065f46);
   background: var(--success-badge-bg, #d1fae5);
+  border-color: color-mix(in srgb, var(--success-badge-text, #065f46) 24%, transparent);
 }
 
 .statusRateMedium {
@@ -1422,10 +1531,14 @@
   resize: vertical;
   min-height: 120px;
   box-sizing: border-box;
+  transition:
+    border-color $transition-fast,
+    box-shadow $transition-fast;
 
   &:focus {
     outline: none;
     border-color: var(--primary-color);
+    box-shadow: var(--focus-ring);
   }
 }
 
@@ -1490,8 +1603,9 @@
 }
 
 .modelsActionButton:global(.btn.btn-sm):hover {
-  border-color: color-mix(in srgb, var(--primary-color) 35%, var(--border-color));
+  border-color: color-mix(in srgb, var(--primary-color) 38%, var(--border-color));
   background: color-mix(in srgb, var(--primary-color) 14%, var(--bg-secondary));
+  box-shadow: var(--glow-cyan-sm);
 }
 
 .modelsActionButton:global(.btn.btn-sm) > span {
@@ -1582,8 +1696,11 @@
   gap: $spacing-md;
   flex-wrap: wrap;
   margin-top: $spacing-lg;
-  padding-top: $spacing-md;
-  border-top: 1px solid var(--border-color);
+  padding: $spacing-sm $spacing-md;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--hairline);
+  background: var(--surface-glass);
+  box-shadow: var(--elev-1);
 }
 
 .batchActionContainer {
@@ -1604,13 +1721,13 @@
   justify-content: space-between;
   gap: $spacing-sm;
   padding: 10px 12px;
-  border-radius: $radius-lg;
-  border: 1px solid color-mix(in srgb, var(--border-color) 70%, transparent);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--hairline);
   background: color-mix(in srgb, var(--bg-primary) 84%, transparent);
   --glass-blur: 12px;
   backdrop-filter: var(--glass-backdrop-filter);
   -webkit-backdrop-filter: var(--glass-backdrop-filter);
-  box-shadow: var(--shadow-lg);
+  box-shadow: var(--elev-3), var(--glow-cyan-sm);
 }
 
 .batchActionLeft,
@@ -1654,8 +1771,9 @@
   font-size: 13px;
   color: var(--text-secondary);
   padding: $spacing-xs $spacing-md;
-  background-color: var(--bg-secondary);
-  border-radius: $radius-md;
+  background-color: var(--surface-glass);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-md);
 }
 
 // OAuth 模型禁用
@@ -1670,10 +1788,21 @@
   justify-content: space-between;
   align-items: center;
   padding: $spacing-md;
-  background-color: var(--bg-secondary);
-  border-radius: $radius-md;
-  border: 1px solid var(--border-color);
+  background-color: var(--surface-glass);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--hairline);
+  border-left: 2px solid transparent;
   gap: $spacing-md;
+  transition:
+    border-color var(--transition-fast),
+    background-color var(--transition-fast),
+    box-shadow var(--transition-fast);
+
+  &:hover {
+    border-color: var(--border-hover);
+    border-left-color: color-mix(in srgb, var(--primary-color) 55%, transparent);
+    box-shadow: var(--glow-cyan-sm);
+  }
 
   @include mobile {
     flex-direction: column;
@@ -1727,36 +1856,57 @@
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  padding: 4px 10px;
-  border-radius: $radius-full;
-  border: 1px solid var(--border-color);
-  background-color: var(--bg-secondary);
+  padding: 5px 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--hairline);
+  background-color: var(--surface-glass);
   color: var(--text-secondary);
   font-size: 12px;
+  font-weight: 600;
   cursor: pointer;
-  transition: all $transition-fast;
+  transition:
+    border-color $transition-fast,
+    color $transition-fast,
+    background-color $transition-fast,
+    box-shadow $transition-fast,
+    transform $transition-fast;
 
   &:hover {
-    border-color: var(--primary-color);
+    border-color: var(--border-hover);
     color: var(--text-primary);
-    background-color: var(--bg-hover);
+    background-color: var(--surface-raised);
+    box-shadow: var(--glow-cyan-sm);
+    transform: translateY(-1px);
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: var(--focus-ring);
+  }
+
+  &:active {
+    transform: translateY(0);
   }
 
   &:disabled {
     opacity: 0.6;
     cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
   }
 }
 
 .providerTagActive {
-  background-color: var(--primary-color);
-  border-color: var(--primary-color);
-  color: #fff;
+  background: var(--grad-energy);
+  border-color: color-mix(in srgb, var(--primary-color) 60%, transparent);
+  color: var(--primary-contrast, #fff);
+  box-shadow: var(--glow-cyan-sm);
 
   &:hover {
-    background-color: var(--primary-color);
-    border-color: var(--primary-color);
-    color: #fff;
+    background: var(--grad-energy);
+    border-color: color-mix(in srgb, var(--primary-color) 70%, transparent);
+    color: var(--primary-contrast, #fff);
+    box-shadow: var(--glow-cyan);
   }
 }
 
@@ -1861,16 +2011,19 @@
 }
 
 .jsonContent {
-  background-color: var(--bg-secondary);
-  border: 1px solid var(--border-color);
-  border-radius: $radius-md;
+  background-color: var(--surface-sunken);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-md);
   padding: $spacing-md;
-  font-family: monospace;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono',
+    'Courier New', monospace;
   font-size: 12px;
+  line-height: 1.55;
   white-space: pre-wrap;
   word-break: break-all;
   color: var(--text-primary);
   margin: 0;
+  box-shadow: inset 0 1px 3px color-mix(in srgb, var(--bg-tertiary) 55%, transparent);
 }
 
 // 表单
@@ -1895,12 +2048,17 @@
   background-color: var(--bg-primary);
   color: var(--text-primary);
   font-size: 14px;
-  font-family: monospace;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono',
+    'Courier New', monospace;
   resize: vertical;
+  transition:
+    border-color $transition-fast,
+    box-shadow $transition-fast;
 
   &:focus {
     outline: none;
     border-color: var(--primary-color);
+    box-shadow: var(--focus-ring);
   }
 
   &::placeholder {
@@ -1928,16 +2086,23 @@
   align-items: center;
   gap: $spacing-sm;
   padding: $spacing-sm $spacing-md;
-  background-color: var(--bg-secondary);
-  border-radius: $radius-md;
-  border: 1px solid var(--border-color);
+  background-color: var(--surface-glass);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--hairline);
+  border-left: 2px solid transparent;
   flex-wrap: wrap;
   cursor: pointer;
-  transition: all $transition-fast;
+  transition:
+    border-color $transition-fast,
+    background-color $transition-fast,
+    box-shadow $transition-fast,
+    transform $transition-fast;
 
   &:hover {
-    background-color: var(--bg-hover);
-    border-color: var(--primary-color);
+    background-color: color-mix(in srgb, var(--primary-color) 6%, var(--surface-glass));
+    border-color: var(--border-hover);
+    border-left-color: color-mix(in srgb, var(--primary-color) 55%, transparent);
+    box-shadow: var(--glow-cyan-sm);
   }
 
   &:active {
@@ -2001,10 +2166,11 @@
   gap: $spacing-xs;
   max-height: 280px;
   overflow-y: auto;
-  border: 1px solid var(--border-color);
-  border-radius: $radius-md;
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-md);
   padding: $spacing-sm;
-  background-color: var(--bg-secondary);
+  background-color: var(--surface-sunken);
+  box-shadow: inset 0 1px 3px color-mix(in srgb, var(--bg-tertiary) 45%, transparent);
 }
 
 .excludedCheckItem {

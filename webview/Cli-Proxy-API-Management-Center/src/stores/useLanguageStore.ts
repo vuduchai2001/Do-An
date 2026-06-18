@@ -35,21 +35,15 @@ export const useLanguageStore = create<LanguageState>()(
         const currentIndex = LANGUAGE_ORDER.indexOf(language);
         const nextLanguage = LANGUAGE_ORDER[(currentIndex + 1) % LANGUAGE_ORDER.length];
         setLanguage(nextLanguage);
-      }
+      },
     }),
     {
       name: STORAGE_KEY_LANGUAGE,
-      merge: (persistedState, currentState) => {
-        const nextLanguage = (persistedState as Partial<LanguageState>)?.language;
-        if (typeof nextLanguage === 'string' && isSupportedLanguage(nextLanguage)) {
-          return {
-            ...currentState,
-            ...(persistedState as Partial<LanguageState>),
-            language: nextLanguage
-          };
-        }
-        return currentState;
-      }
+      // Ứng dụng chỉ hỗ trợ tiếng Việt — bỏ qua ngôn ngữ đã lưu, luôn dùng 'vi'.
+      merge: (_persistedState, currentState) => ({
+        ...currentState,
+        language: 'vi',
+      }),
     }
   )
 );

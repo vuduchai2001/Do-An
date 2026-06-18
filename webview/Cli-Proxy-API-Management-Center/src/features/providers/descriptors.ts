@@ -149,9 +149,8 @@ export const PROVIDER_BRAND_ORDER: ProviderBrand[] = [
   'gemini',
   'codex',
   'claude',
-  'vertex',
+  // 'vertex' và 'ampcode' bị ẩn khỏi giao diện (vẫn hỗ trợ ở backend/descriptors).
   'openaiCompatibility',
-  'ampcode',
 ];
 
 export const PROVIDER_PATHS: Record<ProviderBrand, string> = {

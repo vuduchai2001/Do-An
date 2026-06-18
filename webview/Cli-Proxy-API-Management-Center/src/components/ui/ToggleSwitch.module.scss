@@ -26,10 +26,22 @@
 .track {
   width: 44px;
   height: 24px;
-  background: var(--border-color);
+  background: var(--surface-sunken);
+  border: 1px solid var(--hairline);
   border-radius: $radius-full;
   position: relative;
-  transition: background $transition-fast;
+  transition:
+    background var(--transition-fast),
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast);
+}
+
+.root:hover input:not(:checked) + .track {
+  border-color: var(--border-hover);
+}
+
+.root input:focus-visible + .track {
+  box-shadow: var(--focus-ring);
 }
 
 .thumb {
@@ -41,15 +53,20 @@
   background: #fff;
   border-radius: $radius-full;
   box-shadow: $shadow-sm;
-  transition: transform $transition-fast;
+  transition:
+    transform var(--transition-smooth),
+    box-shadow var(--transition-fast);
 }
 
 .root input:checked + .track {
-  background: var(--primary-color);
+  background: var(--grad-energy);
+  border-color: var(--primary-color);
+  box-shadow: var(--glow-cyan-sm);
 }
 
 .root input:checked + .track .thumb {
   transform: translateX(20px);
+  box-shadow: $shadow-sm, var(--glow-cyan-sm);
 }
 
 .label {

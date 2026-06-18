@@ -14,16 +14,50 @@
 }
 
 .settingsCard {
+  position: relative;
   padding: 0;
-  overflow: visible;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  background:
+    var(--grad-surface),
+    var(--surface-glass);
+  border: 1px solid var(--hairline);
+  box-shadow: var(--elev-1);
+  transition:
+    border-color var(--transition-smooth),
+    box-shadow var(--transition-smooth);
+
+  // Gold→cyan gradient hairline along the top edge — Hexgate panel motif
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--grad-border);
+    opacity: 0.8;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  &:hover {
+    border-color: var(--border-hover);
+    box-shadow: var(--elev-2), var(--glow-cyan-sm);
+  }
 }
 
 .settingsHeader {
   display: flex;
   flex-direction: column;
-  gap: $spacing-xs;
+  gap: 6px;
   padding: $spacing-md $spacing-lg;
-  border-bottom: 1px solid var(--border-color);
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--surface-raised) 60%, transparent),
+    transparent
+  );
+  border-bottom: 1px solid var(--hairline);
 
   @include mobile {
     padding-left: $spacing-md;
@@ -32,23 +66,46 @@
 }
 
 .settingsHeaderTitle {
+  position: relative;
   display: inline-flex;
   align-items: center;
-  gap: $spacing-xs;
-  font-weight: 700;
+  gap: 8px;
+  padding-left: 14px;
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
   color: var(--text-primary);
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 3px;
+    height: 1.1em;
+    border-radius: 2px;
+    background: var(--grad-gold);
+    box-shadow: var(--glow-gold);
+  }
+
+  svg {
+    color: var(--primary-color);
+  }
 }
 
 .settingsHeaderHint {
   font-size: 13px;
   color: var(--text-secondary);
+  line-height: 1.5;
 }
 
 .settingsSection {
   display: flex;
   flex-direction: column;
-  gap: $spacing-sm;
-  padding: $spacing-md $spacing-lg $spacing-lg;
+  gap: $spacing-md;
+  padding: $spacing-lg;
 
   @include mobile {
     padding-left: $spacing-md;
@@ -58,9 +115,13 @@
 
 .settingsRow {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: space-between;
   gap: $spacing-lg;
+  padding: $spacing-md;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--hairline);
+  background: var(--surface-sunken);
 
   @include mobile {
     flex-direction: column;
@@ -108,44 +169,71 @@
 .tag {
   display: inline-flex;
   align-items: center;
-  padding: 4px 10px;
-  border-radius: $radius-full;
-  border: 1px solid var(--border-color);
-  background-color: var(--bg-secondary);
+  padding: 5px 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--hairline);
+  background-color: var(--surface-glass);
   color: var(--text-secondary);
   font-size: 12px;
+  font-weight: 600;
   cursor: pointer;
-  transition: all $transition-fast;
+  transition:
+    border-color var(--transition-fast),
+    color var(--transition-fast),
+    background-color var(--transition-fast),
+    box-shadow var(--transition-fast),
+    transform var(--transition-fast);
 
   &:hover {
-    border-color: var(--primary-color);
+    border-color: var(--border-hover);
     color: var(--text-primary);
-    background-color: var(--bg-tertiary);
+    background-color: var(--surface-raised);
+    box-shadow: var(--glow-cyan-sm);
+    transform: translateY(-1px);
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: var(--focus-ring);
+  }
+
+  &:active {
+    transform: translateY(0);
   }
 
   &:disabled {
     opacity: 0.6;
     cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
   }
 }
 
 .tagActive {
-  background-color: var(--primary-color);
-  border-color: var(--primary-color);
-  color: #fff;
+  background: var(--grad-energy);
+  border-color: color-mix(in srgb, var(--primary-color) 60%, transparent);
+  color: var(--primary-contrast, #fff);
+  box-shadow: var(--glow-cyan-sm);
 
   &:hover {
-    background-color: var(--primary-color);
-    border-color: var(--primary-color);
-    color: #fff;
+    background: var(--grad-energy);
+    border-color: color-mix(in srgb, var(--primary-color) 70%, transparent);
+    color: var(--primary-contrast, #fff);
+    box-shadow: var(--glow-cyan);
   }
 }
 
 .modelsHint {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: $spacing-xs;
-  font-size: 13px;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--hairline);
+  background: var(--surface-glass);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
   color: var(--text-secondary);
 }
 
@@ -154,35 +242,55 @@
   align-items: center;
   justify-content: center;
   gap: $spacing-sm;
+  margin: 0 $spacing-lg $spacing-lg;
   padding: $spacing-xl 0;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--hairline);
+  background: var(--surface-sunken);
   color: var(--text-secondary);
+
+  @include mobile {
+    margin-left: $spacing-md;
+    margin-right: $spacing-md;
+  }
 }
 
 .modelList {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
   max-height: 520px;
   overflow: auto;
-  padding: $spacing-sm $spacing-lg $spacing-lg;
+  margin: 0 $spacing-lg $spacing-lg;
+  padding: $spacing-sm;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--hairline);
+  background: var(--surface-sunken);
+  box-shadow: inset 0 1px 3px color-mix(in srgb, var(--bg-tertiary) 45%, transparent);
 
   @include mobile {
-    padding-left: $spacing-md;
-    padding-right: $spacing-md;
+    margin-left: $spacing-md;
+    margin-right: $spacing-md;
   }
 }
 
 .modelItem {
   width: 100%;
   align-items: flex-start;
-  padding: 10px 0;
-  border-bottom: 1px solid var(--border-color);
-  border-radius: $radius-sm;
-  transition: background-color $transition-fast;
-
-  &:last-child {
-    border-bottom: none;
-  }
+  padding: 9px 10px;
+  border: 1px solid transparent;
+  border-left: 2px solid transparent;
+  border-radius: var(--radius-sm);
+  transition:
+    background-color var(--transition-fast),
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast);
 
   &:hover {
-    background-color: var(--bg-hover);
+    background-color: color-mix(in srgb, var(--primary-color) 9%, transparent);
+    border-color: color-mix(in srgb, var(--primary-color) 22%, transparent);
+    border-left-color: color-mix(in srgb, var(--primary-color) 60%, transparent);
+    box-shadow: var(--glow-cyan-sm);
   }
 }
 
@@ -195,26 +303,33 @@
 }
 
 .modelId {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono',
+    'Courier New', monospace;
   font-size: 13px;
   font-weight: 600;
+  letter-spacing: -0.01em;
   color: var(--text-primary);
   word-break: break-all;
 }
 
 .modelDisplayName {
   font-size: 12px;
-  color: var(--text-secondary);
+  color: var(--text-tertiary);
   word-break: break-all;
 }
 
 .emptyModels {
+  margin: 0 $spacing-lg $spacing-lg;
   padding: $spacing-xl $spacing-lg;
+  border-radius: var(--radius-md);
+  border: 1px dashed color-mix(in srgb, var(--border-color) 80%, transparent);
+  background: var(--surface-sunken);
   color: var(--text-secondary);
   font-size: 13px;
   text-align: center;
 
   @include mobile {
-    padding-left: $spacing-md;
-    padding-right: $spacing-md;
+    margin-left: $spacing-md;
+    margin-right: $spacing-md;
   }
 }

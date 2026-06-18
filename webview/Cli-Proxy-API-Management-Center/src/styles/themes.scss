@@ -26,10 +26,13 @@
   --border-primary: #d5d2cb;
   --border-hover: #cecac4;
 
-  --primary-color: #8b8680; // 行动色（主色）
-  --primary-hover: #7f7a74;
-  --primary-active: #726d67;
+  --primary-color: #0e8fad; // 行动色（主色 — hextech cyan）
+  --primary-hover: #0c7d98;
+  --primary-active: #0a6a82;
   --primary-contrast: #ffffff;
+
+  --accent-gold: #a9823f;
+  --accent-gold-soft: color-mix(in srgb, var(--accent-gold) 14%, transparent);
 
   --success-color: #10b981;
   --quota-medium-color: #e0aa14;
@@ -81,6 +84,45 @@
   --glass-bg: color-mix(in srgb, var(--bg-primary) 82%, transparent);
   --glass-bg-secondary: color-mix(in srgb, var(--bg-secondary) 82%, transparent);
   --glass-border: color-mix(in srgb, var(--border-color) 60%, transparent);
+
+  // ===== Hexgate (Hextech Gateway) decorative tokens — LIGHT (:root) =====
+  // Glow — chỉ quầng sáng mềm, KHÔNG vòng 1px (tránh viền bẩn trên nền sáng)
+  --glow-cyan: 0 6px 18px -6px color-mix(in srgb, var(--primary-color) 30%, transparent);
+  --glow-cyan-sm: 0 3px 10px -4px color-mix(in srgb, var(--primary-color) 26%, transparent);
+  --glow-gold: 0 6px 16px -6px color-mix(in srgb, var(--accent-gold) 26%, transparent);
+
+  // Elevation — layered soft shadows
+  --elev-1: 0 1px 2px rgba(20, 30, 40, 0.06), 0 1px 3px rgba(20, 30, 40, 0.08);
+  --elev-2: 0 2px 6px rgba(20, 30, 40, 0.08), 0 6px 16px -6px rgba(20, 30, 40, 0.12);
+  --elev-3: 0 4px 12px rgba(20, 30, 40, 0.1), 0 18px 38px -12px rgba(20, 30, 40, 0.18);
+
+  // Gradient
+  --grad-energy: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-active) 100%);
+  --grad-gold: linear-gradient(135deg,
+    color-mix(in srgb, var(--accent-gold) 92%, white) 0%,
+    var(--accent-gold) 100%);
+  --grad-border: linear-gradient(135deg,
+    color-mix(in srgb, var(--accent-gold) 70%, transparent) 0%,
+    color-mix(in srgb, var(--primary-color) 70%, transparent) 100%);
+  --grad-surface: linear-gradient(180deg,
+    color-mix(in srgb, var(--primary-color) 2.5%, transparent) 0%,
+    transparent 60%);
+
+  // Surface — đặc, sạch trên nền sáng
+  --surface-glass: color-mix(in srgb, var(--bg-primary) 97%, transparent);
+  --surface-raised: #ffffff;
+  --surface-sunken: color-mix(in srgb, var(--bg-tertiary) 88%, transparent);
+  --hairline: var(--border-color);
+
+  // Focus
+  --focus-ring: 0 0 0 2px var(--bg-secondary),
+    0 0 0 4px color-mix(in srgb, var(--primary-color) 55%, transparent);
+
+  // Radius + motion (extend existing --radius-md)
+  --radius-sm: 6px;
+  --radius-lg: 14px;
+  --transition-fast: 140ms cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-smooth: 280ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 // 纯白主题
@@ -106,10 +148,13 @@
   --border-primary: #d9d9d9;
   --border-hover: #cccccc;
 
-  --primary-color: #8b8680;
-  --primary-hover: #7f7a74;
-  --primary-active: #726d67;
+  --primary-color: #0e8fad;
+  --primary-hover: #0c7d98;
+  --primary-active: #0a6a82;
   --primary-contrast: #ffffff;
+
+  --accent-gold: #a9823f;
+  --accent-gold-soft: color-mix(in srgb, var(--accent-gold) 14%, transparent);
 
   --success-color: #10b981;
   --quota-medium-color: #e0aa14;
@@ -153,73 +198,117 @@
   --muted-bg: var(--bg-tertiary);
   --muted-foreground: var(--text-secondary);
   --accent-bg: var(--bg-tertiary);
+
+  // ===== Hexgate (Hextech Gateway) decorative tokens — WHITE =====
+  // Glow — chỉ quầng sáng mềm, KHÔNG vòng 1px
+  --glow-cyan: 0 6px 16px -6px color-mix(in srgb, var(--primary-color) 26%, transparent);
+  --glow-cyan-sm: 0 3px 9px -4px color-mix(in srgb, var(--primary-color) 22%, transparent);
+  --glow-gold: 0 6px 14px -6px color-mix(in srgb, var(--accent-gold) 22%, transparent);
+
+  // Elevation
+  --elev-1: 0 1px 2px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.07);
+  --elev-2: 0 2px 6px rgba(0, 0, 0, 0.07), 0 6px 16px -6px rgba(0, 0, 0, 0.1);
+  --elev-3: 0 4px 12px rgba(0, 0, 0, 0.08), 0 18px 38px -12px rgba(0, 0, 0, 0.14);
+
+  // Gradient
+  --grad-energy: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-active) 100%);
+  --grad-gold: linear-gradient(135deg,
+    color-mix(in srgb, var(--accent-gold) 92%, white) 0%,
+    var(--accent-gold) 100%);
+  --grad-border: linear-gradient(135deg,
+    color-mix(in srgb, var(--accent-gold) 70%, transparent) 0%,
+    color-mix(in srgb, var(--primary-color) 70%, transparent) 100%);
+  --grad-surface: linear-gradient(180deg,
+    color-mix(in srgb, var(--primary-color) 2%, transparent) 0%,
+    transparent 60%);
+
+  // Surface — đặc, sạch trên nền trắng
+  --surface-glass: color-mix(in srgb, var(--bg-primary) 98%, transparent);
+  --surface-raised: var(--bg-primary);
+  --surface-sunken: color-mix(in srgb, var(--bg-tertiary) 92%, transparent);
+  --hairline: var(--border-color);
+
+  // Focus
+  --focus-ring: 0 0 0 2px var(--bg-secondary),
+    0 0 0 4px color-mix(in srgb, var(--primary-color) 50%, transparent);
+
+  // Radius + motion
+  --radius-sm: 6px;
+  --radius-lg: 14px;
+  --transition-fast: 140ms cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-smooth: 280ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-// 深色主题（#191919）
+// 深色主题 — Hexgate (Hextech Gateway): nền navy/teal sâu, accent cyan năng lượng + vàng đồng
 [data-theme='dark'] {
-  // 极简暖灰：深色模式（提升对比度与层级）
-  --bg-secondary: #151412; // 页面背景
-  --bg-primary: #1d1b18; // 容器/卡片背景
-  --bg-tertiary: #262320; // hover/次级背景
-  --bg-hover: #2e2a26;
-  --bg-quinary: #191714;
-  --bg-error-light: rgba(198, 87, 70, 0.18);
-  --floating-surface: #2a2723;
-  --floating-border: #4a443d;
-  --floating-shadow: 0 14px 30px rgba(0, 0, 0, 0.4);
+  --bg-secondary: #07131f; // 页面背景 (deep hextech navy)
+  --bg-primary: #0c1f2e; // 容器/卡片背景
+  --bg-tertiary: #122b3c; // hover/次级背景
+  --bg-hover: #18374b;
+  --bg-quinary: #0a1a27;
+  --bg-error-light: rgba(224, 96, 84, 0.18);
+  --floating-surface: #103044;
+  --floating-border: #1f4660;
+  --floating-shadow: 0 14px 34px rgba(0, 0, 0, 0.5);
 
-  --text-primary: #f6f4f1;
-  --text-secondary: #c9c3bb;
-  --text-tertiary: #9c958d;
-  --text-quaternary: #6f6962;
+  --text-primary: #eaf5f9;
+  --text-secondary: #aac6d4;
+  --text-tertiary: #7c9aab;
+  --text-quaternary: #51697a;
   --text-muted: var(--text-tertiary);
 
-  --border-color: #3a3530;
+  --border-color: #1d3e54;
   --border-secondary: var(--border-color);
-  --border-primary: #4a453f;
-  --border-hover: #5a544d;
+  --border-primary: #265168;
+  --border-hover: #316f8e;
 
-  --primary-color: #8b8680;
-  --primary-hover: #9a948e;
-  --primary-active: #a6a099;
-  --primary-contrast: #ffffff;
+  // Cyan năng lượng hextech làm action color
+  --primary-color: #34c6ec;
+  --primary-hover: #57d6f1;
+  --primary-active: #18a6cc;
+  --primary-contrast: #04141d;
 
-  --success-color: #10b981;
-  --quota-medium-color: #ffd862;
-  --warning-color: #c65746;
-  --error-color: #c65746;
+  // Vàng đồng hextech (điểm nhấn thương hiệu)
+  --accent-gold: #c8aa6e;
+  --accent-gold-soft: color-mix(in srgb, var(--accent-gold) 16%, transparent);
+
+  --success-color: #2bd4a8;
+  --quota-medium-color: #f0c75a;
+  --warning-color: #e8a33c;
+  --error-color: #e06054;
   --danger-color: var(--error-color);
   --info-color: var(--primary-color);
 
-  --warning-bg: rgba(198, 87, 70, 0.22);
-  --warning-border: rgba(198, 87, 70, 0.45);
-  --warning-text: #f1b0a6;
+  --warning-bg: rgba(232, 163, 60, 0.18);
+  --warning-border: rgba(232, 163, 60, 0.42);
+  --warning-text: #f3c889;
 
-  --success-badge-bg: rgba(6, 78, 59, 0.3);
-  --success-badge-text: #6ee7b7;
-  --success-badge-border: #059669;
+  --success-badge-bg: rgba(13, 89, 75, 0.32);
+  --success-badge-text: #6ff0cf;
+  --success-badge-border: #128f72;
 
-  --failure-badge-bg: rgba(198, 87, 70, 0.24);
-  --failure-badge-text: #f1b0a6;
-  --failure-badge-border: rgba(198, 87, 70, 0.5);
+  --failure-badge-bg: rgba(224, 96, 84, 0.22);
+  --failure-badge-text: #f3a89e;
+  --failure-badge-border: rgba(224, 96, 84, 0.5);
 
-  --count-badge-bg: rgba(139, 134, 128, 0.28);
-  --count-badge-text: var(--primary-active);
+  --count-badge-bg: rgba(52, 198, 236, 0.18);
+  --count-badge-text: #8fe3f7;
 
-  --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.3);
-  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.3);
+  --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.35);
+  --shadow-lg: 0 12px 24px -4px rgb(2 16 26 / 0.55);
 
   --radius-md: 8px;
   --accent-tertiary: var(--bg-tertiary);
 
-  // Workbench tokens (Home parity, deeper amber for dark)
+  // Workbench tokens
   --primary-8: color-mix(in srgb, var(--primary-color) 8%, transparent);
-  --primary-10: color-mix(in srgb, var(--primary-color) 10%, transparent);
+  --primary-10: color-mix(in srgb, var(--primary-color) 12%, transparent);
   --primary-30: color-mix(in srgb, var(--primary-color) 30%, transparent);
-  --amber-color: #f59e0b;
-  --amber-text: #fcd34d;
-  --amber-10: color-mix(in srgb, var(--amber-color) 14%, transparent);
-  --amber-30: color-mix(in srgb, var(--amber-color) 38%, transparent);
+  // "amber" token -> vàng đồng hextech
+  --amber-color: var(--accent-gold);
+  --amber-text: #e7cd96;
+  --amber-10: color-mix(in srgb, var(--amber-color) 16%, transparent);
+  --amber-30: color-mix(in srgb, var(--amber-color) 40%, transparent);
   --destructive-color: var(--error-color);
   --destructive-10: color-mix(in srgb, var(--destructive-color) 14%, transparent);
   --destructive-30: color-mix(in srgb, var(--destructive-color) 38%, transparent);
@@ -228,6 +317,56 @@
   --accent-bg: var(--bg-tertiary);
 
   --glass-border: color-mix(in srgb, var(--border-color) 55%, transparent);
+
+  // ===== Hexgate (Hextech Gateway) decorative tokens — DARK (primary) =====
+  // Glow — pronounced cyan energy halo around active/focus elements
+  --glow-cyan: 0 0 0 1px color-mix(in srgb, var(--primary-color) 45%, transparent),
+    0 0 18px -2px color-mix(in srgb, var(--primary-color) 55%, transparent),
+    0 0 42px -8px color-mix(in srgb, var(--primary-color) 38%, transparent);
+  --glow-cyan-sm: 0 0 0 1px color-mix(in srgb, var(--primary-color) 38%, transparent),
+    0 0 12px -3px color-mix(in srgb, var(--primary-color) 45%, transparent);
+  --glow-gold: 0 0 0 1px color-mix(in srgb, var(--accent-gold) 42%, transparent),
+    0 0 16px -3px color-mix(in srgb, var(--accent-gold) 45%, transparent),
+    0 0 38px -10px color-mix(in srgb, var(--accent-gold) 30%, transparent);
+
+  // Elevation — deep navy multi-layer shadows
+  --elev-1: 0 1px 2px rgba(1, 9, 16, 0.5), 0 1px 3px rgba(1, 9, 16, 0.4);
+  --elev-2: 0 2px 8px rgba(1, 9, 16, 0.55), 0 8px 20px -6px rgba(1, 9, 16, 0.6);
+  --elev-3: 0 4px 14px rgba(1, 9, 16, 0.6), 0 22px 46px -12px rgba(1, 9, 16, 0.72);
+
+  // Gradient
+  --grad-energy: linear-gradient(135deg,
+    var(--primary-hover) 0%,
+    var(--primary-color) 45%,
+    var(--primary-active) 100%);
+  --grad-gold: linear-gradient(135deg,
+    color-mix(in srgb, var(--accent-gold) 88%, white) 0%,
+    var(--accent-gold) 55%,
+    color-mix(in srgb, var(--accent-gold) 82%, black) 100%);
+  --grad-border: linear-gradient(135deg,
+    color-mix(in srgb, var(--accent-gold) 85%, transparent) 0%,
+    color-mix(in srgb, var(--primary-color) 85%, transparent) 100%);
+  --grad-surface: linear-gradient(180deg,
+    color-mix(in srgb, var(--primary-color) 10%, transparent) 0%,
+    color-mix(in srgb, var(--primary-color) 3%, transparent) 35%,
+    transparent 70%);
+
+  // Surface
+  --surface-glass: color-mix(in srgb, var(--bg-primary) 78%, transparent);
+  --surface-raised: color-mix(in srgb, var(--bg-primary) 88%, white);
+  --surface-sunken: color-mix(in srgb, var(--bg-secondary) 88%, black);
+  --hairline: color-mix(in srgb, var(--primary-color) 14%, var(--border-color));
+
+  // Focus — cyan ring for focus-visible inputs/buttons
+  --focus-ring: 0 0 0 2px var(--bg-secondary),
+    0 0 0 4px color-mix(in srgb, var(--primary-color) 70%, transparent),
+    0 0 16px -2px color-mix(in srgb, var(--primary-color) 50%, transparent);
+
+  // Radius + motion
+  --radius-sm: 6px;
+  --radius-lg: 14px;
+  --transition-fast: 140ms cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-smooth: 280ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 @media (max-width: 768px), (prefers-reduced-motion: reduce), (prefers-reduced-transparency: reduce) {

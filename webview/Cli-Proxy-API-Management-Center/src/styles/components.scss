@@ -6,34 +6,67 @@
   align-items: center;
   justify-content: center;
   gap: $spacing-sm;
-  border: 1px solid transparent;
-  border-radius: $radius-md;
+  position: relative;
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-md, #{$radius-md});
   padding: 10px 14px;
   font-weight: 600;
+  letter-spacing: 0.01em;
   cursor: pointer;
-  transition: all $transition-fast;
-  background-color: var(--bg-secondary);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast),
+    background-color var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast);
+  background-color: var(--surface-glass);
   color: var(--text-primary);
+  box-shadow: var(--elev-1);
+
+  &:hover {
+    border-color: var(--border-hover);
+    transform: translateY(-1px);
+    box-shadow: var(--elev-2);
+  }
+
+  &:active {
+    transform: translateY(0);
+    box-shadow: var(--elev-1);
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: var(--focus-ring);
+  }
 
   &.btn-primary {
-    background-color: var(--primary-color);
+    background: var(--grad-energy);
     color: var(--primary-contrast, #fff);
-    border-color: var(--primary-color);
+    border-color: transparent;
+    box-shadow: var(--glow-cyan-sm), var(--elev-1);
 
     &:hover {
-      background-color: var(--primary-hover);
-      border-color: var(--primary-hover);
+      filter: brightness(1.06);
+      transform: translateY(-1px);
+      box-shadow: var(--glow-cyan), var(--elev-2);
+    }
+
+    &:active {
+      filter: brightness(0.98);
+      transform: translateY(0);
+      box-shadow: var(--glow-cyan-sm), var(--elev-1);
+    }
+
+    &:focus-visible {
+      box-shadow: var(--focus-ring), var(--glow-cyan-sm);
     }
   }
 
   &.btn-secondary {
-    background-color: var(--bg-tertiary);
+    background-color: var(--surface-raised);
     border-color: var(--border-color);
     color: var(--text-primary);
 
     &:hover {
-      background-color: var(--bg-hover, var(--bg-tertiary));
+      background-color: var(--bg-hover, var(--surface-raised));
       border-color: var(--border-hover);
+      box-shadow: var(--glow-cyan-sm), var(--elev-2);
     }
   }
 
@@ -41,10 +74,16 @@
     background: transparent;
     border-color: transparent;
     color: var(--text-secondary);
+    box-shadow: none;
 
     &:hover {
       color: var(--text-primary);
-      background: var(--bg-tertiary);
+      background: var(--surface-sunken);
+      box-shadow: none;
+    }
+
+    &:active {
+      box-shadow: none;
     }
   }
 
@@ -52,9 +91,12 @@
     background-color: $error-color;
     border-color: $error-color;
     color: #fff;
+    box-shadow: var(--elev-1);
 
     &:hover {
       background-color: color.adjust($error-color, $lightness: -5%);
+      border-color: color.adjust($error-color, $lightness: -5%);
+      box-shadow: 0 0 0 1px rgba($error-color, 0.35), var(--elev-2);
     }
   }
 
@@ -65,11 +107,15 @@
   &.btn-sm {
     padding: 8px 10px;
     font-size: 14px;
+    border-radius: var(--radius-sm);
   }
 
   &:disabled {
-    opacity: 0.6;
+    opacity: 0.55;
     cursor: not-allowed;
+    transform: none;
+    box-shadow: var(--elev-1);
+    filter: none;
   }
 }
 
@@ -85,19 +131,36 @@
 }
 
 .input,
-textarea {
+textarea,
+select {
   width: 100%;
   border: 1px solid var(--border-color);
-  border-radius: $radius-md;
+  border-radius: var(--radius-md, #{$radius-md});
   padding: 10px 12px;
-  background-color: var(--bg-secondary);
+  background-color: var(--surface-sunken);
   color: var(--text-primary);
-  transition: border-color $transition-fast, box-shadow $transition-fast;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast),
+    background-color var(--transition-fast);
 
-  &:focus {
+  &::placeholder {
+    color: var(--text-tertiary, var(--text-secondary));
+  }
+
+  &:hover {
+    border-color: var(--border-hover);
+  }
+
+  &:focus,
+  &:focus-visible {
     outline: none;
     border-color: var(--primary-color);
-    box-shadow: 0 0 0 3px rgba($primary-color, 0.18);
+    background-color: var(--surface-glass);
+    box-shadow: var(--focus-ring);
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
   }
 }
 
@@ -119,11 +182,14 @@ textarea {
 }
 
 .card {
-  background-color: var(--bg-primary);
-  border: 1px solid var(--border-color);
-  border-radius: $radius-lg;
-  box-shadow: var(--shadow);
+  position: relative;
+  background-color: var(--surface-glass);
+  background-image: var(--grad-surface);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--elev-1);
   padding: $spacing-lg;
+  transition: box-shadow var(--transition-smooth), border-color var(--transition-smooth);
 }
 
 .card-header {
@@ -133,6 +199,8 @@ textarea {
   gap: $spacing-sm;
   flex-wrap: wrap;
   margin-bottom: $spacing-md;
+  padding-bottom: $spacing-sm;
+  border-bottom: 1px solid var(--hairline);
 
   > * {
     min-width: 0;
@@ -144,6 +212,20 @@ textarea {
     font-size: 18px;
     font-weight: 700;
     color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+
+    // Gold-copper accent rule before section titles
+    &::before {
+      content: '';
+      flex: 0 0 auto;
+      width: 3px;
+      height: 1.05em;
+      border-radius: 2px;
+      background: var(--grad-gold);
+      box-shadow: var(--glow-gold);
+    }
   }
 }
 
@@ -152,9 +234,12 @@ textarea {
   align-items: center;
   gap: 6px;
   padding: 4px 10px;
-  border-radius: $radius-full;
+  border-radius: var(--radius-sm);
   font-size: 13px;
-  border: 1px solid var(--border-color);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  border: 1px solid var(--hairline);
+  background: var(--surface-sunken);
   margin-bottom: $spacing-md;
 
   // 确保后续内容换行显示
@@ -220,10 +305,11 @@ textarea {
 
 .notification {
   padding: $spacing-md;
-  border-radius: $radius-md;
-  box-shadow: var(--shadow);
-  border: 1px solid var(--border-color);
-  background: var(--bg-primary);
+  border-radius: var(--radius-md, #{$radius-md});
+  box-shadow: var(--elev-2);
+  border: 1px solid var(--hairline);
+  background: var(--surface-glass);
+  background-image: var(--grad-surface);
   color: var(--text-primary);
   display: flex;
   justify-content: space-between;
@@ -264,9 +350,9 @@ textarea {
     background: transparent;
     border: none;
     color: var(--text-secondary);
-    border-radius: $radius-md;
+    border-radius: var(--radius-sm);
     cursor: pointer;
-    transition: color 0.15s ease, background-color 0.15s ease;
+    transition: color var(--transition-fast), background-color var(--transition-fast);
 
     svg {
       display: block;
@@ -274,7 +360,12 @@ textarea {
 
     &:hover {
       color: var(--text-primary);
-      background: var(--bg-secondary);
+      background: var(--surface-sunken);
+    }
+
+    &:focus-visible {
+      outline: none;
+      box-shadow: var(--focus-ring);
     }
   }
 }
@@ -296,10 +387,11 @@ textarea {
   .track {
     width: 44px;
     height: 24px;
-    background: var(--border-color);
+    background: var(--surface-sunken);
+    border: 1px solid var(--hairline);
     border-radius: $radius-full;
     position: relative;
-    transition: background $transition-fast;
+    transition: background var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast);
   }
 
   .thumb {
@@ -311,15 +403,21 @@ textarea {
     background: #fff;
     border-radius: $radius-full;
     box-shadow: $shadow-sm;
-    transition: transform $transition-fast;
+    transition: transform var(--transition-smooth);
   }
 
   input:checked + .track {
-    background: var(--primary-color);
+    background: var(--grad-energy);
+    border-color: transparent;
+    box-shadow: var(--glow-cyan-sm);
   }
 
   input:checked + .track .thumb {
     transform: translateX(20px);
+  }
+
+  input:focus-visible + .track {
+    box-shadow: var(--focus-ring);
   }
 
   .label {
@@ -336,11 +434,13 @@ textarea {
 
 .pill {
   padding: 4px 10px;
-  border-radius: $radius-full;
-  background: var(--bg-secondary);
+  border-radius: var(--radius-sm);
+  background: var(--surface-sunken);
   color: var(--text-secondary);
-  border: 1px solid var(--border-color);
+  border: 1px solid var(--hairline);
   font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
 }
 
 .loading-spinner {
@@ -372,7 +472,8 @@ textarea {
 .modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.35);
+  background: color-mix(in srgb, var(--bg-tertiary) 55%, rgba(0, 0, 0, 0.55));
+  backdrop-filter: blur(2px) saturate(1.05);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -407,10 +508,11 @@ textarea {
 }
 
 .modal {
-  background: var(--bg-primary);
-  border-radius: $radius-lg;
-  border: 1px solid var(--border-color);
-  box-shadow: $shadow-lg;
+  background: var(--surface-glass);
+  background-image: var(--grad-surface);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--hairline);
+  box-shadow: var(--elev-3);
   max-width: 100%;
   max-height: 90vh;
   overflow: hidden;
@@ -458,15 +560,16 @@ textarea {
   width: 32px;
   height: 32px;
   padding: 0;
-  background: var(--bg-secondary);
-  border: 1px solid var(--border-color);
+  background: var(--surface-sunken);
+  border: 1px solid var(--hairline);
   color: var(--text-secondary);
   cursor: pointer;
   border-radius: $radius-full;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  transition: color 0.15s ease, background-color 0.15s ease, transform 0.15s ease;
+  transition: color var(--transition-fast), background-color var(--transition-fast),
+    box-shadow var(--transition-fast), transform var(--transition-fast);
   z-index: 10;
 
   svg {
@@ -475,8 +578,15 @@ textarea {
 
   &:hover {
     color: var(--text-primary);
-    background: var(--bg-tertiary);
+    background: var(--surface-raised);
+    border-color: var(--border-hover);
+    box-shadow: var(--glow-cyan-sm);
     transform: scale(1.1);
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: var(--focus-ring);
   }
 
   &:active {
@@ -487,11 +597,13 @@ textarea {
     cursor: not-allowed;
     opacity: 0.6;
     transform: none;
+    box-shadow: none;
   }
 
   &:disabled:hover {
     color: var(--text-secondary);
-    background: var(--bg-secondary);
+    background: var(--surface-sunken);
+    box-shadow: none;
     transform: none;
   }
 }
@@ -500,7 +612,7 @@ textarea {
   display: flex;
   align-items: center;
   padding: $spacing-md $spacing-lg;
-  border-bottom: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--hairline);
 
   .modal-title {
     font-weight: 700;
@@ -517,11 +629,11 @@ textarea {
 
 .modal-footer {
   padding: $spacing-md $spacing-lg;
-  border-top: 1px solid var(--border-color);
+  border-top: 1px solid var(--hairline);
   display: flex;
   justify-content: flex-end;
   gap: $spacing-sm;
-  background: var(--bg-primary);
+  background: var(--surface-sunken);
 }
 
 @media (max-width: $breakpoint-mobile) {
@@ -580,9 +692,9 @@ textarea {
 
 .empty-state {
   border: 1px dashed var(--border-color);
-  border-radius: $radius-lg;
+  border-radius: var(--radius-lg);
   padding: $spacing-lg;
-  background: var(--bg-secondary);
+  background: var(--surface-sunken);
   display: flex;
   justify-content: space-between;
   gap: $spacing-md;
@@ -598,10 +710,12 @@ textarea {
     width: 42px;
     height: 42px;
     border-radius: $radius-full;
-    border: 2px solid var(--border-color);
+    border: 1px solid var(--hairline);
+    background: var(--surface-glass);
+    box-shadow: var(--glow-cyan-sm);
     display: grid;
     place-items: center;
-    color: var(--text-secondary);
+    color: var(--primary-color);
 
     svg {
       display: block;
@@ -648,15 +762,23 @@ textarea {
 }
 
 .item-row {
-  border: 1px solid var(--border-color);
-  border-radius: $radius-md;
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-md, #{$radius-md});
   padding: $spacing-md;
-  background: var(--bg-primary);
+  background: var(--surface-glass);
+  box-shadow: var(--elev-1);
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: $spacing-md;
   flex-wrap: wrap;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast);
+
+  &:hover {
+    border-color: var(--border-hover);
+    box-shadow: var(--glow-cyan-sm), var(--elev-2);
+    transform: translateY(-1px);
+  }
 
   .item-meta {
     display: flex;
@@ -685,9 +807,10 @@ textarea {
 .error-box {
   background: rgba($error-color, 0.1);
   border: 1px solid rgba($error-color, 0.4);
-  border-radius: $radius-md;
+  border-radius: var(--radius-md, #{$radius-md});
   padding: $spacing-sm $spacing-md;
   color: $error-color;
+  box-shadow: 0 0 0 1px rgba($error-color, 0.18);
 }
 
 .stack {
@@ -712,9 +835,11 @@ textarea {
 .table {
   display: flex;
   flex-direction: column;
-  border: 1px solid var(--border-color);
-  border-radius: $radius-md;
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-md, #{$radius-md});
   overflow: hidden;
+  background: var(--surface-glass);
+  box-shadow: var(--elev-1);
 
   .table-header,
   .table-row {
@@ -726,13 +851,20 @@ textarea {
   }
 
   .table-header {
-    background: var(--bg-secondary);
+    background: var(--surface-sunken);
     font-weight: 700;
+    letter-spacing: 0.01em;
     color: var(--text-primary);
+    border-bottom: 1px solid var(--hairline);
   }
 
   .table-row {
-    border-top: 1px solid var(--border-color);
+    border-top: 1px solid var(--hairline);
+    transition: background-color var(--transition-fast);
+
+    &:hover {
+      background: var(--surface-sunken);
+    }
   }
 
   .cell {
@@ -751,13 +883,34 @@ textarea {
 }
 
 .stat-card {
-  border: 1px solid var(--border-color);
-  border-radius: $radius-md;
+  position: relative;
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-md, #{$radius-md});
   padding: $spacing-md;
-  background: var(--bg-primary);
+  background: var(--surface-glass);
+  background-image: var(--grad-surface);
+  box-shadow: var(--elev-1);
   display: flex;
   flex-direction: column;
   gap: $spacing-xs;
+  overflow: hidden;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast);
+
+  // Cyan energy bar accent at top edge
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 2px;
+    background: var(--grad-energy);
+    opacity: 0.85;
+  }
+
+  &:hover {
+    border-color: var(--border-hover);
+    box-shadow: var(--glow-cyan-sm), var(--elev-2);
+    transform: translateY(-2px);
+  }
 
   .stat-label {
     color: var(--text-secondary);
@@ -772,9 +925,9 @@ textarea {
 }
 
 .log-viewer {
-  background: var(--bg-secondary);
-  border: 1px solid var(--border-color);
-  border-radius: $radius-md;
+  background: var(--surface-sunken);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-md, #{$radius-md});
   padding: $spacing-md;
   max-height: 520px;
   overflow: auto;

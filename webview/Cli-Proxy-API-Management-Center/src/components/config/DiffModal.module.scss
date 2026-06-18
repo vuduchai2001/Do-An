@@ -7,10 +7,11 @@ $diff-line-height: 20px;
 $diff-gutter-width: 50px;
 $diff-prefix-width: 20px;
 
-// GitHub-inspired diff colors (theme-adaptive via color-mix)
-$diff-add-color: #3fb950;
-$diff-del-color: #f85149;
-$diff-hunk-color: #388bfd;
+// Hextech Gateway diff colors — added = teal/success, removed = coral, hunk = cyan
+// Mapped to theme tokens so all three themes stay coherent.
+$diff-add-color: var(--success-color);
+$diff-del-color: var(--error-color);
+$diff-hunk-color: var(--primary-color);
 
 .diffModal {
   :global(.modal-body) {
@@ -25,13 +26,14 @@ $diff-hunk-color: #388bfd;
   flex-direction: column;
   height: 70vh;
   min-height: 420px;
+  background: var(--surface-sunken);
 }
 
 .emptyState {
   flex: 1;
   border: 1px dashed var(--border-color);
   border-radius: $radius-md;
-  background: var(--bg-secondary);
+  background: var(--surface-sunken);
   color: var(--text-secondary);
   font-size: 14px;
   display: grid;
@@ -51,25 +53,43 @@ $diff-hunk-color: #388bfd;
 
 // ── File header ─────────────────────────────────────────
 
+// File header — glass strip with a leading gold accent (MẪU TIÊU ĐỀ MỤC)
 .fileHeader {
+  position: relative;
   display: flex;
   align-items: center;
   gap: $spacing-sm;
-  padding: 10px $spacing-md;
-  background: var(--bg-secondary);
-  border-bottom: 1px solid var(--border-color);
+  padding: 11px $spacing-md 11px ($spacing-md + 6px);
+  background:
+    var(--grad-surface),
+    var(--surface-glass);
+  border-bottom: 1px solid var(--hairline);
   flex-shrink: 0;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    width: 3px;
+    height: 18px;
+    border-radius: 0 2px 2px 0;
+    background: var(--grad-gold);
+    box-shadow: var(--glow-gold);
+  }
 }
 
 .fileIcon {
   flex-shrink: 0;
-  color: var(--text-tertiary);
+  color: var(--accent-gold);
 }
 
 .fileName {
   font-size: 13px;
-  font-weight: 600;
+  font-weight: 700;
   font-family: $diff-mono;
+  letter-spacing: 0.02em;
   color: var(--text-primary);
 }
 
@@ -105,18 +125,22 @@ $diff-hunk-color: #388bfd;
 
 .statBlockAdd {
   background: $diff-add-color;
+  box-shadow: 0 0 4px -1px color-mix(in srgb, $diff-add-color 60%, transparent);
 }
 
 .statBlockDel {
   background: $diff-del-color;
+  box-shadow: 0 0 4px -1px color-mix(in srgb, $diff-del-color 60%, transparent);
 }
 
 // ── Diff body (scrollable) ──────────────────────────────
 
+// LOGS/CONSOLE — sunken mono diff surface
 .diffBody {
   flex: 1;
   min-height: 0;
   overflow: auto;
+  background: var(--surface-sunken);
   font-family: $diff-mono;
   font-size: $diff-font-size;
   line-height: $diff-line-height;
@@ -128,12 +152,15 @@ $diff-hunk-color: #388bfd;
   border-top: 1px solid var(--border-color);
 }
 
+// Hunk header — cyan-tinted band separating change groups
 .hunkHeader {
   display: flex;
   align-items: center;
-  background: color-mix(in srgb, $diff-hunk-color 8%, var(--bg-primary));
-  border-bottom: 1px solid color-mix(in srgb, $diff-hunk-color 12%, var(--border-color));
-  color: color-mix(in srgb, $diff-hunk-color 75%, var(--text-secondary));
+  background: color-mix(in srgb, $diff-hunk-color 12%, var(--surface-sunken));
+  border-top: 1px solid color-mix(in srgb, $diff-hunk-color 16%, var(--border-color));
+  border-bottom: 1px solid color-mix(in srgb, $diff-hunk-color 16%, var(--border-color));
+  color: color-mix(in srgb, $diff-hunk-color 80%, var(--text-secondary));
+  font-weight: 700;
   min-height: $diff-line-height;
 }
 
@@ -206,26 +233,26 @@ $diff-hunk-color: #388bfd;
 // ── Context lines ───────────────────────────────────────
 
 .context {
-  background: var(--bg-primary);
+  background: transparent;
+
+  .lineText {
+    color: var(--text-secondary);
+  }
 
   .linePrefix {
     color: var(--text-tertiary);
   }
-
-  .lineText {
-    color: var(--text-primary);
-  }
 }
 
-// ── Deletion lines ──────────────────────────────────────
+// ── Deletion lines — coral ──────────────────────────────
 
 .deletion {
-  background: color-mix(in srgb, $diff-del-color 8%, var(--bg-primary));
+  background: color-mix(in srgb, $diff-del-color 14%, var(--surface-sunken));
 
   .lineNum {
-    background: color-mix(in srgb, $diff-del-color 12%, var(--bg-primary));
-    border-right-color: color-mix(in srgb, $diff-del-color 18%, var(--border-color));
-    color: color-mix(in srgb, $diff-del-color 60%, var(--text-tertiary));
+    background: color-mix(in srgb, $diff-del-color 20%, var(--surface-sunken));
+    border-right-color: color-mix(in srgb, $diff-del-color 30%, var(--border-color));
+    color: color-mix(in srgb, $diff-del-color 70%, var(--text-tertiary));
   }
 
   .linePrefix {
@@ -237,15 +264,15 @@ $diff-hunk-color: #388bfd;
   }
 }
 
-// ── Addition lines ──────────────────────────────────────
+// ── Addition lines — teal ───────────────────────────────
 
 .addition {
-  background: color-mix(in srgb, $diff-add-color 8%, var(--bg-primary));
+  background: color-mix(in srgb, $diff-add-color 14%, var(--surface-sunken));
 
   .lineNum {
-    background: color-mix(in srgb, $diff-add-color 12%, var(--bg-primary));
-    border-right-color: color-mix(in srgb, $diff-add-color 18%, var(--border-color));
-    color: color-mix(in srgb, $diff-add-color 60%, var(--text-tertiary));
+    background: color-mix(in srgb, $diff-add-color 20%, var(--surface-sunken));
+    border-right-color: color-mix(in srgb, $diff-add-color 30%, var(--border-color));
+    color: color-mix(in srgb, $diff-add-color 70%, var(--text-tertiary));
   }
 
   .linePrefix {

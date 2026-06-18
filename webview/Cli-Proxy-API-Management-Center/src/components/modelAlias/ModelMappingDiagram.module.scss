@@ -11,10 +11,16 @@
   position: sticky;
   left: 0;
   z-index: 3;
+  display: inline-flex;
+  align-items: center;
   font-size: 12px;
   color: var(--text-secondary);
-  padding: 0 4px;
-  margin-bottom: 8px;
+  padding: 5px 11px;
+  margin-bottom: 10px;
+  border: 1px solid var(--hairline);
+  border-radius: 999px;
+  background: var(--surface-sunken);
+  box-shadow: var(--elev-1);
 }
 
 .container {
@@ -23,13 +29,34 @@
   min-width: 100%;
   min-height: 300px;
   justify-content: space-between;
-  padding: 20px 0;
+  gap: 28px;
+  padding: 24px;
   user-select: none;
+  // Framed diagram surface — a console "board" the three columns live on.
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-lg);
+  background:
+    var(--grad-surface),
+    var(--surface-glass);
+  box-shadow: var(--elev-1);
+
+  // faint teal grid wash to read as a wiring board
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    background:
+      radial-gradient(140% 90% at 50% -10%, color-mix(in srgb, var(--primary-color) 6%, transparent), transparent 60%);
+    opacity: 0.9;
+  }
 
   @media (max-width: 768px) {
     // Give mobile extra horizontal room to reduce line overlap; users can swipe to scroll.
     min-width: max(100%, 960px);
-    padding: 12px 0;
+    gap: 16px;
+    padding: 16px;
   }
 }
 
@@ -46,7 +73,12 @@
 
   path {
     fill: none;
-    stroke-width: 2;
+    // Teal wiring tone — overrides per-provider inline stroke toward the
+    // console palette so the whole board reads cohesively.
+    stroke: color-mix(in srgb, var(--primary-color) 60%, transparent);
+    stroke-width: 1.75;
+    stroke-linecap: round;
+    filter: drop-shadow(0 0 3px color-mix(in srgb, var(--primary-color) 30%, transparent));
   }
 }
 
@@ -59,33 +91,52 @@
 
   &.providers {
     align-items: flex-end;
-    min-width: 140px;
+    min-width: 150px;
   }
 
   &.sources {
     align-items: flex-start;
-    min-width: 200px;
+    min-width: 210px;
   }
 
   &.aliases {
     align-items: flex-start;
-    min-width: 200px;
+    min-width: 210px;
   }
 }
 
+// Column header: small uppercase label with a gold signal bar on the left.
 .columnHeader {
-  font-size: 13px;
-  font-weight: 600;
+  position: relative;
+  font-size: 11px;
+  font-weight: 700;
   color: var(--text-secondary);
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  margin-bottom: 8px;
-  padding: 0 4px;
+  margin-bottom: 10px;
+  padding: 4px 4px 4px 12px;
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 3px;
+    height: 1.1em;
+    border-radius: 2px;
+    background: var(--grad-gold);
+    box-shadow: var(--glow-gold);
+  }
 }
 
+// Node chip — cyan-tinted glass, rounded, with a quiet inner highlight.
 .item {
-  background: var(--bg-primary);
-  border: 1px solid var(--border-color);
-  border-radius: 8px;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--primary-color) 6%, transparent), transparent 70%),
+    var(--surface-glass);
+  border: 1px solid color-mix(in srgb, var(--primary-color) 16%, var(--hairline));
+  border-radius: var(--radius-lg);
   padding: 10px 14px;
   font-size: 13px;
   color: var(--text-primary);
@@ -95,36 +146,56 @@
   width: 100%;
   max-width: 280px;
   position: relative;
-  transition: all 0.2s ease;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  transition: border-color var(--transition-fast), transform var(--transition-fast),
+    box-shadow var(--transition-fast), background-color var(--transition-fast);
+  box-shadow: var(--elev-1), inset 0 1px 0 color-mix(in srgb, #fff 30%, transparent);
 
   &:hover {
     border-color: var(--primary-color);
     transform: translateY(-1px);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    box-shadow: var(--elev-2), var(--glow-cyan-sm);
     z-index: 10;
   }
 
   &.dropTarget {
-    background-color: var(--bg-secondary);
+    background:
+      linear-gradient(180deg, var(--primary-10), transparent),
+      var(--surface-glass);
     border-color: var(--primary-color);
     border-width: 2px;
+    box-shadow: var(--glow-cyan);
   }
 
   &.selected {
     border-color: var(--primary-color);
-    background-color: var(--bg-secondary);
-    box-shadow: 0 0 0 2px rgba($primary-color, 0.18);
+    background:
+      linear-gradient(180deg, var(--primary-10), transparent),
+      var(--bg-secondary);
+    box-shadow: var(--glow-cyan-sm);
   }
 }
 
 // Mindmap-style provider branch (root node)
 .providerItem {
+  position: relative;
   border-left: 3px solid transparent;
-  padding-left: 8px;
+  padding-left: 10px;
   display: flex;
   align-items: center;
   gap: 8px;
+
+  // gold root-branch marker
+  &::after {
+    content: '';
+    position: absolute;
+    left: -1px;
+    top: 6px;
+    bottom: 6px;
+    width: 3px;
+    border-radius: 2px;
+    background: var(--grad-gold);
+    box-shadow: var(--glow-gold);
+  }
 
   .providerLabel {
     font-weight: 600;
@@ -143,15 +214,17 @@
     align-items: center;
     justify-content: center;
     border: none;
-    background: var(--bg-secondary);
-    border-radius: 4px;
+    background: var(--surface-sunken);
+    border-radius: var(--radius-sm);
     cursor: pointer;
     color: var(--text-secondary);
-    transition: background-color 0.15s, color 0.15s;
+    transition: background-color var(--transition-fast), color var(--transition-fast),
+      box-shadow var(--transition-fast);
 
     &:hover {
-      background: var(--border-color);
-      color: var(--text-primary);
+      background: var(--primary-10);
+      color: var(--primary-color);
+      box-shadow: var(--glow-cyan-sm);
     }
   }
 
@@ -206,22 +279,28 @@
 
   &.dotLeft {
     left: -3px;
-    background: var(--text-tertiary);
+    background: var(--primary-color);
+    box-shadow: var(--glow-cyan-sm);
   }
 }
 
 .sourceItem .dot {
   right: -3px;
+  background: var(--primary-color);
+  box-shadow: var(--glow-cyan-sm);
 }
 
 .providerBadge {
-  font-size: 11px;
-  padding: 2px 6px;
-  border-radius: 4px;
-  background: var(--bg-secondary);
-  color: var(--text-secondary);
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 2px 7px;
+  border-radius: var(--radius-sm);
+  background: var(--accent-gold-soft);
+  border: 1px solid color-mix(in srgb, var(--accent-gold) 35%, transparent);
+  color: var(--amber-text);
   margin-right: 8px;
-  font-weight: 500;
+  font-weight: 700;
 }
 
 .itemName {
@@ -233,19 +312,22 @@
 
 .itemCount {
   font-size: 11px;
-  color: var(--text-tertiary);
+  font-weight: 600;
+  color: var(--primary-color);
   margin-left: 8px;
-  background: var(--bg-secondary);
-  padding: 1px 6px;
+  background: color-mix(in srgb, var(--primary-color) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--primary-color) 24%, transparent);
+  padding: 1px 7px;
   border-radius: 10px;
 }
 
 .contextMenu {
   position: fixed;
-  background: var(--bg-primary);
-  border: 1px solid var(--border-color);
-  border-radius: 6px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  background: var(--surface-raised);
+  backdrop-filter: var(--glass-backdrop-filter);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-md);
+  box-shadow: var(--elev-2);
   z-index: 9999;
   min-width: 120px;
   overflow: hidden;
@@ -256,13 +338,14 @@
     font-size: 13px;
     color: var(--text-primary);
     cursor: pointer;
-    transition: background-color 0.1s;
+    transition: background-color var(--transition-fast), color var(--transition-fast);
     display: flex;
     align-items: center;
     gap: 8px;
 
     &:hover {
-      background-color: var(--bg-secondary);
+      background-color: var(--primary-10);
+      color: var(--primary-color);
     }
 
     &.danger {
@@ -303,9 +386,14 @@
   gap: $spacing-md;
   align-items: center;
   padding: $spacing-sm $spacing-md;
-  border: 1px solid var(--border-color);
+  border: 1px solid var(--hairline);
   border-radius: $radius-md;
-  background: var(--bg-secondary);
+  background: var(--surface-sunken);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+
+  &:hover {
+    border-color: var(--border-hover);
+  }
 
   @media (max-width: 768px) {
     grid-template-columns: 1fr;

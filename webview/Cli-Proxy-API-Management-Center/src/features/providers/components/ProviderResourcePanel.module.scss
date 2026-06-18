@@ -1,22 +1,71 @@
 @use '../../../styles/mixins' as *;
 @use '../../../styles/variables' as *;
 
+// Primary content PANEL. Gradient top hairline + a quiet corner energy wash so
+// the surface reads as the focal console, not just a flat card.
 .panel {
-  background: var(--bg-primary);
-  border: 1px solid var(--border-color);
-  border-radius: 12px;
-  box-shadow: var(--shadow);
-  padding: 20px;
+  position: relative;
+  background:
+    var(--grad-surface),
+    var(--surface-glass);
+  backdrop-filter: var(--glass-backdrop-filter);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--elev-2);
+  padding: 22px 22px 18px;
   min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 18px;
+  overflow: hidden;
+  transition: box-shadow var(--transition-smooth), transform var(--transition-smooth);
+
+  // Gradient hairline accent along the top edge (gold -> cyan)
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 2px;
+    background: var(--grad-border);
+    opacity: 0.85;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  // Diffuse cyan glow anchored top-right of the panel.
+  &::after {
+    content: '';
+    position: absolute;
+    top: -60px;
+    right: -60px;
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    background: radial-gradient(
+      circle,
+      color-mix(in srgb, var(--primary-color) 10%, transparent),
+      transparent 70%
+    );
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  &:hover {
+    box-shadow: var(--elev-3), var(--glow-cyan-sm);
+  }
+
+  > * {
+    position: relative;
+    z-index: 1;
+  }
 }
 
 .header {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 14px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--hairline);
 }
 
 .headerMain {
@@ -52,11 +101,15 @@
 }
 
 .logo {
-  width: 26px;
-  height: 26px;
+  width: 38px;
+  height: 38px;
   border-radius: var(--radius-md);
   object-fit: contain;
   flex-shrink: 0;
+  padding: 6px;
+  background: color-mix(in srgb, var(--primary-color) 9%, var(--bg-tertiary));
+  border: 1px solid var(--primary-30);
+  box-shadow: var(--glow-cyan-sm);
 }
 
 .logoInvertOnDark {
@@ -66,11 +119,27 @@
 }
 
 .title {
-  font-size: 22px;
-  font-weight: 600;
+  font-size: 24px;
+  font-weight: 700;
   color: var(--text-primary);
   margin: 0;
-  letter-spacing: -0.005em;
+  letter-spacing: -0.015em;
+  position: relative;
+  padding-left: 14px;
+
+  // Gold tick accent before the section title
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 4px;
+    height: 0.9em;
+    border-radius: 2px;
+    background: var(--grad-gold);
+    box-shadow: var(--glow-gold);
+  }
 }
 
 .searchWrap {
@@ -88,19 +157,30 @@
   padding: 0 12px 0 38px;
   border-radius: var(--radius-md);
   border: 1px solid var(--border-color);
-  background: var(--bg-primary);
+  background: var(--surface-sunken);
   color: var(--text-primary);
   font-size: 14px;
   box-sizing: border-box;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast),
+    background-color var(--transition-fast);
 
   &::placeholder {
     color: var(--text-tertiary);
   }
 
+  &:hover:not(:focus) {
+    border-color: var(--border-hover);
+  }
+
   &:focus {
     outline: none;
     border-color: var(--primary-color);
-    box-shadow: 0 0 0 3px var(--primary-10);
+    background: var(--bg-primary);
+    box-shadow: var(--glow-cyan-sm);
+  }
+
+  &:focus-visible {
+    box-shadow: var(--focus-ring);
   }
 }
 
@@ -130,14 +210,33 @@
 }
 
 .empty {
+  position: relative;
   border: 1px dashed var(--border-color);
-  border-radius: var(--radius-md);
-  padding: 32px;
+  border-radius: var(--radius-lg);
+  padding: 48px 32px;
   text-align: center;
-  color: var(--muted-foreground);
+  color: var(--text-tertiary);
   font-size: 14px;
+  background:
+    radial-gradient(
+      100% 80% at 50% 0%,
+      color-mix(in srgb, var(--primary-color) 5%, transparent),
+      transparent 70%
+    ),
+    var(--surface-sunken);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+
+  > div:first-child {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    letter-spacing: 0.01em;
+  }
 }
 
 .emptyAction {
-  margin-top: 12px;
+  margin-top: 16px;
 }

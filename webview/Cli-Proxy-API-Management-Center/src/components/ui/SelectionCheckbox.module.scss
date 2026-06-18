@@ -31,23 +31,23 @@
   width: 22px;
   height: 22px;
   flex-shrink: 0;
-  border-radius: 7px;
+  border-radius: var(--radius-sm);
   border: 1px solid var(--border-color);
-  background: color-mix(in srgb, var(--bg-secondary) 92%, transparent);
+  background: var(--surface-sunken);
   color: var(--primary-contrast, #fff);
   display: inline-flex;
   align-items: center;
   justify-content: center;
   transition:
-    border-color $transition-fast,
-    background-color $transition-fast,
-    box-shadow $transition-fast,
-    transform $transition-fast;
+    border-color var(--transition-fast),
+    background-color var(--transition-fast),
+    box-shadow var(--transition-fast),
+    transform var(--transition-fast);
 }
 
 .root:hover .box {
   border-color: var(--primary-color);
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary-color) 16%, transparent);
+  box-shadow: var(--glow-cyan-sm);
 }
 
 .root:active .box {
@@ -65,14 +65,13 @@
 
 .input:focus-visible + .box {
   border-color: var(--primary-color);
-  box-shadow:
-    0 0 0 3px color-mix(in srgb, var(--primary-color) 16%, transparent),
-    0 0 0 1px color-mix(in srgb, var(--primary-color) 50%, transparent);
+  box-shadow: var(--focus-ring);
 }
 
 .boxChecked {
   border-color: var(--primary-color);
-  background: var(--primary-color);
+  background: var(--grad-energy);
+  box-shadow: var(--glow-cyan);
 }
 
 .boxChecked svg {

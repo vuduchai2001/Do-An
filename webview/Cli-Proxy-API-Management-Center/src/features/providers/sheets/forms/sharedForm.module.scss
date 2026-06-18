@@ -21,6 +21,21 @@
   display: flex;
   align-items: center;
   gap: 8px;
+  position: relative;
+  padding-left: 10px;
+
+  // Gold gateway tick before each section title
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 3px;
+    height: 0.9em;
+    border-radius: 2px;
+    background: var(--grad-gold);
+  }
 }
 
 .sectionDesc {
@@ -54,20 +69,27 @@
   padding: 8px 12px;
   border-radius: var(--radius-md);
   border: 1px solid var(--border-color);
-  background: var(--bg-primary);
+  background: var(--surface-sunken);
   color: var(--text-primary);
   font-size: 13px;
   font-family: inherit;
   box-sizing: border-box;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast),
+    background-color var(--transition-fast);
 
   &::placeholder {
     color: var(--text-tertiary);
   }
 
+  &:hover:not(:focus):not(:disabled) {
+    border-color: var(--border-hover);
+  }
+
   &:focus {
     outline: none;
     border-color: var(--primary-color);
-    box-shadow: 0 0 0 3px var(--primary-10);
+    background: var(--bg-primary);
+    box-shadow: var(--glow-cyan-sm);
   }
 
   &:disabled {
@@ -108,8 +130,9 @@
   position: relative;
 
   &:checked {
-    background: var(--primary-color);
+    background: var(--grad-energy);
     border-color: var(--primary-color);
+    box-shadow: var(--glow-cyan-sm);
   }
 
   &:checked::after {
@@ -122,8 +145,8 @@
   }
 
   &:focus-visible {
-    outline: 2px solid var(--primary-color);
-    outline-offset: 2px;
+    outline: none;
+    box-shadow: var(--focus-ring);
   }
 }
 
@@ -148,7 +171,14 @@
 
 .divider {
   border: 0;
-  border-top: 1px solid var(--border-color);
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--hairline) 15%,
+    var(--hairline) 85%,
+    transparent
+  );
   margin: 4px 0;
 }
 
@@ -189,13 +219,13 @@
 }
 
 .entryCard {
-  border: 1px solid var(--border-color);
+  border: 1px solid var(--hairline);
   border-radius: var(--radius-md);
   padding: 12px;
   display: flex;
   flex-direction: column;
   gap: 10px;
-  background: var(--bg-secondary);
+  background: var(--surface-sunken);
 }
 
 .entryCardHeader {
@@ -240,16 +270,23 @@
   padding: 0 12px;
   border-radius: var(--radius-md);
   border: 1px solid var(--border-color);
-  background: var(--bg-primary);
+  background: var(--surface-glass);
   color: var(--text-primary);
   font-size: 12px;
   font-weight: 500;
   cursor: pointer;
-  transition: background-color $transition-fast, border-color $transition-fast;
+  transition: background-color var(--transition-fast), border-color var(--transition-fast),
+    color var(--transition-fast), box-shadow var(--transition-fast);
 
   &:hover:not(:disabled) {
     border-color: var(--primary-color);
     color: var(--primary-color);
+    box-shadow: var(--glow-cyan-sm);
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: var(--focus-ring);
   }
 
   &:disabled {
@@ -326,9 +363,11 @@
   flex-direction: column;
   gap: 10px;
   padding: 12px;
-  border: 1px solid var(--border-color);
+  border: 1px solid var(--hairline);
   border-radius: var(--radius-md);
-  background: var(--bg-secondary);
+  background:
+    var(--grad-surface),
+    var(--surface-sunken);
 }
 
 .discoveryToolbar {
@@ -363,6 +402,7 @@
   color: var(--text-primary);
   font-size: 12px;
   box-sizing: border-box;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
 
   &::placeholder {
     color: var(--text-tertiary);
@@ -371,7 +411,7 @@
   &:focus {
     outline: none;
     border-color: var(--primary-color);
-    box-shadow: 0 0 0 3px var(--primary-10);
+    box-shadow: var(--glow-cyan-sm);
   }
 }
 
@@ -468,15 +508,28 @@
   padding: 0 14px;
   border-radius: var(--radius-md);
   border: 1px solid transparent;
-  background: var(--primary-color);
+  background: var(--grad-energy);
   color: var(--primary-contrast);
   font-size: 12px;
   font-weight: 500;
   cursor: pointer;
-  transition: background-color $transition-fast;
+  box-shadow: var(--glow-cyan-sm);
+  transition: box-shadow var(--transition-fast), transform var(--transition-fast),
+    background-color var(--transition-fast);
 
   &:hover:not(:disabled) {
-    background: var(--primary-hover);
+    box-shadow: var(--glow-cyan);
+    transform: translateY(-1px);
+  }
+
+  &:active:not(:disabled) {
+    background: var(--primary-active);
+    transform: translateY(0);
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: var(--focus-ring);
   }
 
   &:disabled {
@@ -564,16 +617,24 @@
   padding: 6px 12px;
   border-radius: var(--radius-md);
   border: 1px dashed var(--border-color);
-  background: var(--bg-primary);
+  background: var(--surface-glass);
   color: var(--text-secondary);
   cursor: pointer;
   font-size: 12px;
   font-weight: 500;
   align-self: flex-start;
+  transition: border-color var(--transition-fast), color var(--transition-fast),
+    box-shadow var(--transition-fast);
 
   &:hover {
     border-color: var(--primary-color);
     color: var(--primary-color);
+    box-shadow: var(--glow-cyan-sm);
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: var(--focus-ring);
   }
 }
 
@@ -587,10 +648,16 @@
   font-size: 13px;
   font-weight: 500;
   cursor: pointer;
-  transition: background-color $transition-fast;
+  transition: background-color var(--transition-fast), border-color var(--transition-fast),
+    color var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast);
   border: 1px solid transparent;
   background: transparent;
   color: var(--text-primary);
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: var(--focus-ring);
+  }
 
   &:disabled {
     opacity: 0.6;
@@ -609,19 +676,28 @@
 
 .footerBtnOutline {
   border-color: var(--border-color);
-  background: var(--bg-primary);
+  background: var(--surface-glass);
 
   &:hover:not(:disabled) {
     background: var(--bg-tertiary);
+    border-color: var(--border-hover);
+    box-shadow: var(--glow-cyan-sm);
   }
 }
 
 .footerBtnPrimary {
-  background: var(--primary-color);
+  background: var(--grad-energy);
   color: var(--primary-contrast);
+  box-shadow: var(--glow-cyan-sm);
 
   &:hover:not(:disabled) {
-    background: var(--primary-hover);
+    box-shadow: var(--glow-cyan);
+    transform: translateY(-1px);
+  }
+
+  &:active:not(:disabled) {
+    background: var(--primary-active);
+    transform: translateY(0);
   }
 }
 
@@ -654,9 +730,9 @@
   min-width: 0;
   max-width: 100%;
   padding: 8px 12px;
-  background: var(--bg-secondary);
-  border: 1px solid var(--border-secondary);
-  border-radius: 8px;
+  background: var(--surface-sunken);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-md);
   font-size: 12px;
 }
 
@@ -667,11 +743,12 @@
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  background: var(--primary-color);
+  background: var(--grad-energy);
   color: var(--primary-contrast);
   font-size: 11px;
   font-weight: 600;
   flex-shrink: 0;
+  box-shadow: var(--glow-cyan-sm);
 }
 
 .apiKeyEntryKey {

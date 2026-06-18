@@ -1,37 +1,64 @@
 @use '../styles/mixins' as *;
 @use '../styles/variables' as *;
 
+// Page root — transparent, lives inside .hg-main shell padding.
 .container {
   width: min(100%, 1480px);
   min-height: 100%;
   display: flex;
   flex-direction: column;
-  gap: clamp(18px, 2.4vw, 28px);
+  gap: clamp(16px, 2vw, 22px);
   margin: 0 auto;
+  background: transparent;
   overflow-y: auto;
   padding-bottom: calc(
     var(--config-action-bar-height, 0px) + 16px + env(safe-area-inset-bottom) + #{$spacing-md}
   );
 }
 
+// Header strip — eyebrow label on the left, tab switch on the right.
 .pageHeader {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
+  justify-content: space-between;
+  gap: $spacing-lg;
+  flex-wrap: wrap;
 }
 
 .pageHeaderCopy {
   display: flex;
-  flex-direction: column;
-  gap: 10px;
+  align-items: center;
+  gap: 14px;
   min-width: 0;
-  width: min(100%, 360px);
+  width: auto;
+  flex: 1 1 auto;
 }
 
+// MẪU TIÊU ĐỀ MỤC — uppercase eyebrow + leading gold bar.
+// Downscaled from a hero so it does not compete with the shell top bar.
 .pageTitle {
-  font-size: 28px;
-  font-weight: 700;
-  color: var(--text-primary);
+  position: relative;
   margin: 0;
+  padding-left: 16px;
+  font-size: 13px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--text-secondary);
+  white-space: nowrap;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    width: 4px;
+    height: 16px;
+    border-radius: 2px;
+    background: var(--grad-gold);
+    box-shadow: var(--glow-gold);
+  }
 }
 
 .tabBar {
@@ -39,9 +66,10 @@
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 2px;
   padding: 2px;
-  border: 1px solid var(--border-color);
-  border-radius: 8px;
-  background: color-mix(in srgb, var(--bg-primary) 72%, transparent);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-md);
+  background: var(--surface-sunken);
+  box-shadow: var(--elev-1);
 }
 
 .tabItem {
@@ -73,8 +101,14 @@
 
 .tabActive {
   color: var(--bg-primary);
-  background: var(--text-primary);
-  border-color: var(--text-primary);
+  background: var(--grad-energy);
+  border-color: transparent;
+  box-shadow: var(--glow-cyan-sm);
+
+  &:hover:not(:disabled) {
+    color: var(--bg-primary);
+    background: var(--grad-energy);
+  }
 }
 
 .workspaceShell {
@@ -103,10 +137,13 @@
   grid-template-columns: minmax(0, 1fr) auto;
   gap: 8px;
   align-items: center;
-  padding: 8px;
-  border: 1px solid var(--border-color);
-  border-radius: 8px;
-  background: color-mix(in srgb, var(--bg-primary) 76%, transparent);
+  padding: 10px;
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-lg);
+  background:
+    var(--grad-surface),
+    color-mix(in srgb, var(--bg-primary) 78%, transparent);
+  box-shadow: var(--elev-1);
 
   @include mobile {
     grid-template-columns: minmax(0, 1fr);
@@ -159,18 +196,23 @@
   justify-content: center;
   width: 30px;
   height: 30px;
-  border-radius: 6px;
-  border: 1px solid var(--text-primary);
-  background: var(--text-primary);
+  border-radius: var(--radius-sm);
+  border: 1px solid transparent;
+  background: var(--grad-energy);
   color: var(--bg-primary);
   transition:
     background-color $transition-fast,
     border-color $transition-fast,
+    box-shadow $transition-fast,
     opacity $transition-fast;
 
   &:hover:not(:disabled) {
-    background: var(--primary-hover);
-    border-color: var(--primary-hover);
+    box-shadow: var(--glow-cyan-sm);
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: var(--focus-ring);
   }
 
   &:disabled {
@@ -202,14 +244,31 @@
   }
 }
 
+// LOGS/CONSOLE — sunken mono editor surface in a framed panel
 .editorWrapper {
+  position: relative;
   width: 100%;
   flex: 0 0 auto;
   height: clamp(500px, 70vh, 1040px);
-  border: 1px solid var(--border-color);
-  border-radius: 8px;
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-lg);
   overflow: hidden;
-  background: var(--bg-primary);
+  background: var(--surface-sunken);
+  box-shadow: var(--elev-2);
+
+  // Cyan top edge to tie it to the panel language
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    z-index: 2;
+    background: var(--grad-energy);
+    opacity: 0.5;
+    pointer-events: none;
+  }
 
   @supports (height: 100dvh) {
     height: clamp(500px, 70dvh, 1040px);
@@ -263,6 +322,7 @@
   }
 }
 
+// Status badges — token-driven (amber warn / teal success / coral error)
 .modified {
   color: var(--warning-text);
   background: var(--warning-bg);
@@ -271,14 +331,14 @@
 
 .saved {
   color: var(--success-color);
-  background: color-mix(in srgb, var(--success-color) 10%, transparent);
-  border-color: color-mix(in srgb, var(--success-color) 34%, var(--border-color));
+  background: color-mix(in srgb, var(--success-color) 12%, transparent);
+  border-color: color-mix(in srgb, var(--success-color) 38%, var(--hairline));
 }
 
 .error {
-  color: var(--warning-text);
-  background: var(--warning-bg);
-  border-color: var(--warning-border);
+  color: var(--error-color);
+  background: color-mix(in srgb, var(--error-color) 12%, transparent);
+  border-color: color-mix(in srgb, var(--error-color) 38%, var(--hairline));
 }
 
 .floatingActionContainer {
@@ -292,18 +352,43 @@
   max-width: calc(100vw - 24px);
 }
 
+// ─── Floating action bar — glass console panel ──────────
 .floatingActionList {
+  position: relative;
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 6px;
+  padding: 7px;
   max-width: inherit;
   overflow-x: auto;
-  border: 1px solid var(--border-color);
-  border-radius: 8px;
-  background: color-mix(in srgb, var(--bg-primary) 92%, transparent);
-  box-shadow: var(--shadow-lg);
+  border: 1px solid transparent;
+  border-radius: var(--radius-lg);
+  background:
+    var(--grad-surface),
+    color-mix(in srgb, var(--bg-primary) 90%, transparent);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow:
+    var(--elev-3),
+    var(--glow-cyan-sm);
   scrollbar-width: none;
+
+  // Gold→cyan gradient frame via mask compositing
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: var(--grad-border);
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+    opacity: 0.7;
+  }
 
   &::-webkit-scrollbar {
     display: none;
@@ -343,17 +428,24 @@
   justify-content: center;
   width: 38px;
   height: 38px;
-  border-radius: 6px;
+  border-radius: var(--radius-sm);
   color: var(--text-primary);
   cursor: pointer;
   transition:
     background-color 0.15s ease,
     color 0.15s ease,
+    box-shadow 0.15s ease,
     opacity 0.15s ease;
 
   &:hover:not(:disabled) {
-    background: var(--text-primary);
-    color: var(--bg-primary);
+    background: color-mix(in srgb, var(--primary-color) 16%, transparent);
+    color: var(--primary-color);
+    box-shadow: var(--glow-cyan-sm);
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: var(--focus-ring);
   }
 
   &:disabled {

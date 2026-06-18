@@ -4,13 +4,13 @@
 .skeleton {
   background: linear-gradient(
     90deg,
-    var(--bg-tertiary) 0%,
-    var(--bg-hover) 50%,
-    var(--bg-tertiary) 100%
+    var(--surface-sunken) 0%,
+    color-mix(in srgb, var(--primary-color) 14%, var(--bg-tertiary)) 50%,
+    var(--surface-sunken) 100%
   );
   background-size: 200% 100%;
   animation: shimmer 1.5s ease-in-out infinite;
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-sm);
   display: block;
 }
 
@@ -26,6 +26,6 @@
 @media (prefers-reduced-motion: reduce) {
   .skeleton {
     animation: none;
-    background: var(--bg-tertiary);
+    background: var(--surface-sunken);
   }
 }

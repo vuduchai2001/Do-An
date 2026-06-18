@@ -30,8 +30,8 @@
     "not_set": "Chưa đặt",
     "optional": "Tùy chọn",
     "required": "Bắt buộc",
-    "api_key": "Khóa",
-    "base_url": "Địa chỉ",
+    "api_key": "API Key",
+    "base_url": "Base URL",
     "prefix": "Tiền tố",
     "proxy_url": "Proxy",
     "priority": "Độ ưu tiên",
@@ -109,7 +109,7 @@
     "status": "Trạng thái kết nối:"
   },
   "nav": {
-    "dashboard": "Bảng điều khiển",
+    "dashboard": "Dashboard",
     "basic_settings": "Cài đặt cơ bản",
     "api_keys": "API Keys",
     "ai_providers": "Nhà cung cấp AI",
@@ -128,7 +128,7 @@
   },
   "nav_meta": {
     "dashboard": "Tổng quan vận hành",
-    "ai_providers": "Định tuyến model thượng nguồn",
+    "ai_providers": "Định tuyến model upstream",
     "auth_files": "Tệp xác thực & thông tin xác thực",
     "oauth": "Ủy quyền OAuth",
     "quota_management": "API keys & giới hạn",
@@ -137,7 +137,7 @@
     "system_info": "Thời gian chạy & chẩn đoán"
   },
   "dashboard": {
-    "title": "Bảng điều khiển",
+    "title": "Dashboard",
     "subtitle": "Chào mừng đến với Trung tâm quản lý Hexgate",
     "openai_providers": "Nhà cung cấp OpenAI",
     "quick_actions": "Thao tác nhanh",

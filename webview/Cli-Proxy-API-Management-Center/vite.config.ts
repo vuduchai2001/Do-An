@@ -14,7 +14,10 @@ function getVersion(): string {
 
   // 2. Try git tag
   try {
-    const gitTag = execSync('git describe --tags --exact-match 2>/dev/null || git describe --tags 2>/dev/null || echo ""', { encoding: 'utf8' }).trim();
+    const gitTag = execSync(
+      'git describe --tags --exact-match 2>/dev/null || git describe --tags 2>/dev/null || echo ""',
+      { encoding: 'utf8' }
+    ).trim();
     if (gitTag) {
       return gitTag;
     }
@@ -40,27 +43,39 @@ export default defineConfig({
   plugins: [
     react(),
     viteSingleFile({
-      removeViteModuleLoader: true
-    })
+      removeViteModuleLoader: true,
+    }),
   ],
   define: {
-    __APP_VERSION__: JSON.stringify(getVersion())
+    __APP_VERSION__: JSON.stringify(getVersion()),
+  },
+  // Dev-only: chuyển tiếp request API quản lý sang backend (mặc định :8317).
+  // Khi mở UI qua Vite (:5173), request /v0/... sẽ tự trỏ về :5173 và nhận
+  // index.html (200 HTML) thay vì JSON -> gây lỗi "missing state". Proxy này
+  // forward /v0 sang backend. Đặt CLIPROXY_BACKEND để đổi địa chỉ backend.
+  server: {
+    proxy: {
+      '/v0': {
+        target: process.env.CLIPROXY_BACKEND || 'http://localhost:8317',
+        changeOrigin: true,
+      },
+    },
   },
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, './src')
-    }
+      '@': path.resolve(__dirname, './src'),
+    },
   },
   css: {
     modules: {
       localsConvention: 'camelCase',
-      generateScopedName: '[name]__[local]___[hash:base64:5]'
+      generateScopedName: '[name]__[local]___[hash:base64:5]',
     },
     preprocessorOptions: {
       scss: {
-        additionalData: `@use "@/styles/variables.scss" as *;`
-      }
-    }
+        additionalData: `@use "@/styles/variables.scss" as *;`,
+      },
+    },
   },
   build: {
     target: 'es2020',
@@ -70,8 +85,8 @@ export default defineConfig({
     cssCodeSplit: false,
     rolldownOptions: {
       output: {
-        codeSplitting: false
-      }
-    }
-  }
+        codeSplitting: false,
+      },
+    },
+  },
 });

@@ -6,13 +6,18 @@
 .dashboard {
   display: flex;
   flex-direction: column;
-  gap: $spacing-xl;
-  max-width: 1000px;
+  gap: $spacing-2xl;
+  width: 100%;
+  max-width: 1180px;
   margin: 0 auto;
+  padding: $spacing-xs 0 $spacing-md;
+  background: transparent;
   position: relative;
 }
 
 // ─── Decorative Background Orbs ─────────────────────────
+// Greatly toned down — the shell already provides atmosphere.
+// Kept as a barely-there ambient wash so the page stays flat & legible.
 
 .backgroundOrbs {
   position: absolute;
@@ -20,8 +25,8 @@
   pointer-events: none;
   z-index: 0;
   overflow: hidden;
-  opacity: 0.42;
-  filter: blur(16px);
+  opacity: 0.1;
+  filter: blur(40px);
 }
 
 .orb1 {
@@ -73,18 +78,34 @@
   justify-content: space-between;
   gap: $spacing-lg;
   padding: $spacing-2xl $spacing-xl;
-  border-radius: $radius-lg;
+  border-radius: var(--radius-lg);
   --glass-blur: 12px;
-  background: linear-gradient(
-    135deg,
-    color-mix(in srgb, var(--bg-primary) 92%, transparent),
-    color-mix(in srgb, var(--bg-secondary) 80%, transparent)
-  );
-  border: 1px solid color-mix(in srgb, var(--border-color) 60%, transparent);
+  background:
+    var(--grad-surface),
+    linear-gradient(
+      135deg,
+      var(--surface-glass),
+      color-mix(in srgb, var(--bg-secondary) 80%, transparent)
+    );
+  border: 1px solid var(--hairline);
   backdrop-filter: var(--glass-backdrop-filter);
   -webkit-backdrop-filter: var(--glass-backdrop-filter);
+  box-shadow: var(--elev-2);
   overflow: hidden;
   animation: heroEnter 0.6s ease-out both;
+
+  // Gold→cyan gradient hairline accent along the top edge
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--grad-border);
+    opacity: 0.85;
+    pointer-events: none;
+  }
 
   @media (max-width: $breakpoint-mobile) {
     flex-direction: column;
@@ -137,12 +158,25 @@
 }
 
 .heroGreeting {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   font-size: 13px;
   font-weight: 600;
-  letter-spacing: 0;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
   color: var(--primary-color);
   animation: fadeSlideUp 0.5s ease-out 0.1s both;
+
+  // Gold tick mark before the greeting label
+  &::before {
+    content: '';
+    width: 18px;
+    height: 2px;
+    border-radius: 2px;
+    background: var(--accent-gold);
+    box-shadow: var(--glow-gold);
+  }
 }
 
 .heroTitle {
@@ -224,6 +258,7 @@
   border: 1px solid var(--glass-border);
   backdrop-filter: var(--glass-backdrop-filter);
   -webkit-backdrop-filter: var(--glass-backdrop-filter);
+  box-shadow: var(--elev-1);
   font-size: 12px;
 }
 
@@ -271,23 +306,56 @@
   z-index: 1;
 }
 
+// ─── MẪU TIÊU ĐỀ MỤC — uppercase label + leading gold bar ─
 .sectionHeading {
-  font-size: 12px;
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+  font-size: 11px;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0;
-  color: var(--text-tertiary);
-  margin: 0 0 $spacing-md;
+  letter-spacing: 0.16em;
+  color: var(--text-secondary);
+  margin: 0 0 $spacing-lg;
+  padding-left: 14px;
+
+  // Vertical gold bar with glow — the section anchor
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    width: 4px;
+    height: 16px;
+    border-radius: 2px;
+    background: var(--grad-gold);
+    box-shadow: var(--glow-gold);
+  }
+
+  position: relative;
+
+  // Faint hairline carrying the eye to the right
+  &::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--accent-gold) 40%, transparent),
+      transparent 70%
+    );
+    opacity: 0.7;
+  }
 }
 
 .bentoGrid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: auto auto;
-  gap: $spacing-md;
+  grid-template-columns: 1.4fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: $spacing-lg;
 
   @media (max-width: 900px) {
     grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto;
   }
 
   @media (max-width: 500px) {
@@ -295,113 +363,212 @@
   }
 }
 
+// ─── MẪU PANEL — framed surface card ────────────────────
 .bentoCard {
+  position: relative;
   display: flex;
   flex-direction: column;
-  gap: $spacing-md;
-  padding: $spacing-lg;
-  background: linear-gradient(
-    145deg,
-    color-mix(in srgb, var(--bg-primary) 86%, transparent),
-    color-mix(in srgb, var(--bg-secondary) 72%, transparent)
-  );
-  border: 1px solid color-mix(in srgb, var(--border-color) 66%, transparent);
-  border-radius: $radius-lg;
+  justify-content: space-between;
+  gap: $spacing-lg;
+  min-height: 132px;
+  padding: $spacing-lg $spacing-lg ($spacing-lg + 2px);
+  background:
+    var(--grad-surface),
+    linear-gradient(
+      145deg,
+      var(--surface-glass),
+      color-mix(in srgb, var(--bg-secondary) 72%, transparent)
+    );
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-lg);
   --glass-blur: 12px;
   backdrop-filter: var(--glass-backdrop-filter);
   -webkit-backdrop-filter: var(--glass-backdrop-filter);
-  box-shadow:
-    0 18px 42px rgb(0 0 0 / 0.12),
-    inset 0 1px 0 rgb(255 255 255 / 0.03);
+  box-shadow: var(--elev-2);
   text-decoration: none;
+  overflow: hidden;
   transition:
-    border-color $transition-fast,
-    box-shadow $transition-fast,
-    transform $transition-fast;
+    border-color var(--transition-smooth),
+    box-shadow var(--transition-smooth),
+    transform var(--transition-smooth);
   animation: cardEnter 0.4s ease-out both;
 
+  // Cyan accent line revealed along the top edge on hover
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--grad-energy);
+    transform: scaleX(0);
+    transform-origin: left center;
+    opacity: 0;
+    transition:
+      transform var(--transition-smooth),
+      opacity var(--transition-smooth);
+    pointer-events: none;
+  }
+
   &:hover {
-    border-color: color-mix(in srgb, var(--border-hover) 82%, transparent);
+    border-color: color-mix(in srgb, var(--primary-color) 38%, var(--border-hover));
     box-shadow:
-      0 22px 48px rgb(0 0 0 / 0.16),
-      inset 0 1px 0 rgb(255 255 255 / 0.04);
+      var(--elev-3),
+      var(--glow-cyan-sm);
     transform: translateY(-2px);
+
+    &::before {
+      transform: scaleX(1);
+      opacity: 0.9;
+    }
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: var(--focus-ring);
   }
 }
 
-// First card spans 2 rows — the "hero stat"
+// ─── Featured panel — spans 2 rows w/ gradient border ───
 .bentoLarge {
   grid-row: 1 / 3;
-  justify-content: center;
-  background: linear-gradient(
-    160deg,
-    color-mix(in srgb, var(--primary-color) 8%, var(--bg-primary)),
-    color-mix(in srgb, var(--bg-primary) 84%, transparent)
-  );
+  justify-content: space-between;
+  padding: ($spacing-lg + 6px) $spacing-xl;
+  background:
+    var(--grad-surface),
+    linear-gradient(
+      155deg,
+      color-mix(in srgb, var(--primary-color) 9%, var(--bg-primary)),
+      color-mix(in srgb, var(--bg-primary) 88%, transparent)
+    );
+  // Gradient (gold→cyan) border via mask compositing — the "frame"
+  border-color: transparent;
+  box-shadow:
+    var(--elev-2),
+    var(--glow-cyan-sm);
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: var(--grad-border);
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+    opacity: 0.85;
+    transition: opacity var(--transition-smooth);
+  }
+
+  // Featured card keeps its cyan top edge always visible
+  &::before {
+    transform: scaleX(1);
+    opacity: 0.7;
+  }
+
+  &:hover {
+    box-shadow:
+      var(--elev-3),
+      var(--glow-cyan);
+
+    &::after {
+      opacity: 1;
+    }
+  }
 
   .bentoValue {
-    font-size: 44px;
+    font-size: 56px;
+    background: var(--grad-energy);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: var(--primary-color);
   }
 
   .bentoIcon {
-    width: 56px;
-    height: 56px;
+    width: 60px;
+    height: 60px;
+    border-radius: var(--radius-lg);
+  }
+
+  .bentoLabel {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text-primary);
   }
 
   @media (max-width: 900px) {
     grid-row: auto;
+    grid-column: 1 / -1;
 
     .bentoValue {
-      font-size: 32px;
+      font-size: 40px;
     }
 
     .bentoIcon {
-      width: 44px;
-      height: 44px;
+      width: 48px;
+      height: 48px;
     }
   }
 }
 
+// Icon sits in a cyan-tinted rounded tile
 .bentoIcon {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 44px;
-  height: 44px;
-  border-radius: $radius-md;
-  background: color-mix(in srgb, var(--primary-color) 10%, var(--bg-secondary));
+  width: 46px;
+  height: 46px;
+  flex-shrink: 0;
+  border-radius: var(--radius-md);
+  background: color-mix(in srgb, var(--primary-color) 14%, var(--bg-secondary));
+  border: 1px solid color-mix(in srgb, var(--primary-color) 24%, transparent);
   color: var(--primary-color);
-  transition: background $transition-fast;
+  transition:
+    background var(--transition-smooth),
+    border-color var(--transition-smooth),
+    transform var(--transition-smooth),
+    box-shadow var(--transition-smooth);
 }
 
 .bentoCard:hover .bentoIcon {
-  background: color-mix(in srgb, var(--primary-color) 16%, var(--bg-secondary));
+  background: color-mix(in srgb, var(--primary-color) 22%, var(--bg-secondary));
+  border-color: color-mix(in srgb, var(--primary-color) 42%, transparent);
+  transform: translateY(-1px) scale(1.04);
+  box-shadow: var(--glow-cyan-sm);
 }
 
 .bentoContent {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 3px;
 }
 
 .bentoValue {
-  font-size: 28px;
+  font-size: 34px;
   font-weight: 800;
+  letter-spacing: -0.02em;
   color: var(--text-primary);
   font-variant-numeric: tabular-nums;
-  line-height: 1.2;
+  line-height: 1.05;
 }
 
 .bentoLabel {
   font-size: 13px;
+  font-weight: 500;
   color: var(--text-secondary);
 }
 
 .bentoSublabel {
   font-size: 11px;
-  color: var(--text-secondary);
-  opacity: 0.7;
-  margin-top: 2px;
+  line-height: 1.4;
+  color: var(--text-tertiary);
+  margin-top: 4px;
 }
 
 // ─── Config Pills Section ───────────────────────────────
@@ -411,47 +578,61 @@
   z-index: 1;
   display: flex;
   flex-direction: column;
-  gap: $spacing-md;
-  animation: cardEnter 0.4s ease-out 0.5s both;
+  gap: $spacing-lg;
+  padding: $spacing-lg $spacing-lg ($spacing-lg + 4px);
+  background: var(--surface-glass);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--elev-1);
+  animation: cardEnter 0.4s ease-out 0.45s both;
 }
 
+// Tidy auto-fitting grid of compact framed chips
 .configPillGrid {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
   gap: $spacing-sm;
 }
 
+// ─── Config chip — framed, label over value ─────────────
 .configPill {
-  display: inline-flex;
-  align-items: center;
-  gap: $spacing-sm;
-  padding: 6px 14px;
-  background: color-mix(in srgb, var(--bg-primary) 68%, transparent);
-  border: 1px solid color-mix(in srgb, var(--border-color) 68%, transparent);
-  border-radius: $radius-full;
-  --glass-blur: 10px;
-  backdrop-filter: var(--glass-backdrop-filter);
-  -webkit-backdrop-filter: var(--glass-backdrop-filter);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 5px;
+  padding: 10px 12px;
+  background: var(--bg-primary);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-md);
   font-size: 13px;
-  transition: border-color $transition-fast;
+  transition:
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast),
+    transform var(--transition-fast);
 
   &:hover {
-    border-color: color-mix(in srgb, var(--border-hover) 82%, transparent);
+    border-color: color-mix(in srgb, var(--primary-color) 32%, var(--border-hover));
+    transform: translateY(-1px);
+    box-shadow: var(--glow-cyan-sm);
   }
 }
 
 .configPillWide {
-  flex-basis: 100%;
-  border-radius: $radius-md;
+  grid-column: 1 / -1;
 }
 
 .configPillLabel {
-  color: var(--text-secondary);
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-tertiary);
   white-space: nowrap;
 }
 
 .configPillValue {
-  font-weight: 600;
+  font-size: 15px;
+  font-weight: 700;
   color: var(--text-primary);
 
   &.on {
@@ -459,13 +640,14 @@
   }
 
   &.off {
-    color: var(--text-secondary);
+    color: var(--text-tertiary);
   }
 }
 
 .configPillMono {
   font-size: 12px;
   font-family: $font-mono;
+  font-weight: 600;
   color: var(--text-secondary);
   word-break: break-all;
 }
@@ -475,12 +657,12 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 2px 8px;
+  padding: 3px 10px;
   border-radius: $radius-full;
   border: 1px solid var(--border-color);
-  font-size: 11px;
-  font-weight: 600;
-  line-height: 1.2;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.3;
   max-width: 100%;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -509,15 +691,37 @@
 .viewMoreLink {
   display: inline-flex;
   align-items: center;
+  gap: 4px;
+  align-self: flex-end;
   font-size: 13px;
+  font-weight: 600;
   color: var(--primary-color);
   text-decoration: none;
-  margin-top: $spacing-xs;
-  transition: color $transition-fast;
+  margin-top: 0;
+  padding: 6px 10px;
+  border: 1px solid color-mix(in srgb, var(--primary-color) 22%, var(--hairline));
+  background: color-mix(in srgb, var(--primary-color) 7%, transparent);
+  border-radius: var(--radius-sm);
+  transition:
+    color var(--transition-fast),
+    gap var(--transition-fast);
+
+  &::after {
+    content: '→';
+    transition: transform var(--transition-fast);
+  }
 
   &:hover {
-    text-decoration: underline;
     color: var(--primary-hover);
+
+    &::after {
+      transform: translateX(3px);
+    }
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: var(--focus-ring);
   }
 }
 

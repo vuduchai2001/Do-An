@@ -1,29 +1,62 @@
 @use '../styles/variables' as *;
 @use '../styles/mixins' as *;
 
+// ════════════════════════════════════════════════════════════════
+// Quota Management — "Hexgate Console" composition
+// Framed quota panels · gold section accents · energy gauges ·
+// token-driven warning thresholds · lifted/glowing cards.
+// ════════════════════════════════════════════════════════════════
+
 .container {
   display: flex;
   flex-direction: column;
-  gap: $spacing-lg;
+  gap: $spacing-xl;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  background: transparent;
 }
 
+// ─── Page intro (compact — shell already owns the page title) ─────
+// No hero/full-bleed. Just a quiet eyebrow + lead so the framed
+// panels below carry the visual weight.
+
 .pageHeader {
+  position: relative;
   display: flex;
   flex-direction: column;
-  gap: $spacing-sm;
+  gap: 6px;
+  padding-left: $spacing-md;
+
+  // Gold ledger rule running down the left of the intro
+  &::before {
+    content: '';
+    position: absolute;
+    top: 4px;
+    bottom: 4px;
+    left: 0;
+    width: 3px;
+    border-radius: 3px;
+    background: var(--grad-gold);
+    box-shadow: var(--glow-gold);
+  }
 }
 
 .pageTitle {
-  font-size: 28px;
+  font-size: 15px;
   font-weight: 700;
-  color: var(--text-primary);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
   margin: 0;
 }
 
 .description {
   font-size: 14px;
-  color: var(--text-secondary);
+  line-height: 1.55;
+  color: var(--text-tertiary);
   margin: 0;
+  max-width: 64ch;
 }
 
 .headerActions {
@@ -49,58 +82,117 @@
   }
 }
 
+// ─── Section title (panel heading) ───────────────────────────────
+// IN-CAPS label with a gold accent bar to the left, wide tracking.
+
 .titleWrapper {
+  position: relative;
   display: flex;
   align-items: center;
   gap: $spacing-sm;
+  padding-left: 14px;
   line-height: 24px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+
+  // Gold accent stub anchoring the section label
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 4px;
+    height: 16px;
+    border-radius: 4px;
+    background: var(--grad-gold);
+    box-shadow: var(--glow-gold);
+  }
+
+  > span:first-child {
+    font-size: 14px;
+  }
 }
 
 .countBadge {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  height: 24px;
-  min-width: 24px;
+  height: 22px;
+  min-width: 22px;
   padding: 0 8px;
   border-radius: 999px;
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--count-badge-text);
-  background-color: var(--count-badge-bg);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--accent-gold);
+  background: var(--accent-gold-soft);
+  border: 1px solid color-mix(in srgb, var(--accent-gold) 40%, transparent);
   box-sizing: border-box;
 }
 
+// ─── Error banner ────────────────────────────────────────────────
+
 .errorBox {
-  padding: $spacing-md;
-  background-color: rgba($error-color, 0.1);
-  border: 1px solid var(--danger-color);
-  border-radius: $radius-md;
+  position: relative;
+  padding: $spacing-md $spacing-md $spacing-md ($spacing-md + 6px);
+  background:
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--danger-color) 12%, transparent),
+      color-mix(in srgb, var(--danger-color) 4%, transparent)
+    ),
+    var(--surface-glass);
+  border: 1px solid color-mix(in srgb, var(--danger-color) 45%, var(--hairline));
+  border-radius: var(--radius-lg);
   color: var(--danger-color);
   font-size: 14px;
+  box-shadow: var(--elev-1);
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 4px;
+    background: var(--danger-color);
+  }
 }
+
+// ─── Inline controls ─────────────────────────────────────────────
 
 .pageSizeSelect {
   padding: 8px 12px;
-  border: 1px solid var(--border-color);
-  border-radius: $radius-md;
-  background-color: var(--bg-primary);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-md);
+  background-color: var(--surface-sunken);
   color: var(--text-primary);
   font-size: 14px;
   cursor: text;
   height: 38px;
   box-sizing: border-box;
+  transition:
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast);
+
+  &:hover {
+    border-color: var(--border-hover);
+  }
 
   &:focus {
     outline: none;
     border-color: var(--primary-color);
+    box-shadow: var(--focus-ring);
   }
 }
 
 .statsInfo {
   padding: 8px 12px;
-  background-color: var(--bg-secondary);
-  border-radius: $radius-md;
+  background-color: var(--surface-sunken);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-md);
   font-size: 13px;
   color: var(--text-secondary);
   white-space: nowrap;
@@ -109,6 +201,8 @@
   display: flex;
   align-items: center;
 }
+
+// ─── Card grids — bento-ish rhythm, generous min width ───────────
 
 .antigravityGrid,
 .claudeGrid,
@@ -149,21 +243,25 @@
   gap: 4px;
 
   label {
-    font-size: 12px;
-    color: var(--text-secondary);
-    font-weight: 500;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--text-tertiary);
     white-space: nowrap;
   }
 }
+
+// ─── View-mode segmented toggle ──────────────────────────────────
 
 .viewModeToggle {
   display: inline-flex;
   gap: $spacing-xs;
   align-items: center;
   padding: 3px;
-  border-radius: 999px;
-  background: color-mix(in srgb, var(--bg-secondary) 92%, transparent);
-  border: 1px solid color-mix(in srgb, var(--border-color) 88%, transparent);
+  border-radius: var(--radius-md);
+  background: var(--surface-sunken);
+  border: 1px solid var(--hairline);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.16);
 
   @include mobile {
@@ -174,15 +272,20 @@
 
 .viewModeButton:global(.btn.btn-sm) {
   padding: 8px 14px;
-  border-radius: 999px;
+  border-radius: var(--radius-sm);
   border-color: transparent;
   background: transparent;
   color: var(--text-secondary);
   box-shadow: none;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  transition:
+    background-color var(--transition-fast),
+    color var(--transition-fast);
 
   &:hover:not(:disabled) {
     border-color: transparent;
-    background: color-mix(in srgb, var(--bg-hover) 72%, transparent);
+    background: color-mix(in srgb, var(--primary-color) 10%, transparent);
     color: var(--text-primary);
   }
 
@@ -196,24 +299,31 @@
 }
 
 .viewModeButtonActive:global(.btn.btn-sm) {
-  background: var(--primary-color);
-  border-color: var(--primary-color);
+  background: var(--grad-energy);
+  border-color: color-mix(in srgb, var(--primary-color) 60%, transparent);
   color: var(--primary-contrast, #fff);
-  box-shadow: 0 8px 18px -14px rgba(0, 0, 0, 0.45);
+  box-shadow: var(--glow-cyan-sm);
 
   &:hover:not(:disabled) {
-    background: var(--primary-hover);
-    border-color: var(--primary-hover);
+    background: var(--grad-energy);
+    border-color: color-mix(in srgb, var(--primary-color) 70%, transparent);
     color: var(--primary-contrast, #fff);
+    box-shadow: var(--glow-cyan);
   }
 }
 
 .refreshAllButton:global(.btn.btn-sm) {
   padding-inline: 14px;
-  border-radius: 999px;
+  border-radius: var(--radius-md);
   background: color-mix(in srgb, var(--primary-color) 12%, var(--bg-secondary));
-  border-color: color-mix(in srgb, var(--primary-color) 22%, var(--border-color));
+  border-color: color-mix(in srgb, var(--primary-color) 24%, var(--border-color));
   color: var(--text-primary);
+  font-weight: 600;
+  transition:
+    background-color var(--transition-fast),
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast),
+    transform var(--transition-fast);
 
   > span {
     display: inline-flex;
@@ -224,7 +334,14 @@
 
   &:hover:not(:disabled) {
     background: color-mix(in srgb, var(--primary-color) 16%, var(--bg-secondary));
-    border-color: color-mix(in srgb, var(--primary-color) 34%, var(--border-color));
+    border-color: color-mix(in srgb, var(--primary-color) 36%, var(--border-color));
+    box-shadow: var(--glow-cyan-sm);
+    transform: translateY(-1px);
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: var(--focus-ring);
   }
 
   @include mobile {
@@ -248,7 +365,10 @@
   }
 }
 
-// 卡片渐变背景 — 基于 TYPE_COLORS light.bg 转 rgba
+// ─── Per-provider card tint accents ──────────────────────────────
+// Layered over the framed surface as a top-edge wash so each
+// provider reads distinctly without breaking the panel language.
+
 .claudeCard {
   background-image: linear-gradient(180deg, rgba(251, 236, 228, 0.18), rgba(251, 236, 228, 0));
 }
@@ -273,19 +393,34 @@
   background-image: linear-gradient(180deg, rgba(243, 244, 246, 0.22), rgba(243, 244, 246, 0));
 }
 
+// ─── Quota readout block (per-model rows inside a card) ──────────
+
 .quotaSection {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: $spacing-sm;
-  padding-top: $spacing-sm;
   margin-top: $spacing-xs;
-  border-top: 1px dashed var(--border-color);
+  padding-top: $spacing-sm;
+  border-top: 1px solid var(--hairline);
 }
 
 .quotaRow {
   display: flex;
   flex-direction: column;
-  gap: $spacing-xs;
+  gap: 6px;
+  padding: 8px 10px;
+  border-radius: var(--radius-md);
+  background: var(--surface-sunken);
+  border: 1px solid var(--hairline);
+  transition:
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast);
+
+  &:hover {
+    border-color: var(--border-hover);
+    box-shadow: var(--glow-cyan-sm);
+  }
 }
 
 .quotaRowHeader {
@@ -304,6 +439,7 @@
 .quotaModel {
   font-size: 13px;
   font-weight: 600;
+  letter-spacing: 0.01em;
   color: var(--text-primary);
   white-space: nowrap;
   overflow: hidden;
@@ -316,29 +452,74 @@
   }
 }
 
+// ─── Energy gauge ────────────────────────────────────────────────
+// Sunken track, rounded; fill defaults to energy gradient, with
+// token-driven warning thresholds layered by modifier classes.
+
 .quotaBar {
-  height: 8px;
-  background-color: var(--bg-tertiary);
+  position: relative;
+  height: 10px;
+  background-color: var(--surface-sunken);
+  border: 1px solid var(--hairline);
   border-radius: 999px;
   overflow: hidden;
+  box-shadow: inset 0 1px 3px color-mix(in srgb, var(--bg-tertiary) 60%, transparent);
 }
 
 .quotaBarFill {
+  position: relative;
   height: 100%;
-  background-color: var(--success-color, #22c55e);
-  transition: width 0.2s ease;
+  background: var(--grad-energy);
+  border-radius: 999px;
+  transition: width var(--transition-smooth);
+
+  // Moving sheen across the gauge for a live, energized feel
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(
+      100deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.28) 50%,
+      transparent 100%
+    );
+    opacity: 0.4;
+    mix-blend-mode: overlay;
+  }
 }
 
+// High remaining — healthy: full energy gradient + cyan glow.
 .quotaBarFillHigh {
-  background-color: var(--success-color, #22c55e);
+  background: var(--grad-energy);
+  box-shadow:
+    0 0 10px color-mix(in srgb, var(--primary-color) 38%, transparent),
+    inset 0 0 0 1px color-mix(in srgb, var(--primary-color) 30%, transparent);
 }
 
+// Medium — caution: amber/gold token.
 .quotaBarFillMedium {
-  background-color: var(--quota-medium-color, #e0aa14);
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--accent-gold) 88%, white) 0%,
+    var(--accent-gold) 100%
+  );
+  box-shadow:
+    0 0 10px color-mix(in srgb, var(--accent-gold) 36%, transparent),
+    inset 0 0 0 1px color-mix(in srgb, var(--accent-gold) 30%, transparent);
 }
 
+// Low remaining — critical: coral/red danger token.
 .quotaBarFillLow {
-  background-color: var(--danger-color);
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--danger-color) 86%, white) 0%,
+    var(--danger-color) 100%
+  );
+  box-shadow:
+    0 0 10px color-mix(in srgb, var(--danger-color) 40%, transparent),
+    inset 0 0 0 1px color-mix(in srgb, var(--danger-color) 32%, transparent);
 }
 
 .quotaMeta {
@@ -355,7 +536,9 @@
 }
 
 .quotaPercent {
-  font-weight: 600;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.01em;
   color: var(--text-primary);
 }
 
@@ -365,6 +548,7 @@
 
 .quotaAmount {
   color: var(--text-secondary);
+  font-variant-numeric: tabular-nums;
 }
 
 .quotaMessage {
@@ -376,39 +560,70 @@
 
 .quotaMessageAction {
   width: 100%;
-  border: none;
-  background: none;
+  border: 1px dashed var(--hairline);
+  border-radius: var(--radius-md);
+  background: var(--surface-sunken);
   cursor: pointer;
-  text-decoration: underline;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  transition:
+    color var(--transition-fast),
+    border-color var(--transition-fast),
+    background-color var(--transition-fast);
 
   &:hover:not(:disabled) {
-    color: var(--text-primary);
+    color: var(--primary-color);
+    border-color: color-mix(in srgb, var(--primary-color) 45%, var(--hairline));
+    background: color-mix(in srgb, var(--primary-color) 8%, var(--surface-sunken));
   }
 
   &:disabled {
     cursor: not-allowed;
-    opacity: 0.6;
-    text-decoration: none;
+    opacity: 0.55;
   }
 }
 
+// ─── Status callouts (token-driven badges) ───────────────────────
+
 .quotaError {
+  position: relative;
   font-size: 12px;
   color: var(--danger-color);
-  background-color: rgba($error-color, 0.08);
-  border: 1px solid var(--danger-color);
-  border-radius: $radius-sm;
-  padding: $spacing-xs $spacing-sm;
+  background: color-mix(in srgb, var(--danger-color) 10%, var(--surface-sunken));
+  border: 1px solid color-mix(in srgb, var(--danger-color) 45%, var(--hairline));
+  border-radius: var(--radius-sm);
+  padding: $spacing-xs $spacing-sm $spacing-xs ($spacing-sm + 4px);
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 3px;
+    background: var(--danger-color);
+  }
 }
 
 .quotaWarning {
+  position: relative;
   font-size: 12px;
   color: var(--warning-text);
-  background-color: var(--warning-bg);
+  background: var(--warning-bg);
   border: 1px solid var(--warning-border);
-  border-radius: $radius-sm;
-  padding: $spacing-xs $spacing-sm;
+  border-radius: var(--radius-sm);
+  padding: $spacing-xs $spacing-sm $spacing-xs ($spacing-sm + 4px);
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 3px;
+    background: var(--accent-gold);
+  }
 }
+
+// ─── Codex plan row ──────────────────────────────────────────────
 
 .codexPlan {
   display: flex;
@@ -420,10 +635,14 @@
 
 .codexPlanLabel {
   color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 11px;
+  font-weight: 600;
 }
 
 .codexPlanValue {
-  font-weight: 600;
+  font-weight: 700;
   color: var(--text-primary);
   text-transform: capitalize;
 }
@@ -625,23 +844,49 @@
   }
 }
 
+// ─── File card — the framed quota panel ──────────────────────────
+// Glass surface · hairline · gold-tipped top edge · hover lift+glow.
+
 .fileCard {
-  background-color: var(--bg-primary);
-  border: 1px solid var(--border-color);
-  border-radius: $radius-lg;
+  position: relative;
+  background:
+    var(--grad-surface),
+    var(--surface-glass);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-lg);
   padding: $spacing-md;
   display: flex;
   flex-direction: column;
   gap: $spacing-sm;
+  box-shadow: var(--elev-1);
+  overflow: hidden;
   transition:
-    transform $transition-fast,
-    box-shadow $transition-fast,
-    border-color $transition-fast;
+    transform var(--transition-smooth),
+    box-shadow var(--transition-smooth),
+    border-color var(--transition-smooth);
+
+  // Gold→cyan gradient hairline along the top edge of every panel
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--grad-border);
+    opacity: 0.7;
+    pointer-events: none;
+    transition: opacity var(--transition-smooth);
+  }
 
   &:hover {
     transform: translateY(-2px);
-    box-shadow: $shadow-md;
-    border-color: rgba(37, 99, 235, 0.2);
+    box-shadow: var(--elev-2), var(--glow-cyan-sm);
+    border-color: var(--border-hover);
+
+    &::before {
+      opacity: 1;
+    }
   }
 }
 
@@ -650,13 +895,16 @@
   align-items: center;
   gap: $spacing-sm;
   min-height: 28px;
+  padding-bottom: 2px;
 }
 
 .typeBadge {
   padding: 4px 10px;
-  border-radius: 12px;
-  font-size: 12px;
-  font-weight: 600;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
   white-space: nowrap;
   flex-shrink: 0;
 }
@@ -669,6 +917,8 @@
   line-height: 1.4;
 }
 
+// ─── Pagination ──────────────────────────────────────────────────
+
 .pagination {
   display: flex;
   justify-content: center;
@@ -676,16 +926,20 @@
   gap: $spacing-md;
   margin-top: $spacing-lg;
   padding-top: $spacing-md;
-  border-top: 1px solid var(--border-color);
+  border-top: 1px solid var(--hairline);
 }
 
 .pageInfo {
   font-size: 13px;
+  font-variant-numeric: tabular-nums;
   color: var(--text-secondary);
   padding: $spacing-xs $spacing-md;
-  background-color: var(--bg-secondary);
-  border-radius: $radius-md;
+  background-color: var(--surface-sunken);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-md);
 }
+
+// ─── Too-many-files warning modal ────────────────────────────────
 
 .warningOverlay {
   position: fixed;
@@ -693,7 +947,10 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: color-mix(in srgb, var(--bg-primary) 60%, rgba(0, 0, 0, 0.6));
+  --glass-blur: 4px;
+  backdrop-filter: var(--glass-filter);
+  -webkit-backdrop-filter: var(--glass-filter);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -701,12 +958,29 @@
 }
 
 .warningModal {
-  background-color: var(--bg-primary);
-  border-radius: $radius-lg;
+  position: relative;
+  background:
+    var(--grad-surface),
+    var(--surface-raised);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-lg);
   padding: $spacing-lg;
   max-width: 400px;
   text-align: center;
-  box-shadow: $shadow-lg;
+  box-shadow: var(--elev-3);
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--grad-border);
+    opacity: 0.85;
+    pointer-events: none;
+  }
 
   p {
     margin: 0 0 $spacing-md 0;

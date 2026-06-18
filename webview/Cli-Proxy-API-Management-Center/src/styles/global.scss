@@ -8,9 +8,23 @@
 @use './themes.scss';
 @use './components.scss';
 @use './layout.scss';
+@use './shell.scss';
 
 body {
   background-color: var(--bg-secondary);
+  // Hexgate: very soft navy/cyan gradient atmosphere over the base surface
+  background-image:
+    radial-gradient(
+      120% 80% at 100% 0%,
+      color-mix(in srgb, var(--primary-color) 5%, transparent) 0%,
+      transparent 55%
+    ),
+    radial-gradient(
+      120% 90% at 0% 100%,
+      color-mix(in srgb, var(--accent-gold) 3.5%, transparent) 0%,
+      transparent 55%
+    );
+  background-attachment: fixed;
   color: var(--text-primary);
   transition: background-color $transition-normal, color $transition-normal;
 }
@@ -31,16 +45,26 @@ body.modal-open .content {
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--bg-secondary);
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--border-color);
+  // Hexgate: translucent teal thumb, brighter cyan on hover
+  background: color-mix(in srgb, var(--primary-color) 28%, transparent);
   border-radius: $radius-full;
+  transition: background var(--transition-fast);
 
   &:hover {
-    background: var(--border-hover);
+    background: color-mix(in srgb, var(--primary-color) 50%, transparent);
   }
+
+  &:active {
+    background: color-mix(in srgb, var(--primary-color) 65%, transparent);
+  }
+}
+
+::-webkit-scrollbar-corner {
+  background: transparent;
 }
 
 // 通用工具类

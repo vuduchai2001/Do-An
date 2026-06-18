@@ -3,9 +3,10 @@
 
 .wrap {
   border: 1px solid var(--border-color);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-lg);
   overflow: hidden;
-  background: var(--bg-primary);
+  background: var(--surface-glass);
+  box-shadow: var(--elev-1);
 }
 
 .scroll {
@@ -21,15 +22,17 @@
 }
 
 .head {
-  background: var(--muted-bg);
+  background: var(--surface-sunken);
 
   th {
-    color: var(--muted-foreground);
-    font-weight: 500;
+    color: var(--accent-gold);
+    font-weight: 600;
     font-size: 12px;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
     text-align: left;
     padding: 10px 14px;
-    border-bottom: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--hairline);
     vertical-align: middle;
   }
 
@@ -39,25 +42,30 @@
 }
 
 .body {
-  background: var(--bg-primary);
+  background: transparent;
 }
 
 .row {
-  transition: background-color $transition-fast;
+  transition: background-color var(--transition-fast);
 
   td {
     padding: 12px 14px;
-    border-bottom: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--hairline);
     vertical-align: top;
     line-height: 1.5;
   }
 
+  &:nth-child(even) td {
+    background: color-mix(in srgb, var(--bg-tertiary) 30%, transparent);
+  }
+
   &:hover td {
-    background: color-mix(in srgb, var(--accent-bg) 50%, transparent);
+    background: color-mix(in srgb, var(--primary-color) 9%, transparent);
   }
 
   &.selected td {
-    background: var(--primary-8);
+    background: color-mix(in srgb, var(--primary-color) 14%, transparent);
+    box-shadow: inset 2px 0 0 var(--primary-color);
   }
 }
 

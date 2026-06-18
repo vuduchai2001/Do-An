@@ -23,16 +23,8 @@ import {
   IconSidebarSystem,
 } from '@/components/ui/icons';
 import { INLINE_LOGO_JPEG } from '@/assets/logoInline';
-import {
-  useAuthStore,
-  useConfigStore,
-  useLanguageStore,
-  useNotificationStore,
-  useThemeStore,
-} from '@/stores';
+import { useAuthStore, useConfigStore, useNotificationStore, useThemeStore } from '@/stores';
 import { triggerHeaderRefresh } from '@/hooks/useHeaderRefresh';
-import { LANGUAGE_LABEL_KEYS, LANGUAGE_ORDER } from '@/utils/constants';
-import { isSupportedLanguage } from '@/utils/language';
 import type { Theme } from '@/types';
 
 const sidebarIcons: Record<string, ReactNode> = {
@@ -218,22 +210,35 @@ export function MainLayout() {
 
   const theme = useThemeStore((state) => state.theme);
   const setTheme = useThemeStore((state) => state.setTheme);
-  const language = useLanguageStore((state) => state.language);
-  const setLanguage = useLanguageStore((state) => state.setLanguage);
-
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
-  const [languageMenuOpen, setLanguageMenuOpen] = useState(false);
   const [themeMenuOpen, setThemeMenuOpen] = useState(false);
   const contentRef = useRef<HTMLDivElement | null>(null);
-  const languageMenuRef = useRef<HTMLDivElement | null>(null);
   const themeMenuRef = useRef<HTMLDivElement | null>(null);
   const headerRef = useRef<HTMLElement | null>(null);
+
+  const [railExpanded, setRailExpanded] = useState(() => {
+    try {
+      return localStorage.getItem('hg-rail-expanded') === '1';
+    } catch {
+      return false;
+    }
+  });
 
   const fullBrandName = 'Hexgate Management Center';
   const abbrBrandName = t('title.abbr');
   const isLogsPage = location.pathname.startsWith('/logs');
-  const showSidebarLabels = !sidebarCollapsed || sidebarOpen;
+  const closeMobileNav = useCallback(() => setSidebarOpen(false), []);
+  const toggleRail = useCallback(() => {
+    setRailExpanded((prev) => {
+      const next = !prev;
+      try {
+        localStorage.setItem('hg-rail-expanded', next ? '1' : '0');
+      } catch {
+        // ignore storage failure
+      }
+      return next;
+    });
+  }, []);
 
   // 将顶部悬浮控制区高度写入 CSS 变量，供移动端粘性元素和浮层避让。
   useLayoutEffect(() => {
@@ -297,32 +302,6 @@ export function MainLayout() {
   }, []);
 
   useEffect(() => {
-    if (!languageMenuOpen) {
-      return;
-    }
-
-    const handlePointerDown = (event: MouseEvent) => {
-      if (!languageMenuRef.current?.contains(event.target as Node)) {
-        setLanguageMenuOpen(false);
-      }
-    };
-
-    const handleEscape = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') {
-        setLanguageMenuOpen(false);
-      }
-    };
-
-    document.addEventListener('mousedown', handlePointerDown);
-    document.addEventListener('keydown', handleEscape);
-
-    return () => {
-      document.removeEventListener('mousedown', handlePointerDown);
-      document.removeEventListener('keydown', handleEscape);
-    };
-  }, [languageMenuOpen]);
-
-  useEffect(() => {
     if (!themeMenuOpen) {
       return;
     }
@@ -348,14 +327,8 @@ export function MainLayout() {
     };
   }, [themeMenuOpen]);
 
-  const toggleLanguageMenu = useCallback(() => {
-    setLanguageMenuOpen((prev) => !prev);
-    setThemeMenuOpen(false);
-  }, []);
-
   const toggleThemeMenu = useCallback(() => {
     setThemeMenuOpen((prev) => !prev);
-    setLanguageMenuOpen(false);
   }, []);
 
   const handleThemeSelect = useCallback(
@@ -364,17 +337,6 @@ export function MainLayout() {
       setThemeMenuOpen(false);
     },
     [setTheme]
-  );
-
-  const handleLanguageSelect = useCallback(
-    (nextLanguage: string) => {
-      if (!isSupportedLanguage(nextLanguage)) {
-        return;
-      }
-      setLanguage(nextLanguage);
-      setLanguageMenuOpen(false);
-    },
-    [setLanguage]
   );
 
   useEffect(() => {
@@ -447,12 +409,6 @@ export function MainLayout() {
           labelKey: 'nav.config_management',
           metaKey: 'nav_meta.config_management',
           icon: sidebarIcons.config,
-        },
-        {
-          path: '/system',
-          labelKey: 'nav.system_info',
-          metaKey: 'nav_meta.system_info',
-          icon: sidebarIcons.system,
         },
       ],
     },
@@ -533,47 +489,99 @@ export function MainLayout() {
     }
     showNotification(t('notification.data_refreshed'), 'success');
   };
-  const mobileSidebarToggleLabel = sidebarOpen
+  const normalizedPath =
+    location.pathname === '/dashboard' ? '/' : location.pathname.replace(/\/+$/, '') || '/';
+  const currentNav =
+    navItems.find((item) => item.path === normalizedPath) ??
+    navItems.find((item) => item.path !== '/' && normalizedPath.startsWith(`${item.path}/`)) ??
+    navItems.find((item) => item.path !== '/' && normalizedPath.startsWith(item.path));
+  const currentTitle = currentNav ? t(currentNav.labelKey) : abbrBrandName;
+  const currentSubtitle = currentNav ? t(currentNav.metaKey) : fullBrandName;
+  const mobileNavLabel = sidebarOpen
     ? t('sidebar.toggle_collapse', { defaultValue: 'Close navigation' })
     : t('sidebar.toggle_expand', { defaultValue: 'Open navigation' });
 
   return (
-    <div className={`app-shell ${sidebarCollapsed ? 'sidebar-is-collapsed' : ''}`}>
-      <div className="top-gradient-blur" aria-hidden="true" />
+    <div
+      className={`hg-shell ${sidebarOpen ? 'rail-open' : ''} ${
+        railExpanded ? 'rail-expanded' : ''
+      }`}
+    >
+      <button
+        type="button"
+        className="hg-rail-backdrop"
+        onClick={closeMobileNav}
+        aria-label={t('common.close')}
+        aria-hidden={!sidebarOpen}
+        tabIndex={sidebarOpen ? 0 : -1}
+      />
 
-      <header className="main-header" ref={headerRef}>
+      <aside className="hg-rail">
+        <NavLink to="/" className="hg-rail-brand" title={fullBrandName} onClick={closeMobileNav}>
+          <img src={INLINE_LOGO_JPEG} alt="Hexgate logo" className="hg-rail-brand-logo" />
+          <span className="hg-rail-brand-title">{abbrBrandName}</span>
+        </NavLink>
+
+        <nav className="hg-rail-nav" aria-label={t('title.abbr')}>
+          {navItems.map((item) => {
+            const itemLabel = t(item.labelKey);
+            return (
+              <NavLink
+                key={item.path}
+                to={item.path}
+                className={({ isActive }) => `hg-rail-item ${isActive ? 'active' : ''}`}
+                onClick={closeMobileNav}
+                title={itemLabel}
+              >
+                <span className="hg-rail-ico">{item.icon}</span>
+                <span className="hg-rail-tip">{itemLabel}</span>
+              </NavLink>
+            );
+          })}
+        </nav>
+
         <button
           type="button"
-          className="sidebar-toggle-floating"
-          onClick={() => setSidebarCollapsed((prev) => !prev)}
+          className="hg-rail-toggle"
+          onClick={toggleRail}
           title={
-            sidebarCollapsed
-              ? t('sidebar.expand', { defaultValue: '展开' })
-              : t('sidebar.collapse', { defaultValue: '收起' })
+            railExpanded
+              ? t('sidebar.collapse', { defaultValue: 'Collapse' })
+              : t('sidebar.expand', { defaultValue: 'Expand' })
           }
           aria-label={
-            sidebarCollapsed
-              ? t('sidebar.expand', { defaultValue: '展开' })
-              : t('sidebar.collapse', { defaultValue: '收起' })
+            railExpanded
+              ? t('sidebar.collapse', { defaultValue: 'Collapse' })
+              : t('sidebar.expand', { defaultValue: 'Expand' })
           }
+          aria-pressed={railExpanded}
         >
-          {sidebarCollapsed ? headerIcons.chevronRight : headerIcons.chevronLeft}
+          <span className="hg-rail-toggle-ico">
+            {railExpanded ? headerIcons.chevronLeft : headerIcons.chevronRight}
+          </span>
+          <span className="hg-rail-toggle-label">
+            {t('sidebar.collapse', { defaultValue: 'Collapse' })}
+          </span>
+        </button>
+      </aside>
+
+      <header className="hg-topbar" ref={headerRef}>
+        <button
+          type="button"
+          className="hg-topbar-burger"
+          onClick={() => setSidebarOpen((prev) => !prev)}
+          title={mobileNavLabel}
+          aria-label={mobileNavLabel}
+        >
+          {sidebarOpen ? headerIcons.close : headerIcons.menu}
         </button>
 
-        <div className="mobile-sidebar-actions">
-          <Button
-            className="mobile-menu-btn"
-            variant="ghost"
-            size="sm"
-            onClick={() => setSidebarOpen((prev) => !prev)}
-            title={mobileSidebarToggleLabel}
-            aria-label={mobileSidebarToggleLabel}
-          >
-            {sidebarOpen ? headerIcons.close : headerIcons.menu}
-          </Button>
+        <div className="hg-topbar-title">
+          <h1 className="hg-topbar-h">{currentTitle}</h1>
+          <span className="hg-topbar-sub">{currentSubtitle}</span>
         </div>
 
-        <div className="header-actions floating-actions">
+        <div className="hg-topbar-actions">
           <Button
             variant="ghost"
             size="sm"
@@ -582,40 +590,6 @@ export function MainLayout() {
           >
             {headerIcons.refresh}
           </Button>
-          <div className={`language-menu ${languageMenuOpen ? 'open' : ''}`} ref={languageMenuRef}>
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={toggleLanguageMenu}
-              title={t('language.switch')}
-              aria-label={t('language.switch')}
-              aria-haspopup="menu"
-              aria-expanded={languageMenuOpen}
-            >
-              {headerIcons.language}
-            </Button>
-            {languageMenuOpen && (
-              <div
-                className="notification entering language-menu-popover"
-                role="menu"
-                aria-label={t('language.switch')}
-              >
-                {LANGUAGE_ORDER.map((lang) => (
-                  <button
-                    key={lang}
-                    type="button"
-                    className={`language-menu-option ${language === lang ? 'active' : ''}`}
-                    onClick={() => handleLanguageSelect(lang)}
-                    role="menuitemradio"
-                    aria-checked={language === lang}
-                  >
-                    <span>{t(LANGUAGE_LABEL_KEYS[lang])}</span>
-                    {language === lang ? <span className="language-menu-check">✓</span> : null}
-                  </button>
-                ))}
-              </div>
-            )}
-          </div>
           <div className={`theme-menu ${themeMenuOpen ? 'open' : ''}`} ref={themeMenuRef}>
             <Button
               variant="ghost"
@@ -695,65 +669,15 @@ export function MainLayout() {
         </div>
       </header>
 
-      <div className="main-body">
-        <button
-          type="button"
-          className={`sidebar-backdrop ${sidebarOpen ? 'visible' : ''}`}
-          onClick={() => setSidebarOpen(false)}
-          aria-label={t('common.close')}
-          aria-hidden={!sidebarOpen}
-          tabIndex={sidebarOpen ? 0 : -1}
-        />
-
-        <aside
-          className={`sidebar ${sidebarOpen ? 'open' : ''} ${sidebarCollapsed ? 'collapsed' : ''}`}
-        >
-          <div className="sidebar-brand" title={fullBrandName}>
-            <img src={INLINE_LOGO_JPEG} alt="Hexgate logo" className="sidebar-brand-logo" />
-            {showSidebarLabels && <span className="sidebar-brand-title">{abbrBrandName}</span>}
-          </div>
-
-          <div className="nav-section">
-            {navGroups.map((group, idx) => (
-              <div className="nav-group" key={group.id}>
-                {showSidebarLabels
-                  ? <div className="nav-group-label">{t(group.labelKey)}</div>
-                  : idx > 0 && <div className="nav-group-divider" aria-hidden="true" />}
-                {group.items.map((item) => {
-                  const itemLabel = t(item.labelKey);
-                  return (
-                    <NavLink
-                      key={item.path}
-                      to={item.path}
-                      className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}
-                      onClick={() => setSidebarOpen(false)}
-                      title={showSidebarLabels ? undefined : itemLabel}
-                    >
-                      <span className="nav-icon">{item.icon}</span>
-                      {showSidebarLabels && (
-                        <span className="nav-text">
-                          <span className="nav-label">{itemLabel}</span>
-                          <span className="nav-meta">{t(item.metaKey)}</span>
-                        </span>
-                      )}
-                    </NavLink>
-                  );
-                })}
-              </div>
-            ))}
-          </div>
-        </aside>
-
-        <div className={`content${isLogsPage ? ' content-logs' : ''}`} ref={contentRef}>
-          <main className={`main-content${isLogsPage ? ' main-content-logs' : ''}`}>
-            <PageTransition
-              render={(location) => <MainRoutes location={location} />}
-              getRouteOrder={getRouteOrder}
-              getTransitionVariant={getTransitionVariant}
-              scrollContainerRef={contentRef}
-            />
-          </main>
-        </div>
+      <div className="hg-content" ref={contentRef}>
+        <main className={`hg-main${isLogsPage ? ' hg-main-logs' : ''}`}>
+          <PageTransition
+            render={(location) => <MainRoutes location={location} />}
+            getRouteOrder={getRouteOrder}
+            getTransitionVariant={getTransitionVariant}
+            scrollContainerRef={contentRef}
+          />
+        </main>
       </div>
     </div>
   );

@@ -1,36 +1,76 @@
 @use '../../../styles/mixins' as *;
 @use '../../../styles/variables' as *;
 
+// Framed navigation rail panel. Sticks alongside the resource panel on wide
+// viewports so the provider switcher stays in view while the table scrolls.
 .aside {
-  background: var(--bg-primary);
-  border: 1px solid var(--border-color);
-  border-radius: 12px;
-  box-shadow: var(--shadow);
-  padding: 12px;
+  background:
+    var(--grad-surface),
+    var(--surface-glass);
+  backdrop-filter: var(--glass-backdrop-filter);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--elev-1);
+  padding: 14px 12px;
   min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  @media (min-width: 1280px) {
+    position: sticky;
+    top: 12px;
+  }
 }
 
+// Section header per the title pattern: small uppercase label + gold accent.
 .eyebrow {
-  margin: 4px 8px 8px;
-  font-size: 12px;
-  font-weight: 500;
-  letter-spacing: 0.05em;
+  margin: 2px 6px 12px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--muted-foreground);
+  color: var(--accent-gold);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  // Leading gold tick + trailing hairline frame the rail title.
+  &::before {
+    content: '';
+    width: 3px;
+    height: 13px;
+    border-radius: 2px;
+    background: var(--grad-gold);
+    box-shadow: var(--glow-gold);
+    flex-shrink: 0;
+  }
+
+  &::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(
+      to right,
+      color-mix(in srgb, var(--accent-gold) 45%, transparent),
+      transparent
+    );
+  }
 }
 
 .list {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 5px;
 }
 
 .item {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  padding: 10px 12px;
+  padding: 10px 12px 10px 14px;
   border-radius: var(--radius-md);
   border: 1px solid transparent;
   background: transparent;
@@ -38,24 +78,55 @@
   text-align: left;
   width: 100%;
   color: var(--text-primary);
-  transition: background-color $transition-fast, border-color $transition-fast,
-    color $transition-fast;
+  overflow: hidden;
+  transition: background-color var(--transition-fast), border-color var(--transition-fast),
+    color var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast);
   min-width: 0;
 
+  // Gold gateway bar — collapsed off-screen until active/hover.
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%) scaleY(0);
+    width: 3px;
+    height: 56%;
+    border-radius: 0 2px 2px 0;
+    background: var(--grad-gold);
+    box-shadow: var(--glow-gold);
+    transition: transform var(--transition-fast);
+  }
+
   &:hover:not(.active) {
-    background: color-mix(in srgb, var(--accent-bg) 50%, transparent);
-    border-color: var(--border-color);
+    background: color-mix(in srgb, var(--surface-raised) 60%, transparent);
+    border-color: var(--border-hover);
+    transform: translateX(1px);
+
+    &::before {
+      transform: translateY(-50%) scaleY(0.7);
+      opacity: 0.6;
+    }
   }
 
   &:focus-visible {
-    outline: 2px solid var(--primary-color);
-    outline-offset: -2px;
+    outline: none;
+    box-shadow: var(--focus-ring);
   }
 
   &.active {
     border-color: var(--primary-30);
-    background: var(--primary-10);
+    background: linear-gradient(
+        135deg,
+        color-mix(in srgb, var(--primary-color) 16%, transparent),
+        var(--primary-10)
+      );
     color: var(--primary-color);
+    box-shadow: var(--glow-cyan-sm);
+
+    &::before {
+      transform: translateY(-50%) scaleY(1);
+    }
   }
 }
 
@@ -68,13 +139,21 @@
 }
 
 .logo {
-  width: 26px;
-  height: 26px;
+  width: 32px;
+  height: 32px;
   border-radius: var(--radius-md);
   flex-shrink: 0;
   object-fit: contain;
-  background: var(--bg-tertiary);
-  padding: 2px;
+  background: color-mix(in srgb, var(--primary-color) 8%, var(--bg-tertiary));
+  border: 1px solid var(--hairline);
+  padding: 5px;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+
+  .active & {
+    border-color: var(--primary-30);
+    background: var(--primary-10);
+    box-shadow: var(--glow-cyan-sm);
+  }
 }
 
 .logoInvertOnDark {
@@ -91,21 +170,23 @@
 
 .itemTitle {
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 600;
+  letter-spacing: -0.005em;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
 .itemSubtitle {
-  font-size: 12px;
-  color: var(--muted-foreground);
-  margin-top: 2px;
-  font-weight: 400;
+  font-size: 11px;
+  color: var(--text-tertiary);
+  margin-top: 3px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
 
   .active & {
     color: var(--primary-color);
-    opacity: 0.85;
+    opacity: 0.8;
   }
 }
 
@@ -113,15 +194,26 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 26px;
-  padding: 2px 9px;
-  border-radius: var(--radius-md);
+  min-width: 28px;
+  height: 22px;
+  padding: 0 9px;
+  border-radius: 999px;
   font-size: 12px;
-  font-weight: 500;
-  background: var(--bg-primary);
-  border: 1px solid var(--border-color);
-  color: var(--muted-foreground);
+  font-weight: 700;
+  background: var(--surface-sunken);
+  border: 1px solid var(--hairline);
+  color: var(--text-secondary);
   flex-shrink: 0;
+  font-variant-numeric: tabular-nums;
+  transition: border-color var(--transition-fast), background-color var(--transition-fast),
+    color var(--transition-fast), box-shadow var(--transition-fast);
+
+  .active & {
+    border-color: var(--primary-30);
+    background: var(--primary-10);
+    color: var(--primary-color);
+    box-shadow: var(--glow-cyan-sm);
+  }
 }
 
 .badgeAmber {
