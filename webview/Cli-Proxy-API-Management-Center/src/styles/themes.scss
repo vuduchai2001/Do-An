@@ -241,14 +241,14 @@
 
 // 深色主题 — Hexgate (Hextech Gateway): nền navy/teal sâu, accent cyan năng lượng + vàng đồng
 [data-theme='dark'] {
-  --bg-secondary: #07131f; // 页面背景 (deep hextech navy)
-  --bg-primary: #0c1f2e; // 容器/卡片背景
-  --bg-tertiary: #122b3c; // hover/次级背景
-  --bg-hover: #18374b;
-  --bg-quinary: #0a1a27;
+  --bg-secondary: #0a121a; // 页面背景 (slate-navy trầm, giảm chói)
+  --bg-primary: #111b24; // 容器/卡片背景
+  --bg-tertiary: #1a2731; // hover/次级背景
+  --bg-hover: #22323d;
+  --bg-quinary: #0d151d;
   --bg-error-light: rgba(224, 96, 84, 0.18);
-  --floating-surface: #103044;
-  --floating-border: #1f4660;
+  --floating-surface: #15212b;
+  --floating-border: #283a47;
   --floating-shadow: 0 14px 34px rgba(0, 0, 0, 0.5);
 
   --text-primary: #eaf5f9;
@@ -257,10 +257,10 @@
   --text-quaternary: #51697a;
   --text-muted: var(--text-tertiary);
 
-  --border-color: #1d3e54;
+  --border-color: #1d2b37;
   --border-secondary: var(--border-color);
-  --border-primary: #265168;
-  --border-hover: #316f8e;
+  --border-primary: #283a46;
+  --border-hover: #3a5260;
 
   // Cyan năng lượng hextech làm action color
   --primary-color: #34c6ec;
